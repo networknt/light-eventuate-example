@@ -1,2 +1,2 @@
-# light-escqrs-example
-Example projects based on light-escqrs framework
+# light-eventuate-example
+Example projects based on light-eventuate framework
