@@ -1,0 +1,8 @@
+{
+  "description": "singleton service factory configuration",
+  "singletons": [
+    {"com.networknt.eventuate.todolist.query.TodoQueryRepository" : ["com.networknt.eventuate.todolist.query.TodoQueryRepositoryImpl"]},
+    {"com.networknt.eventuate.todolist.query.TodoQueryService" : ["com.networknt.eventuate.todolist.query.TodoQueryServiceImpl"]}
+  ]
+
+}
