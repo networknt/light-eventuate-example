@@ -5,7 +5,7 @@ import com.networknt.eventuate.common.EventHandlerContext;
 import com.networknt.eventuate.common.EventHandlerMethod;
 import com.networknt.eventuate.common.EventSubscriber;
 import com.networknt.eventuate.todolist.command.DeleteTodoCommand;
-import com.networknt.eventuate.todolist.common.common.event.TodoDeletionRequestedEvent;
+import com.networknt.eventuate.todolist.common.event.TodoDeletionRequestedEvent;
 
 import java.util.concurrent.CompletableFuture;
 

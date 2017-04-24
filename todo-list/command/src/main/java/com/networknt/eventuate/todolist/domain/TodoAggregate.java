@@ -8,17 +8,19 @@ import com.networknt.eventuate.todolist.command.CreateTodoCommand;
 import com.networknt.eventuate.todolist.command.DeleteTodoCommand;
 import com.networknt.eventuate.todolist.command.TodoCommand;
 import com.networknt.eventuate.todolist.command.UpdateTodoCommand;
-import com.networknt.eventuate.todolist.common.common.event.TodoCreatedEvent;
-import com.networknt.eventuate.todolist.common.common.event.TodoDeletedEvent;
-import com.networknt.eventuate.todolist.common.common.event.TodoUpdatedEvent;
+import com.networknt.eventuate.todolist.common.event.TodoCreatedEvent;
+import com.networknt.eventuate.todolist.common.event.TodoDeletedEvent;
+import com.networknt.eventuate.todolist.common.event.TodoUpdatedEvent;
+import com.networknt.eventuate.todolist.common.model.TodoInfo;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+
 
 public class TodoAggregate extends ReflectiveMutableCommandProcessingAggregate<TodoAggregate, TodoCommand> {
 
-    private Map<String, Object> todo;
+    private TodoInfo todo;
+
     private boolean deleted;
 
     public List<Event> process(CreateTodoCommand cmd) {
@@ -55,7 +57,7 @@ public class TodoAggregate extends ReflectiveMutableCommandProcessingAggregate<T
         this.deleted = true;
     }
 
-    public Map<String, Object> getTodo() {
+    public TodoInfo getTodo() {
         return todo;
     }
 

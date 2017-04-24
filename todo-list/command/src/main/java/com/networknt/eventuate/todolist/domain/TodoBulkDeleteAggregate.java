@@ -5,7 +5,7 @@ import com.networknt.eventuate.common.Event;
 import com.networknt.eventuate.common.ReflectiveMutableCommandProcessingAggregate;
 import com.networknt.eventuate.todolist.command.DeleteTodosCommand;
 import com.networknt.eventuate.todolist.command.TodoCommand;
-import com.networknt.eventuate.todolist.common.common.event.TodoDeletionRequestedEvent;
+import com.networknt.eventuate.todolist.common.event.TodoDeletionRequestedEvent;
 
 import java.util.List;
 import java.util.stream.Collectors;

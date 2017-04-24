@@ -1,14 +1,16 @@
 package com.networknt.eventuate.todolist.command;
 
-import java.util.Map;
+import com.networknt.eventuate.todolist.common.model.TodoInfo;
+
 
 public class UpdateTodoCommand implements TodoCommand {
-    private Map<String, Object> todo;
+    private TodoInfo todo;
 
-    public UpdateTodoCommand(Map<String, Object> todo) {
+    public UpdateTodoCommand(String id, TodoInfo todo) {
         this.todo = todo;
     }
-    public Map<String, Object> getTodo() {
+
+    public TodoInfo getTodo() {
         return todo;
     }
 }

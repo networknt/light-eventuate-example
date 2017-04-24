@@ -1,18 +1,19 @@
 package com.networknt.eventuate.todolist;
 
-import java.util.Collection;
+import com.networknt.eventuate.todolist.common.model.TodoInfo;
+
+
+import java.util.List;
 import java.util.Map;
 
-/**
- * Created by stevehu on 2016-12-09.
- */
+
 public interface TodoQueryRepository {
 
-    Collection<Map<String, Object>> getAll();
+    List<Map<String, TodoInfo>> getAll();
 
-    Map<String, Object> findById(String id);
+    Map<String, TodoInfo> findById(String id);
 
-    Map<String, Object> save(Map<String, Object> todo);
+    Map<String, TodoInfo> save(String id, TodoInfo todo);
 
     void remove(String id);
 }

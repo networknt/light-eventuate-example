@@ -1,19 +1,19 @@
 package com.networknt.eventuate.todolist;
 
-import java.util.Collection;
+import com.networknt.eventuate.todolist.common.model.TodoInfo;
+
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-/**
- * Created by stevehu on 2016-12-08.
- */
+
 public interface TodoQueryService {
 
-    Collection<Map<String, Object>> getAll();
+    List<Map<String, TodoInfo>> getAll();
 
-    CompletableFuture<Map<String, Object>> findById(String id);
+    CompletableFuture<Map<String, TodoInfo>> findById(String id);
 
-    Map<String, Object> save(Map<String, Object> todo);
+    Map<String, TodoInfo> save(String id, TodoInfo todo);
 
     void remove(String id);
 }
