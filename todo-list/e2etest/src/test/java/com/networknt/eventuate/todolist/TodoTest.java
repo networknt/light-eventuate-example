@@ -1,16 +1,13 @@
 package com.networknt.eventuate.todolist;
 
-import com.networknt.eventuate.common.impl.AggregateCrud;
-import com.networknt.exception.ClientException;
-import com.networknt.exception.ApiException;
-import com.networknt.command.handler.TestCommandServer;
-import com.networknt.query.handler.TestQueryServer;
+import com.networknt.eventuate.common.AggregateRepository;
+import com.networknt.eventuate.common.EventuateAggregateStore;
+
+import com.networknt.eventuate.common.impl.sync.AggregateCrud;
+import com.networknt.eventuate.todolist.common.model.TodoInfo;
+
 import com.networknt.service.SingletonServiceFactory;
-import org.apache.http.client.methods.*;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+
 import org.h2.tools.RunScript;
 import org.junit.*;
 import org.slf4j.Logger;
@@ -53,15 +50,21 @@ public class TodoTest {
         }
     }
 
-    private AggregateCrud eventStore = (AggregateCrud)SingletonServiceFactory.getBean(AggregateCrud.class);
-    private TodoCommandService service = (TodoCommandService)SingletonServiceFactory.getBean(TodoCommandService.class);
 
+    private AggregateCrud aggregateCrud = (AggregateCrud)SingletonServiceFactory.getBean(AggregateCrud.class);
+    private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);
+   // private TodoCommandService service = (TodoCommandService)SingletonServiceFactory.getBean(TodoCommandService.class);
+
+    private AggregateRepository todoRepository = new AggregateRepository(aggregateCrud.getClass(), eventStore);
+    private AggregateRepository bulkDeleteAggregateRepository  = new AggregateRepository(aggregateCrud.getClass(), eventStore);
+
+    private TodoCommandService  service = new TodoCommandServiceImpl(todoRepository, bulkDeleteAggregateRepository);
     @Test
     public void testAddTodo() throws Exception {
-        Map<String, Object> todo = new HashMap<>();
-        todo.put("title", "this is the first todo");
-        CompletableFuture<Map<String, Object>> result = service.add(todo).thenApply((e) -> {
-            Map<String, Object> m = e.getAggregate().getTodo();
+        TodoInfo todo = new TodoInfo();
+        todo.setTitle(" this is the first todo");
+        CompletableFuture<TodoInfo> result = service.add(todo).thenApply((e) -> {
+            TodoInfo m = e.getAggregate().getTodo();
             System.out.println("m = " + m);
             return m;
         });

@@ -1,7 +1,7 @@
 {
   "description": "security configuration",
   "enableVerifyJwt": false,
-  "enableVerifyScope": true,
+  "enableVerifyScope": false,
   "enableMockJwt": false,
   "jwt": {
     "certificate": {
