@@ -193,6 +193,11 @@
             <artifactId>eventuate-testjdbc</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>eventuate-jdbc</artifactId>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

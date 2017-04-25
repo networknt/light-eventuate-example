@@ -4,8 +4,11 @@ import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EventuateAggregateStore;
 
 import com.networknt.eventuate.common.impl.sync.AggregateCrud;
+import com.networknt.eventuate.jdbc.EventuateLocalAggregateStore;
 import com.networknt.eventuate.todolist.common.model.TodoInfo;
 
+import com.networknt.eventuate.todolist.domain.TodoAggregate;
+import com.networknt.eventuate.todolist.domain.TodoBulkDeleteAggregate;
 import com.networknt.service.SingletonServiceFactory;
 
 import org.h2.tools.RunScript;
@@ -55,17 +58,20 @@ public class TodoTest {
     private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);
    // private TodoCommandService service = (TodoCommandService)SingletonServiceFactory.getBean(TodoCommandService.class);
 
-    private AggregateRepository todoRepository = new AggregateRepository(aggregateCrud.getClass(), eventStore);
-    private AggregateRepository bulkDeleteAggregateRepository  = new AggregateRepository(aggregateCrud.getClass(), eventStore);
+    private AggregateRepository todoRepository = new AggregateRepository(TodoAggregate.class, eventStore);
+    private AggregateRepository bulkDeleteAggregateRepository  = new AggregateRepository(TodoBulkDeleteAggregate.class, eventStore);
 
     private TodoCommandService  service = new TodoCommandServiceImpl(todoRepository, bulkDeleteAggregateRepository);
+
     @Test
     public void testAddTodo() throws Exception {
+
         TodoInfo todo = new TodoInfo();
         todo.setTitle(" this is the first todo");
         CompletableFuture<TodoInfo> result = service.add(todo).thenApply((e) -> {
             TodoInfo m = e.getAggregate().getTodo();
             System.out.println("m = " + m);
+            System.out.println("m = " + e.getEntityId());
             return m;
         });
 
