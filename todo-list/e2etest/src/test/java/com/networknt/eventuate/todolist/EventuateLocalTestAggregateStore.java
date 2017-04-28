@@ -77,4 +77,5 @@ public class EventuateLocalTestAggregateStore extends AbstractEventuateJdbcAggre
     }
   }
 
+
 }

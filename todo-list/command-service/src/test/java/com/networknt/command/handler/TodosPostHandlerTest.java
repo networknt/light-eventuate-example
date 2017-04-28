@@ -16,10 +16,12 @@ public class TodosPostHandlerTest {
     @ClassRule
     public static TestCommandServer server = TestCommandServer.getInstance();
 
+
     static final Logger logger = LoggerFactory.getLogger(TodosPostHandlerTest.class);
 
     @Test
     public void testTodosPostHandler() throws ClientException, ApiException {
+
         CloseableHttpClient client = Client.getInstance().getSyncClient();
         HttpPost httpPost = new HttpPost("http://localhost:8080/v1/todos");
         /*

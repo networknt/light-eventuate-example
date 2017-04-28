@@ -1,6 +1,7 @@
 package com.networknt.eventuate.todolist;
 
 import com.networknt.eventuate.common.AggregateRepository;
+import com.networknt.eventuate.common.EntityWithIdAndVersion;
 import com.networknt.eventuate.common.EventuateAggregateStore;
 
 import com.networknt.eventuate.common.impl.sync.AggregateCrud;
@@ -69,6 +70,28 @@ public class TodoTest {
         TodoInfo todo = new TodoInfo();
         todo.setTitle(" this is the first todo");
         CompletableFuture<TodoInfo> result = service.add(todo).thenApply((e) -> {
+            TodoInfo m = e.getAggregate().getTodo();
+            System.out.println("m = " + m);
+            System.out.println("m = " + e.getEntityId());
+            return m;
+        });
+
+        System.out.println("result = " + result.get());
+    }
+
+    @Test
+    public void testUpdateTodo() throws Exception {
+
+        TodoInfo todo = new TodoInfo();
+        todo.setTitle(" this is the new todo");
+
+        CompletableFuture<String > id  = service.add(todo).thenApply((e) -> {
+            String m =  e.getEntityId();
+            return m;
+        });
+
+        todo.setCompleted(true);
+        CompletableFuture<TodoInfo> result = service.update(id.get(), todo).thenApply((e) -> {
             TodoInfo m = e.getAggregate().getTodo();
             System.out.println("m = " + m);
             System.out.println("m = " + e.getEntityId());
