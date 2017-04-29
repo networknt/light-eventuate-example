@@ -4,8 +4,7 @@ import com.networknt.body.BodyHandler;
 import com.networknt.config.Config;
 import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EventuateAggregateStore;
-import com.networknt.eventuate.common.impl.sync.AggregateCrud;
-import com.networknt.eventuate.test.jdbc.EventuateEmbeddedTestAggregateStore;
+
 import com.networknt.eventuate.todolist.TodoCommandService;
 import com.networknt.eventuate.todolist.TodoCommandServiceImpl;
 import com.networknt.eventuate.todolist.common.model.TodoInfo;
@@ -15,16 +14,14 @@ import com.networknt.service.SingletonServiceFactory;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.HttpString;
-import java.util.HashMap;
-import java.util.Map;
+
 import java.util.concurrent.CompletableFuture;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+
 
 public class TodosIdDeleteHandler implements HttpHandler {
 
-    private AggregateCrud aggregateCrud = (AggregateCrud)SingletonServiceFactory.getBean(AggregateCrud.class);
-    private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);
+     private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);
 
     private AggregateRepository todoRepository = new AggregateRepository(TodoAggregate.class, eventStore);
     private AggregateRepository bulkDeleteAggregateRepository  = new AggregateRepository(TodoBulkDeleteAggregate.class, eventStore);

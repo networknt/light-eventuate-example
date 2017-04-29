@@ -1,10 +1,9 @@
 package com.networknt.command.handler;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.networknt.config.Config;
 import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EventuateAggregateStore;
-import com.networknt.eventuate.common.impl.sync.AggregateCrud;
 import com.networknt.eventuate.todolist.TodoCommandService;
 import com.networknt.eventuate.todolist.TodoCommandServiceImpl;
 import com.networknt.eventuate.todolist.common.model.TodoInfo;
@@ -16,15 +15,12 @@ import io.undertow.server.HttpServerExchange;
 import io.undertow.util.HttpString;
 import com.networknt.body.BodyHandler;
 
-import java.util.HashMap;
-import java.util.Map;
+
 import java.util.concurrent.CompletableFuture;
 
 public class TodosPostHandler implements HttpHandler {
 
-    private AggregateCrud aggregateCrud = (AggregateCrud)SingletonServiceFactory.getBean(AggregateCrud.class);
     private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);
-    // private TodoCommandService service = (TodoCommandService)SingletonServiceFactory.getBean(TodoCommandService.class);
 
     private AggregateRepository todoRepository = new AggregateRepository(TodoAggregate.class, eventStore);
     private AggregateRepository bulkDeleteAggregateRepository  = new AggregateRepository(TodoBulkDeleteAggregate.class, eventStore);

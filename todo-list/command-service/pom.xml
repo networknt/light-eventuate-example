@@ -52,7 +52,7 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>validator</artifactId>
+            <artifactId>swagger-validator</artifactId>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>

@@ -14,8 +14,7 @@ import com.networknt.service.SingletonServiceFactory;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.HttpString;
-import java.util.HashMap;
-import java.util.Map;
+
 import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.lang3.StringEscapeUtils;

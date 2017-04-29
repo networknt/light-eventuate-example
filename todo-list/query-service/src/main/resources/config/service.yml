@@ -23,3 +23,11 @@ singletons:
   - com.networknt.eventuate.todolist.domain.TodoAggregate
 - com.networknt.eventuate.todolist.domain.TodoBulkDeleteAggregate:
   - com.networknt.eventuate.todolist.domain.TodoBulkDeleteAggregate
+- com.networknt.eventuate.todolist.TodoQueryRepository:
+  - com.networknt.eventuate.todolist.TodoQueryRepositoryImpl
+- com.networknt.eventuate.todolist.TodoQueryService:
+  - com.networknt.eventuate.todolist.TodoQueryServiceImpl
+- com.networknt.eventuate.todolist.TodoQueryWorkflow:
+  - com.networknt.eventuate.todolist.TodoQueryWorkflow
+- com.networknt.eventuate.event.EventHandlerProcessor:
+  - com.networknt.eventuate.todolist.TodoQueryWorkflow

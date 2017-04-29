@@ -169,7 +169,7 @@
             </dependency>
             <dependency>
                 <groupId>com.networknt</groupId>
-                <artifactId>validator</artifactId>
+                <artifactId>swagger-validator</artifactId>
                 <version>${version.light-java}</version>
             </dependency>
             <dependency>

@@ -52,7 +52,7 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>validator</artifactId>
+            <artifactId>swagger-validator</artifactId>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
@@ -112,7 +112,27 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
+            <artifactId>eventuate-event</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>eventuate-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>eventuate-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>eventuate-testjdbc</artifactId>
+         </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
             <artifactId>eventuate-todo-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>eventuate-todo-command</artifactId>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>

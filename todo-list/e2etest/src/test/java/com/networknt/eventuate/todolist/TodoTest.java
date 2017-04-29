@@ -55,9 +55,7 @@ public class TodoTest {
     }
 
 
-    private AggregateCrud aggregateCrud = (AggregateCrud)SingletonServiceFactory.getBean(AggregateCrud.class);
     private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);
-   // private TodoCommandService service = (TodoCommandService)SingletonServiceFactory.getBean(TodoCommandService.class);
 
     private AggregateRepository todoRepository = new AggregateRepository(TodoAggregate.class, eventStore);
     private AggregateRepository bulkDeleteAggregateRepository  = new AggregateRepository(TodoBulkDeleteAggregate.class, eventStore);
