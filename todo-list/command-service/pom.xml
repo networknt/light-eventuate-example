@@ -171,6 +171,10 @@
             <groupId>com.networknt</groupId>
             <artifactId>eventuate-jdbc</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>eventuate-client</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
