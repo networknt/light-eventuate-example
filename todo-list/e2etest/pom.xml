@@ -52,7 +52,7 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>validator</artifactId>
+            <artifactId>swagger-validator</artifactId>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
@@ -68,7 +68,7 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>swagger</artifactId>
+            <artifactId>swagger-meta</artifactId>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
@@ -147,8 +147,7 @@
         <dependency>
             <groupId>io.undertow</groupId>
             <artifactId>undertow-core</artifactId>
-            <version>${version.undertow}</version>
-        </dependency>
+         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
