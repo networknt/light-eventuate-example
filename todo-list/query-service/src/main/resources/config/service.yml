@@ -3,8 +3,8 @@ description: singleton service factory configuration
 singletons:
 - javax.sql.DataSource:
   - com.zaxxer.hikari.HikariDataSource:
-      DriverClassName: org.h2.jdbcx.JdbcDataSource
-      jdbcUrl: jdbc:h2:~/test
+      DriverClassName: com.mysql.jdbc.Driver
+      jdbcUrl: jdbc:mysql:/localhost/test
       username: sa
       password: sa
 - com.networknt.eventuate.common.impl.sync.AggregateCrud,com.networknt.eventuate.common.impl.sync.AggregateEvents:

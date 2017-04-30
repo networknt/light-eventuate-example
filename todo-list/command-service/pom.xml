@@ -52,10 +52,6 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>swagger-validator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
             <artifactId>status</artifactId>
         </dependency>
         <dependency>
@@ -65,10 +61,6 @@
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>mask</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>swagger-meta</artifactId>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
@@ -106,6 +98,19 @@
             <groupId>com.networknt</groupId>
             <artifactId>server</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>swagger-meta</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>swagger-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>swagger-security</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>eventuate-common</artifactId>

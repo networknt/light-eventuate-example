@@ -3,6 +3,7 @@ package com.networknt.query.handler;
 import com.networknt.client.Client;
 import com.networknt.exception.ClientException;
 import com.networknt.exception.ApiException;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.*;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.junit.*;
@@ -21,16 +22,15 @@ public class TodosIdGetHandlerTest {
     @Test
     public void testTodosIdGetHandler() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpGet httpGet = new HttpGet("http://localhost:8080/v1/todos/id");
-        /*
-        Client.getInstance().addAuthorization(httpPost);
+        HttpGet httpGet = new HttpGet("http://localhost:8082/v1/todos/id");
         try {
             CloseableHttpResponse response = client.execute(httpGet);
-            Assert.assertEquals(200, response.getStatusLine().getStatusCode());
-            Assert.assertEquals("getById", IOUtils.toString(response.getEntity().getContent(), "utf8"));
+            int statusCode = response.getStatusLine().getStatusCode();
+            String body = IOUtils.toString(response.getEntity().getContent(), "utf8");
+            Assert.assertEquals(200, statusCode);
+            Assert.assertTrue(body != null);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
     }
 }
