@@ -30,4 +30,5 @@ singletons:
 - com.networknt.eventuate.todolist.TodoQueryWorkflow:
   - com.networknt.eventuate.todolist.TodoQueryWorkflow
 - com.networknt.eventuate.event.EventHandlerProcessor:
-  - com.networknt.eventuate.todolist.TodoQueryWorkflow
+  - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningVoid
+

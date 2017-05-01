@@ -22,7 +22,13 @@
       "post" : {
         "description" : "Return a todo object with Id",
         "operationId" : "add",
-        "parameters" : [ ],
+        "parameters" : [{
+          "in" : "body",
+          "name" : "body",
+          "description" : "Created todo object",
+          "required" : true
+          }
+        ],
         "responses" : {
           "200" : {
             "description" : "Successful response",
@@ -40,7 +46,15 @@
       "put" : {
         "description" : "Return the updated todo object",
         "operationId" : "update",
-        "parameters" : [ ],
+        "parameters" : [
+          {
+            "name": "id",
+            "in": "body",
+            "description": "The event id for update",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses" : {
           "200" : {
             "description" : "Successful response",

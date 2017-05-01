@@ -4,11 +4,11 @@ singletons:
 - javax.sql.DataSource:
   - com.zaxxer.hikari.HikariDataSource:
       DriverClassName: com.mysql.jdbc.Driver
-      jdbcUrl: jdbc:mysql:/localhost/test
-      username: sa
-      password: sa
+      jdbcUrl: jdbc:mysql://localhost:3306/event_sourcing
+      username: root
+      password: passWord11
 - com.networknt.eventuate.common.impl.sync.AggregateCrud,com.networknt.eventuate.common.impl.sync.AggregateEvents:
-    - com.networknt.eventuate.test.jdbc.EventuateEmbeddedTestAggregateStore
+    - com.networknt.query.EventuateLocalTestAggregateStore
 - com.networknt.eventuate.common.impl.AggregateCrud:
   - com.networknt.eventuate.common.impl.adapters.SyncToAsyncAggregateCrudAdapter
 - com.networknt.eventuate.common.impl.AggregateEvents:
@@ -30,4 +30,4 @@ singletons:
 - com.networknt.eventuate.todolist.TodoQueryWorkflow:
   - com.networknt.eventuate.todolist.TodoQueryWorkflow
 - com.networknt.eventuate.event.EventHandlerProcessor:
-  - com.networknt.eventuate.todolist.TodoQueryWorkflow
+  - com.networknt.eventuate.event.EventHandlerDispatchedEventReturningVoid

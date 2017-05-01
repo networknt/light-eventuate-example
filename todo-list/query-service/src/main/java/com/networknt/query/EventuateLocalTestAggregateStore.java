@@ -1,4 +1,4 @@
-package com.networknt.eventuate.todolist;
+package com.networknt.query;
 
 import com.networknt.eventuate.common.EventContext;
 import com.networknt.eventuate.common.SubscriberOptions;

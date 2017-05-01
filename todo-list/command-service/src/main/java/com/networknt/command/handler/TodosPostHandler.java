@@ -29,12 +29,16 @@ public class TodosPostHandler implements HttpHandler {
 
 
     public void handleRequest(HttpServerExchange exchange) throws Exception {
+   //     System.out.println("start service method:");
+    //   System.out.println("result:" + exchange.getAttachment(BodyHandler.REQUEST_BODY));
+
         // add a new object
         TodoInfo todo = (TodoInfo)exchange.getAttachment(BodyHandler.REQUEST_BODY);
         CompletableFuture<TodoInfo> result = service.add(todo).thenApply((e) -> {
             TodoInfo m = e.getAggregate().getTodo();
             return m;
         });
+
         exchange.getResponseHeaders().add(new HttpString("Content-Type"), "application/json");
         exchange.getResponseSender().send(Config.getInstance().getMapper().writeValueAsString(result));
     }
