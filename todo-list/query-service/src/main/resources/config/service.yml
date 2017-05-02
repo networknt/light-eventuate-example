@@ -30,4 +30,9 @@ singletons:
 - com.networknt.eventuate.todolist.TodoQueryWorkflow:
   - com.networknt.eventuate.todolist.TodoQueryWorkflow
 - com.networknt.eventuate.event.EventHandlerProcessor:
-  - com.networknt.eventuate.event.EventHandlerDispatchedEventReturningVoid
+  - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningVoid
+  - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningCompletableFuture
+  - com.networknt.eventuate.event.EventHandlerProcessorEventHandlerContextReturningCompletableFuture
+  - com.networknt.eventuate.event.EventHandlerProcessorEventHandlerContextReturningVoid
+- com.networknt.eventuate.client.SubscriptionsRegistry:
+  - com.networknt.eventuate.client.SubscriptionsRegistryImpl

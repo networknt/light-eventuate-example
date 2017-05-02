@@ -1,11 +1,10 @@
 package com.networknt.eventuate.todolist.common.event;
 
 
-import com.networknt.eventuate.common.Event;
-import com.networknt.eventuate.common.EventEntity;
 
-@EventEntity(entity = "com.networknt.eventuate.todolist.domain.TodoBulkDeleteAggregate")
-public class TodoDeletionRequestedEvent implements Event {
+
+
+public class TodoDeletionRequestedEvent implements TodoBulkEvent {
 
     private String todoId;
 
