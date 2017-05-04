@@ -19,8 +19,9 @@ Integration test steps:
 3.under query-service, start test server by run command line: mvn exec:exec
  
  since EventuateClientStartupHookProvider already added into the META-INFO\service\com.networknt.server.StartupHookProvider file:
- # config event handle registration
- com.networknt.eventuate.client.EventuateClientStartupHookProvider
+     -- config event handle registration
+        com.networknt.eventuate.client.EventuateClientStartupHookProvider
+  
  System will startupHookProvide to start event handler processor
 
 4. open brower, and type in url: http://localhost:8082/v1/todos
