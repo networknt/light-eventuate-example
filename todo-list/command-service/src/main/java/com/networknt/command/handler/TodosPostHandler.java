@@ -6,6 +6,7 @@ import com.networknt.config.Config;
 import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EventuateAggregateStore;
 
+import com.networknt.eventuate.common.impl.JSonMapper;
 import com.networknt.eventuate.todolist.TodoCommandService;
 import com.networknt.eventuate.todolist.TodoCommandServiceImpl;
 import com.networknt.eventuate.todolist.common.model.TodoInfo;
@@ -38,7 +39,8 @@ public class TodosPostHandler implements HttpHandler {
         Map s = (Map)exchange.getAttachment(BodyHandler.REQUEST_BODY);
         String json = mapper.writeValueAsString(s);
         TodoInfo todo = mapper.readValue(json, TodoInfo.class);
-     //   TodoInfo todo = (JSonMapper.fromJson(exchange.getAttachment(BodyHandler.REQUEST_BODY),  TodoInfo.class);
+
+        //TodoInfo todo2 = JSonMapper.fromJson(exchange.getAttachment(BodyHandler.REQUEST_BODY),  TodoInfo.class);
         CompletableFuture<TodoInfo> result = service.add(todo).thenApply((e) -> {
             TodoInfo m = e.getAggregate().getTodo();
             return m;
