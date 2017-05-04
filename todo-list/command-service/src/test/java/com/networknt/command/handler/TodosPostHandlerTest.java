@@ -1,11 +1,11 @@
 package com.networknt.command.handler;
 
+
 import com.networknt.client.Client;
 import com.networknt.eventuate.common.impl.JSonMapper;
 import com.networknt.eventuate.todolist.common.model.TodoInfo;
 import com.networknt.exception.ClientException;
 import com.networknt.exception.ApiException;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -29,20 +29,21 @@ public class TodosPostHandlerTest {
     public void testTodosPostHandler() throws ClientException, ApiException, UnsupportedEncodingException {
 
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpPost httpPost = new HttpPost("http://localhost:8081/v1/todos");
-    /*   TodoInfo todo = new TodoInfo();
+        HttpPost httpPost = new HttpPost("http://localhost:8083/v1/todos");
+       TodoInfo todo = new TodoInfo();
         todo.setTitle(" this is the test todo from junit test");
+
         String json = JSonMapper.toJson(todo);
-        httpPost.setEntity(new StringEntity(json));
-        httpPost.setHeader("Content-type", "application/json");
+
      //   Client.getInstance().addAuthorization(httpPost);
         try {
+            httpPost.setEntity(new StringEntity(json));
+            httpPost.setHeader("Content-type", "application/json");
             CloseableHttpResponse response = client.execute(httpPost);
             Assert.assertEquals(200, response.getStatusLine().getStatusCode());
-            Assert.assertEquals("add", IOUtils.toString(response.getEntity().getContent(), "utf8"));
-        } catch (Exception e) {
+       } catch (Exception e) {
             e.printStackTrace();
         }
-*/
+
     }
 }

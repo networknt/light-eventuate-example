@@ -1,5 +1,6 @@
 package com.networknt.command.handler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.body.BodyHandler;
 import com.networknt.config.Config;
 import com.networknt.eventuate.common.AggregateRepository;
@@ -15,6 +16,7 @@ import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.HttpString;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -30,9 +32,12 @@ public class TodosPutHandler implements HttpHandler {
     private TodoCommandService  service = new TodoCommandServiceImpl(todoRepository, bulkDeleteAggregateRepository);
 
     public void handleRequest(HttpServerExchange exchange) throws Exception {
-        // update a new object
+        ObjectMapper mapper = new ObjectMapper();      // update a new object
         String id = exchange.getQueryParameters().get("id").getFirst();
-        TodoInfo todo = (TodoInfo)exchange.getAttachment(BodyHandler.REQUEST_BODY);
+        Map s = (Map)exchange.getAttachment(BodyHandler.REQUEST_BODY);
+        String json = mapper.writeValueAsString(s);
+        TodoInfo todo = mapper.readValue(json, TodoInfo.class);
+
         CompletableFuture<TodoInfo> result = service.update(id, todo).thenApply((e) -> {
             TodoInfo m = e.getAggregate().getTodo();
             return m;

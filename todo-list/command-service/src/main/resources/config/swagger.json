@@ -26,7 +26,10 @@
           "in" : "body",
           "name" : "body",
           "description" : "Created todo object",
-          "required" : true
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Todo"
+          }
           }
         ],
         "responses" : {

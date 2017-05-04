@@ -1,9 +1,11 @@
 package com.networknt.command.handler;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.config.Config;
 import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EventuateAggregateStore;
+
 import com.networknt.eventuate.todolist.TodoCommandService;
 import com.networknt.eventuate.todolist.TodoCommandServiceImpl;
 import com.networknt.eventuate.todolist.common.model.TodoInfo;
@@ -16,6 +18,7 @@ import io.undertow.util.HttpString;
 import com.networknt.body.BodyHandler;
 
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class TodosPostHandler implements HttpHandler {
@@ -29,11 +32,13 @@ public class TodosPostHandler implements HttpHandler {
 
 
     public void handleRequest(HttpServerExchange exchange) throws Exception {
-   //     System.out.println("start service method:");
-    //   System.out.println("result:" + exchange.getAttachment(BodyHandler.REQUEST_BODY));
+         ObjectMapper mapper = new ObjectMapper();
 
         // add a new object
-        TodoInfo todo = (TodoInfo)exchange.getAttachment(BodyHandler.REQUEST_BODY);
+        Map s = (Map)exchange.getAttachment(BodyHandler.REQUEST_BODY);
+        String json = mapper.writeValueAsString(s);
+        TodoInfo todo = mapper.readValue(json, TodoInfo.class);
+     //   TodoInfo todo = (JSonMapper.fromJson(exchange.getAttachment(BodyHandler.REQUEST_BODY),  TodoInfo.class);
         CompletableFuture<TodoInfo> result = service.add(todo).thenApply((e) -> {
             TodoInfo m = e.getAggregate().getTodo();
             return m;
@@ -42,4 +47,7 @@ public class TodosPostHandler implements HttpHandler {
         exchange.getResponseHeaders().add(new HttpString("Content-Type"), "application/json");
         exchange.getResponseSender().send(Config.getInstance().getMapper().writeValueAsString(result));
     }
+
+
+
 }
