@@ -20,28 +20,11 @@ import java.util.concurrent.CompletableFuture;
 
 public class TodosGetHandler implements HttpHandler {
 
-    private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);
-
-    private AggregateRepository todoRepository = new AggregateRepository(TodoAggregate.class, eventStore);
-    private AggregateRepository bulkDeleteAggregateRepository  = new AggregateRepository(TodoBulkDeleteAggregate.class, eventStore);
-
-    private TodoCommandService commandService = new TodoCommandServiceImpl(todoRepository, bulkDeleteAggregateRepository);
 
     TodoQueryService service =
             (TodoQueryService)SingletonServiceFactory.getBean(TodoQueryService.class);
 
     public void handleRequest(HttpServerExchange exchange) throws Exception {
-
-        TodoInfo todo = new TodoInfo();
-        todo.setTitle(" this is the URL todo");
-        CompletableFuture<TodoInfo> result = commandService.add(todo).thenApply((e) -> {
-            TodoInfo m = e.getAggregate().getTodo();
-            System.out.println("m = " + m);
-            System.out.println("m = " + e.getEntityId());
-            return m;
-        });
-
-        System.out.println("result = " + result.get());
 
         List<Map<String, TodoInfo>> resultAll = service.getAll();
         exchange.getResponseHeaders().add(new HttpString("Content-Type"), "application/json");

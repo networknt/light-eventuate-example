@@ -24,9 +24,12 @@ Integration test steps:
   
  System will startupHookProvide to start event handler processor
 
-4. open brower, and type in url: http://localhost:8082/v1/todos
+4. open brower, and type in url:http://localhost:8082/v1/todoEvents
+ -- this url will send a restful http request and will trigger TodosCreateEventHandler handler based on light-java configuration. And TodosCreateEventHandler will call TodoCreateCommand to create todo event, system use command side service to create a todo event; the new create todo event will be saved into event store and publish out.
+
+5. open brower, and type in url: http://localhost:8082/v1/todos
  
-  -- this url will trigger a http request to TodosGetHandler, in the TodosGetHandler, system use command side service to create a todo event; the new create todo event will be saved into event store and publish out. At same time, event handle process will subscrible the event and create a todo based on the event and save the todo object to query side todo table. And then the TodosGetHandler will use the query side service to get ALL todo list to display on UI.
+  -- this url will trigger a http request to TodosGetHandler, in the TodosGetHandler,   event handle process will subscrible the event and create a todo based on the event and save the todo object to query side todo table. And then the TodosGetHandler will use the query side service to get ALL todo list to display on UI.
   
   
 

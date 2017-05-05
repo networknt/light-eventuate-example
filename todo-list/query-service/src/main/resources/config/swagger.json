@@ -41,6 +41,29 @@
         "x-contentType" : "application/json"
       }
     },
+    "/todoEvents" : {
+      "get" : {
+        "description" : "Create todos event",
+        "operationId" : "createEvent",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful response",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Todo"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "todo_auth" : [ "todo.r", "todo.w" ]
+        } ],
+        "x-accepts" : "application/json",
+        "x-contentType" : "application/json"
+      }
+    },
     "/todos/{id}" : {
       "get" : {
         "description" : "Return a todo by Id",
