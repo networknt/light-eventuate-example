@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.networknt.eventuate.reference.domain.Status;
 
 public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepository {
 
@@ -31,15 +32,16 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
     @Override
     public Map<String, ReferenceData> save(String id, ReferenceData ref) {
         try (final Connection connection = dataSource.getConnection()){
-            String psInsert = "INSERT INTO REFERENCE_REPOSITORY (ID, REFERENCE_NAME, DESCRIPTION) VALUES (?, ?, ?)";
+            String psInsert = "INSERT INTO REFERENCE_QUERY_LIST (ID, REFERENCE_NAME, DESCRIPTION, STATUS) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(psInsert);
             stmt.setString(1, id);
             stmt.setString(2, ref.getReferenceName());
             stmt.setString(3, ref.getDescription());
+            stmt.setString(4, Status.CREATED.asString());
 
             int count = stmt.executeUpdate();
             if (count != 1) {
-                logger.error("Failed to insert REFERENCE_REPOSITORY: {}", id);
+                logger.error("Failed to insert REFERENCE_QUERY_LIST: {}", id);
             } else {
                 Map<String, ReferenceData> refMap = new HashMap<String, ReferenceData>();
                 refMap.put(id, ref);
@@ -55,15 +57,15 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
     @Override
     public Map<String, ReferenceData> update(String id, ReferenceData ref) {
         try (final Connection connection = dataSource.getConnection()){
-            String psInsert = "INSERT INTO REFERENCE_REPOSITORY (ID, REFERENCE_NAME, DESCRIPTION) VALUES (?, ?, ?)";
+            String psInsert = "UPDATE REFERENCE_QUERY_LIST SET STATUS = ? WHERE ID = ?";
             PreparedStatement stmt = connection.prepareStatement(psInsert);
-            stmt.setString(1, id);
-            stmt.setString(2, ref.getReferenceName());
-            stmt.setString(3, ref.getDescription());
+            stmt.setString(1, Status.UPDATED.asString());
+            stmt.setString(2, id);
+
 
             int count = stmt.executeUpdate();
             if (count != 1) {
-                logger.error("Failed to insert REFERENCE_REPOSITORY: {}", id);
+                logger.error("Failed to UPDATE REFERENCE_QUERY_LIST: {}", id);
             } else {
                 Map<String, ReferenceData> refMap = new HashMap<String, ReferenceData>();
                 refMap.put(id, ref);
@@ -78,12 +80,12 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
     @Override
     public void inActive(String id) {
         try (final Connection connection = dataSource.getConnection()){
-            String psDelete = "UPDATE REFERENCE_REPOSITORY SET ACTIVE_FLG = 'N' WHERE ID = ?";
+            String psDelete = "UPDATE REFERENCE_QUERY_LIST SET ACTIVE_FLG = 'N' WHERE ID = ?";
             PreparedStatement psEntity = connection.prepareStatement(psDelete);
             psEntity.setString(1, id);
             int count = psEntity.executeUpdate();
             if (count != 1) {
-                logger.error("Failed to update REFERENCE_REPOSITORY: {}", id);
+                logger.error("Failed to update REFERENCE_QUERY_LIST: {}", id);
             }
 
         } catch (SQLException e) {
@@ -92,5 +94,39 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
 
     }
 
+    @Override
+    public List<String> getAllIds() {
+        List<String> ids = new ArrayList<String>();
 
+        try (final Connection connection = dataSource.getConnection()){
+            String psSelect = "SELECT ID FROM REFERENCE_QUERY_LIST WHERE ACTIVE_FLG = 'Y'  and STATUS = 'A' order by ID asc";
+            PreparedStatement stmt = connection.prepareStatement(psSelect);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                  ids.add(rs.getString("ID"));
+            }
+        } catch (SQLException e) {
+            logger.error("SqlException:", e);
+        }
+
+        return ids;
+    }
+
+    @Override
+    public String getRefIdByName(String name) {
+        String id = null;
+        try (final Connection connection = dataSource.getConnection()){
+            String psSelect = "SELECT ID FROM REFERENCE_QUERY_LIST WHERE ACTIVE_FLG = 'Y'  and STATUS = 'A' and REFERENCE_NAME = ?";
+            PreparedStatement stmt = connection.prepareStatement(psSelect);
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                id = rs.getString("ID");
+            }
+        } catch (SQLException e) {
+            logger.error("SqlException:", e);
+        }
+
+        return id;
+    }
 }

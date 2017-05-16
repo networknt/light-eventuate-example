@@ -19,5 +19,7 @@ public interface ReferenceQueryService {
 
     Map<String, ReferenceData> save(String id, ReferenceData ref);
 
+    Map<String, ReferenceData> update(String id, ReferenceData ref);
+
     void remove(String id);
 }

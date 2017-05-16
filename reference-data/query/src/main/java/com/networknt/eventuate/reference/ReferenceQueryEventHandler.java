@@ -26,8 +26,7 @@ public class ReferenceQueryEventHandler {
     public void create(DispatchedEvent<ReferenceCreatedEvent> de) {
         ReferenceData ref = de.getEvent().getReferenceData();
         if (service.required(ref.getReferenceName()))  {
-        //    service.save(de.getEntityId(), ref);
-
+            service.save(de.getEntityId(), ref);
         }
     }
 
@@ -40,7 +39,7 @@ public class ReferenceQueryEventHandler {
     public void update(DispatchedEvent<ReferenceUpdatedEvent> de) {
         ReferenceData ref = de.getEvent().getReferenceData();
         if (service.required(ref.getReferenceName()))  {
-           // service.save(de.getEntityId(), todo);
+            service.update(de.getEntityId(), ref);
         }
      }
 }

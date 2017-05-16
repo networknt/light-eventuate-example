@@ -137,11 +137,7 @@
                 <artifactId>eventuate-reference-query-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.networknt</groupId>
-                <artifactId>eventuate-reference-e2etest</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+
 
             <dependency>
                 <groupId>com.networknt</groupId>

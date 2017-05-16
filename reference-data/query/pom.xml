@@ -97,6 +97,10 @@
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>eventuate-reference-command</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

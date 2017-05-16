@@ -1,7 +1,8 @@
 package com.networknt.eventuate.todolist;
 
 import com.networknt.eventuate.common.Int128;
-import com.networknt.eventuate.todolist.common.model.TodoInfo;
+import com.networknt.eventuate.reference.ReferenceQuerySideRepository;
+import com.networknt.eventuate.reference.common.model.ReferenceData;
 import com.networknt.service.SingletonServiceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,7 +24,7 @@ import static org.junit.Assert.assertTrue;
  * This is a sample test for H2 test DB.
  * refer the
  */
-public class TodoQueryRepositoryH2Test {
+public class QueryQueryRepositoryH2Test {
 
     public static DataSource ds;
 
@@ -31,8 +32,8 @@ public class TodoQueryRepositoryH2Test {
         ds = (DataSource) SingletonServiceFactory.getBean(DataSource.class);
         try (Connection connection = ds.getConnection()) {
             // Runscript doesn't work need to execute batch here.
-        String schemaResourceName = "/todolist-example-h2-ddl.sql";
-        InputStream in = TodoQueryRepositoryH2Test.class.getResourceAsStream(schemaResourceName);
+        String schemaResourceName = "/query-side-h2-ddl.sql";
+        InputStream in = QueryQueryRepositoryH2Test.class.getResourceAsStream(schemaResourceName);
 
         if (in == null) {
             throw new RuntimeException("Failed to load resource: " + schemaResourceName);
@@ -44,15 +45,15 @@ public class TodoQueryRepositoryH2Test {
         e.printStackTrace();
     }
     }
-    private TodoQueryRepository todoQueryRepository = (TodoQueryRepository)SingletonServiceFactory.getBean(TodoQueryRepository.class);
-    private static  TodoInfo todo;
+    private ReferenceQuerySideRepository refQueryRepository = (ReferenceQuerySideRepository)SingletonServiceFactory.getBean(ReferenceQuerySideRepository.class);
+    private static ReferenceData ref;
     private static  String  id;
     @BeforeClass
     public static void setUp() {
-        todo = new TodoInfo();
-        todo.setOrder(1);
-        todo.setTitle("complete the test first");
-        todo.setCompleted(false);
+        ref = new ReferenceData();
+        ref.setReferenceName("Country");
+        ref.setDescription("complete the test first");
+
 
         Int128 idGen = new Int128(1222L, 1011L);
         id = idGen.asString();
@@ -60,28 +61,15 @@ public class TodoQueryRepositoryH2Test {
 
     @Test
     public void testSave() {
-        Map<String, TodoInfo>  result = todoQueryRepository.save(id, todo);
+        Map<String, ReferenceData>  result = refQueryRepository.save(id, ref);
         assertNotNull(result);
     }
 
-    @Test
-    public void testGetAll() {
-        List<Map<String, TodoInfo>> result= todoQueryRepository.getAll();
-        assertTrue(result.size()>0);
-    }
-
-    @Test
-    public void testFindById() {
-        Map<String, TodoInfo> result = todoQueryRepository.findById(id);
-        assertTrue(result.size()>0);
-
-    }
 
 
     @Test
     public void testRemove() {
-         todoQueryRepository.remove(id);
-        Map<String, TodoInfo> result = todoQueryRepository.findById(id);
-        assertTrue(result.size() ==0);
+        refQueryRepository.inActive(id);
+
     }
 }

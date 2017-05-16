@@ -14,5 +14,9 @@ public interface ReferenceQuerySideRepository {
     Map<String, ReferenceData> update(String id, ReferenceData referenceData);
 
 
+    List<String> getAllIds();
+
+    String getRefIdByName(String name);
+
     void inActive(String id);
 }
