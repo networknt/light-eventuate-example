@@ -3,6 +3,7 @@ package com.networknt.eventuate.reference.common.model;
 
 public class ReferenceItem {
     private String linkStr;
+    private String key;
     private String valueEn;
     private String valueFr;
     private String valueOther;
@@ -13,6 +14,14 @@ public class ReferenceItem {
         }
         return linkStr;
 
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public void setLinkStr(String linkStr) {

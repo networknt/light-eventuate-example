@@ -1,12 +1,13 @@
 package com.networknt.eventuate.reference.common.model;
 
 
-import java.util.Map;
+import java.util.List;
+
 
 public class ReferenceData {
     private String  referenceName;
     private String description;
-    private Map<String, ReferenceItem> content;
+    private List<ReferenceItem> content;
     private boolean active = true;
 
 
@@ -36,11 +37,11 @@ public class ReferenceData {
         this.active = active;
     }
 
-    public Map<String, ReferenceItem> getContent() {
+    public List<ReferenceItem> getContent() {
         return content;
     }
 
-    public void setContent(Map<String, ReferenceItem> content) {
+    public void setContent(List<ReferenceItem> content) {
         this.content = content;
     }
 
