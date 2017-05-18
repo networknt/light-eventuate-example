@@ -23,7 +23,7 @@ public class ReferenceIdDeleteHandlerTest {
     public static TestServer server = TestServer.getInstance();
 
     static final Logger logger = LoggerFactory.getLogger(ReferenceIdDeleteHandlerTest.class);
-
+    @Ignore
     @Test
     public void testReferenceIdDeleteHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();

@@ -108,7 +108,7 @@
         <module>query</module>
         <module>command-service</module>
         <module>command-hybridservice</module>
-
+        <module>e2etest</module>
     </modules>
 
     <dependencyManagement>
@@ -139,7 +139,11 @@
                 <artifactId>eventuate-reference-query-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.networknt</groupId>
+                <artifactId>eventuate-reference-e2etest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.networknt</groupId>
@@ -241,7 +245,41 @@
                 <artifactId>swagger-security</artifactId>
                 <version>${version.light-java-rest}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.networknt</groupId>
+                <artifactId>codegen-core</artifactId>
+                <version>${version.light-java}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.networknt</groupId>
+                <artifactId>codegen-fwk</artifactId>
+                <version>${version.light-java}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.networknt</groupId>
+                <artifactId>registry</artifactId>
+                <version>${version.light-java}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.networknt</groupId>
+                <artifactId>balance</artifactId>
+                <version>${version.light-java}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.networknt</groupId>
+                <artifactId>cluster</artifactId>
+                <version>${version.light-java}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.networknt</groupId>
+                <artifactId>consul</artifactId>
+                <version>${version.light-java}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.networknt</groupId>
+                <artifactId>rpc-router</artifactId>
+                <version>${version.light-java}</version>
+            </dependency>
             <dependency>
                 <groupId>com.networknt</groupId>
                 <artifactId>eventuate-common</artifactId>

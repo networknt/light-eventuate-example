@@ -23,7 +23,7 @@ public class ReferencePutHandlerTest {
     public static TestServer server = TestServer.getInstance();
 
     static final Logger logger = LoggerFactory.getLogger(ReferencePutHandlerTest.class);
-
+@Ignore
     @Test
     public void testReferencePutHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
