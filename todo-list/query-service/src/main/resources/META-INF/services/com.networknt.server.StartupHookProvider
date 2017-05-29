@@ -4,4 +4,4 @@
 # config Json Path to use Jackson Parser
 com.networknt.server.JsonPathStartupHookProvider
 # config event handle registration
- com.networknt.eventuate.client.EventuateClientStartupHookProvider
+com.networknt.eventuate.client.EventuateClientStartupHookProvider

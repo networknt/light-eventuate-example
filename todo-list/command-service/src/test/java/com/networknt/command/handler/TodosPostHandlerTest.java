@@ -34,6 +34,7 @@ public class TodosPostHandlerTest {
         todo.setTitle(" this is the test todo from junit test");
 
         String json = JSonMapper.toJson(todo);
+        System.out.println(json);
 
      //   Client.getInstance().addAuthorization(httpPost);
         try {

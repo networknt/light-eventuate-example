@@ -4,7 +4,7 @@ singletons:
 - javax.sql.DataSource:
   - com.zaxxer.hikari.HikariDataSource:
       DriverClassName: com.mysql.jdbc.Driver
-      jdbcUrl: jdbc:mysql://localhost:3306/event_sourcing?useSSL=false
+      jdbcUrl: jdbc:mysql://localhost:3306/eventuate?useSSL=false
       username: mysqluser
       password: mysqlpw
 - com.networknt.eventuate.common.impl.sync.AggregateCrud,com.networknt.eventuate.common.impl.sync.AggregateEvents:
@@ -23,7 +23,3 @@ singletons:
   - com.networknt.eventuate.todolist.domain.TodoAggregate
 - com.networknt.eventuate.todolist.domain.TodoBulkDeleteAggregate:
   - com.networknt.eventuate.todolist.domain.TodoBulkDeleteAggregate
-- com.networknt.eventuate.common.AggregateRepository:
-  - com.networknt.eventuate.common.AggregateRepository
-- com.networknt.eventuate.todolist.TodoCommandService:
-  - com.networknt.eventuate.todolist.TodoCommandServiceImpl
