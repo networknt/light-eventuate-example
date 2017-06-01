@@ -33,6 +33,7 @@ public class TodosPostHandler implements HttpHandler {
 
 
     public void handleRequest(HttpServerExchange exchange) throws Exception {
+        System.out.println("command side:");
          ObjectMapper mapper = new ObjectMapper();
 
         // add a new object
