@@ -3,6 +3,14 @@ version: "2"
 # Services
 #
 services:
+   command-service:
+      build: ./command-service/
+      volumes:
+        - ./docker/command-service/config:/config
+      ports:
+        - 8083:8083
+      networks:
+          - localnet
 
    query-service:
       build: ./query-service/
