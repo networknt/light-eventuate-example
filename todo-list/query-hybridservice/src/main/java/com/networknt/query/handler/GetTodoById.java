@@ -1,6 +1,7 @@
 
 package com.networknt.query.handler;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.networknt.config.Config;
 import com.networknt.eventuate.todolist.TodoQueryService;
 import com.networknt.eventuate.todolist.common.model.TodoInfo;
@@ -21,7 +22,11 @@ public class GetTodoById implements Handler {
     @Override
     public ByteBuffer handle(Object input) {
 
-        String id = "0";
+        JsonNode inputPara = Config.getInstance().getMapper().valueToTree(input);
+      
+        String id = inputPara.findPath("id").asText();
+
+
         CompletableFuture<Map<String, TodoInfo>> result = service.findById(id);
         String returnMessage = null;
         try {

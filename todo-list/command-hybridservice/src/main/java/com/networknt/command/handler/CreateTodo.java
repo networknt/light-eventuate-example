@@ -1,6 +1,8 @@
 
 package com.networknt.command.handler;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.networknt.config.Config;
 import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EventuateAggregateStore;
 import com.networknt.eventuate.todolist.TodoCommandService;
@@ -29,10 +31,13 @@ public class CreateTodo implements Handler {
     @Override
     public ByteBuffer handle(Object input)  {
 
-        //TODO get input
-        TodoInfo todo = new TodoInfo();
+        JsonNode inputPara =Config.getInstance().getMapper().valueToTree(input);
 
-        //TodoInfo todo2 = JSonMapper.fromJson(exchange.getAttachment(BodyHandler.REQUEST_BODY),  TodoInfo.class);
+        TodoInfo todo = new TodoInfo();
+        todo.setTitle(inputPara.findPath("title").asText());
+        todo.setCompleted(inputPara.findPath("completed").asBoolean());
+        todo.setOrder(inputPara.findPath("order").asInt());
+
         CompletableFuture<TodoInfo> result = service.add(todo).thenApply((e) -> {
             TodoInfo m = e.getAggregate().getTodo();
             return m;

@@ -2,6 +2,8 @@
 package com.networknt.command.handler;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.networknt.config.Config;
 import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EventuateAggregateStore;
 import com.networknt.eventuate.todolist.TodoCommandService;
@@ -32,9 +34,9 @@ public class DeleteTodo implements Handler {
     @Override
     public ByteBuffer handle(Object input)  {
 
+        JsonNode inputPara = Config.getInstance().getMapper().valueToTree(input);
         // delete a todo-event
-        //TODO get input
-        String id = null;
+        String id = inputPara.findPath("id").asText();
 
         CompletableFuture<TodoInfo> result = service.remove(id).thenApply((e) -> {
             TodoInfo m = e.getAggregate().getTodo();
