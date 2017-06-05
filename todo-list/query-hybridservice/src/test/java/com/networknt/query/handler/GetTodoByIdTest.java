@@ -25,7 +25,7 @@ public class GetTodoByIdTest {
     @ClassRule
     public static TestServer server = TestServer.getInstance();
 
-    static final Logger logger = LoggerFactory.getLogger(GetTodoById.class); 
+    static final Logger logger = LoggerFactory.getLogger(GetTodoById.class);
 
     @Test
     public void testGetTodoById() throws ClientException, ApiException {

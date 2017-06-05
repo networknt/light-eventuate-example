@@ -23,7 +23,7 @@ public class GetTodoById implements Handler {
     public ByteBuffer handle(Object input) {
 
         JsonNode inputPara = Config.getInstance().getMapper().valueToTree(input);
-      
+
         String id = inputPara.findPath("id").asText();
 
 

@@ -2,15 +2,9 @@
 package com.networknt.command.handler;
 
 import com.networknt.client.Client;
-import com.networknt.eventuate.common.impl.JSonMapper;
-import com.networknt.eventuate.todolist.common.model.TodoInfo;
-import com.networknt.server.Server;
 import com.networknt.exception.ClientException;
 import com.networknt.exception.ApiException;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
+
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -19,7 +13,7 @@ import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +21,7 @@ public class CreateTodoTest {
     @ClassRule
     public static TestServer server = TestServer.getInstance();
 
-    static final Logger logger = LoggerFactory.getLogger(CreateTodo.class); 
+    static final Logger logger = LoggerFactory.getLogger(CreateTodo.class);
 
     @Test
     public void testCreateTodo() throws ClientException, ApiException {

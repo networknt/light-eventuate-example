@@ -1,19 +1,5 @@
-{
-  "lightapi.net/todo/delete/0.1.0" : {
-    "schema" : {
-      "title" : "Service",
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string"
-        }
-      },
-      "required" : [ "id"]
-    },
-    "scope" : "todo.w"
-  },
-  "lightapi.net/todo/create/0.1.0" : {
-    "schema" : {
+{"lightapi.net/todo/create/0.1.0":{
+  "schema": {
       "title" : "Service",
       "type" : "object",
       "properties" : {
@@ -30,11 +16,9 @@
         }
       },
       "required" : [ "title" ]
-    },
-    "scope" : "todo.w"
-  },
-  "lightapi.net/todo/update/0.1.0" : {
-    "schema" : {
+    },"scope": "todo.w"},
+  "lightapi.net/todo/update/0.1.0":{
+    "schema": {
       "title" : "Service",
       "type" : "object",
       "properties" : {
@@ -54,7 +38,15 @@
         }
       },
       "required" : [ "id" ]
-    },
-    "scope" : "todo.w"
-  }
-}
+    },"scope": "todo.w"},
+  "lightapi.net/todo/delete/0.1.0":{
+    "schema": {
+      "title" : "Service",
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "id"]
+    },"scope": "todo.w"}}

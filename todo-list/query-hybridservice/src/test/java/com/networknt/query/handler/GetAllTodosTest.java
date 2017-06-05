@@ -25,7 +25,7 @@ public class GetAllTodosTest {
     @ClassRule
     public static TestServer server = TestServer.getInstance();
 
-    static final Logger logger = LoggerFactory.getLogger(GetAllTodos.class); 
+    static final Logger logger = LoggerFactory.getLogger(GetAllTodos.class);
 
     @Test
     public void testGetAllTodos() throws ClientException, ApiException {
