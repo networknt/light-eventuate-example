@@ -15,14 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>codegen-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>codegen-fwk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
             <artifactId>client</artifactId>
         </dependency>
         <dependency>
