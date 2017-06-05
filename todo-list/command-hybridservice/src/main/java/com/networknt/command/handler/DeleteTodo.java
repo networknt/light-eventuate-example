@@ -20,7 +20,7 @@ import com.networknt.rpc.router.ServiceHandler;
 import java.nio.ByteBuffer;
 import java.util.concurrent.CompletableFuture;
 
-@ServiceHandler(id="lightapi.net/command/delete/0.1.0")
+@ServiceHandler(id="lightapi.net/todo/delete/0.1.0")
 public class DeleteTodo implements Handler {
 
     private EventuateAggregateStore eventStore  = (EventuateAggregateStore) SingletonServiceFactory.getBean(EventuateAggregateStore.class);

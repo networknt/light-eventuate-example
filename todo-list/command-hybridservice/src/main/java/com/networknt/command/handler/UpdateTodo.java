@@ -19,7 +19,7 @@ import com.networknt.rpc.router.ServiceHandler;
 import java.nio.ByteBuffer;
 import java.util.concurrent.CompletableFuture;
 
-@ServiceHandler(id="lightapi.net/command/update/0.1.0")
+@ServiceHandler(id="lightapi.net/todo/update/0.1.0")
 public class UpdateTodo implements Handler {
 
     private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);

@@ -1,5 +1,5 @@
 {
-  "lightapi.net/command/delete/0.1.0" : {
+  "lightapi.net/todo/delete/0.1.0" : {
     "schema" : {
       "title" : "Service",
       "type" : "object",
@@ -12,7 +12,7 @@
     },
     "scope" : "todo.w"
   },
-  "lightapi.net/command/create/0.1.0" : {
+  "lightapi.net/todo/create/0.1.0" : {
     "schema" : {
       "title" : "Service",
       "type" : "object",
@@ -33,7 +33,7 @@
     },
     "scope" : "todo.w"
   },
-  "lightapi.net/command/update/0.1.0" : {
+  "lightapi.net/todo/update/0.1.0" : {
     "schema" : {
       "title" : "Service",
       "type" : "object",

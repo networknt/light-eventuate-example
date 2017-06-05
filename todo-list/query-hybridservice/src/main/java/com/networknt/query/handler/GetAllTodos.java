@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Map;
 
-@ServiceHandler(id="lightapi.net/query/gettodos/0.1.0")
+@ServiceHandler(id="lightapi.net/todo/gettodos/0.1.0")
 public class GetAllTodos implements Handler {
     TodoQueryService service =
             (TodoQueryService) SingletonServiceFactory.getBean(TodoQueryService.class);

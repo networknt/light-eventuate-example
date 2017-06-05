@@ -33,7 +33,7 @@ public class GetTodoByIdTest {
         HttpPost httpPost = new HttpPost("http://localhost:8082/api/json");
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("host", "lightapi.net");
-        map.put("service", "query");
+        map.put("service", "todo");
         map.put("action", "gettodo");
         map.put("version", "0.1.0");
         map.put("id", "101010");

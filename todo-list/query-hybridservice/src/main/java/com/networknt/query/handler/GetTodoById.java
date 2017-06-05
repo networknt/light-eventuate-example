@@ -14,7 +14,7 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-@ServiceHandler(id="lightapi.net/query/gettodo/0.1.0")
+@ServiceHandler(id="lightapi.net/todo/gettodo/0.1.0")
 public class GetTodoById implements Handler {
     TodoQueryService service =
             (TodoQueryService) SingletonServiceFactory.getBean(TodoQueryService.class);

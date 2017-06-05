@@ -36,7 +36,7 @@ public class CreateTodoTest {
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("host", "lightapi.net");
-        map.put("service", "command");
+        map.put("service", "todo");
         map.put("action", "create");
         map.put("version", "0.1.0");
         map.put("title", "create todo from hybrid service unit test");

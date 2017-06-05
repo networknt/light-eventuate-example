@@ -33,7 +33,7 @@ public class DeleteTodoTest {
         HttpPost httpPost = new HttpPost("http://localhost:8080/api/json");
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("host", "lightapi.net");
-        map.put("service", "command");
+        map.put("service", "todo");
         map.put("action", "delete");
         map.put("version", "0.1.0");
         map.put("id", "101010");
