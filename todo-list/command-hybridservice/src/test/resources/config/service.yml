@@ -6,8 +6,10 @@ singletons:
       jdbcUrl: jdbc:h2:~/test
       username: sa
       password: sa
-- com.networknt.eventuate.common.impl.sync.AggregateCrud,com.networknt.eventuate.common.impl.sync.AggregateEvents:
+- com.networknt.eventuate.common.impl.sync.AggregateCrud:
     - com.networknt.eventuate.test.jdbc.EventuateEmbeddedTestAggregateStore
+- com.networknt.eventuate.common.impl.sync.AggregateEvents:
+    - com.networknt.eventuate.client.EventuateLocalAggregatesEvents
 - com.networknt.eventuate.common.impl.AggregateCrud:
   - com.networknt.eventuate.common.impl.adapters.SyncToAsyncAggregateCrudAdapter
 - com.networknt.eventuate.common.impl.AggregateEvents:
