@@ -174,10 +174,6 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>eventuate-testjdbc</artifactId>
-          </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
             <artifactId>eventuate-jdbc</artifactId>
         </dependency>
         <dependency>
