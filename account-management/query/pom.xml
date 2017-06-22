@@ -20,14 +20,14 @@
 
     <parent>
         <groupId>com.networknt</groupId>
-        <artifactId>light-eventuate-todo</artifactId>
+        <artifactId>light-eventuate-account</artifactId>
         <version>0.1.0</version>
         <relativePath>..</relativePath>
     </parent>
 
-    <artifactId>eventuate-todo-query</artifactId>
+    <artifactId>eventuate-account-query</artifactId>
     <packaging>jar</packaging>
-    <description>A query component of todo application.</description>
+    <description>A query component of account transfer application.</description>
 
     <dependencies>
         <dependency>
@@ -96,6 +96,11 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>eventuate-account-common</artifactId>
+            <version>0.1.0</version>
         </dependency>
     </dependencies>
 

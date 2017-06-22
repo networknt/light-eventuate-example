@@ -111,9 +111,7 @@
         <module>command</module>
         <module>query</module>
         <module>command-service</module>
-        <module>command-hybridservice</module>
-        <module>query-service</module>
-        <module>query-hybridservice</module>
+       <module>query-service</module>
         <module>e2etest</module>
     </modules>
 
