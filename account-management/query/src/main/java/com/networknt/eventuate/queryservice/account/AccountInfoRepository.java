@@ -10,4 +10,7 @@ interface AccountInfoRepository {
     AccountInfo findOneAccount(String accountId);
 
     void delete(String accountId);
+
+    int createAccount(AccountInfo accountInfo);
+
 }

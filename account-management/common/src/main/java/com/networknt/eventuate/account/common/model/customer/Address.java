@@ -11,16 +11,18 @@ public class Address {
   private String city;
   private String state;
   private String zipCode;
+  private String country;
 
   public Address() {
   }
 
-  public Address(String street1, String street2, String city, String state, String zipCode) {
+  public Address(String street1, String street2, String city, String state, String zipCode, String country) {
     this.street1 = street1;
     this.street2 = street2;
     this.city = city;
     this.state = state;
     this.zipCode = zipCode;
+    this.country = country;
   }
 
   public String getStreet1() {
@@ -61,6 +63,14 @@ public class Address {
 
   public void setZipCode(String zipCode) {
     this.zipCode = zipCode;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
   }
 
   @Override

@@ -22,7 +22,7 @@ public class AccountInfo {
   @JsonProperty("date")
   private Date creationDate;
 
-  private AccountInfo() {
+  public AccountInfo() {
   }
 
   public AccountInfo(String id, String customerId, String title, String description, long balance, List<AccountChangeInfo> changes, Map<String, AccountTransactionInfo> transactions, String version) {
@@ -76,5 +76,41 @@ public class AccountInfo {
 
   public Date getCreationDate() {
     return creationDate;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public void setCustomerId(String customerId) {
+    this.customerId = customerId;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public void setBalance(long balance) {
+    this.balance = balance;
+  }
+
+  public void setChanges(List<AccountChangeInfo> changes) {
+    this.changes = changes;
+  }
+
+  public void setTransactions(Map<String, AccountTransactionInfo> transactions) {
+    this.transactions = transactions;
+  }
+
+  public void setVersion(String version) {
+    this.version = version;
+  }
+
+  public void setCreationDate(Date creationDate) {
+    this.creationDate = creationDate;
   }
 }
