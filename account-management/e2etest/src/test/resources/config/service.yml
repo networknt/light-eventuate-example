@@ -18,7 +18,5 @@ singletons:
   - com.networknt.eventuate.common.impl.EventuateAggregateStoreImpl
 - com.networknt.eventuate.common.sync.EventuateAggregateStore:
   - com.networknt.eventuate.common.impl.sync.EventuateAggregateStoreImpl
-- com.networknt.eventuate.todolist.domain.TodoAggregate:
-  - com.networknt.eventuate.todolist.domain.TodoAggregate
-- com.networknt.eventuate.todolist.domain.TodoBulkDeleteAggregate:
-  - com.networknt.eventuate.todolist.domain.TodoBulkDeleteAggregate
+- com.networknt.eventuate.account.command.customer.Customer:
+  - com.networknt.eventuate.account.command.customer.Customer

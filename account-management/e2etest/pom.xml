@@ -20,14 +20,14 @@
 
     <parent>
         <groupId>com.networknt</groupId>
-        <artifactId>light-eventuate-todo</artifactId>
+        <artifactId>light-eventuate-account</artifactId>
         <version>0.1.0</version>
         <relativePath>..</relativePath>
     </parent>
 
-    <artifactId>eventuate-todo-e2etest</artifactId>
+    <artifactId>eventuate-account-e2etest</artifactId>
     <packaging>jar</packaging>
-    <description>A end to end test component of todo list application.</description>
+    <description>A end to end test component of account money transfer application.</description>
 
     <dependencies>
         <dependency>
@@ -113,24 +113,20 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>eventuate-todo-common</artifactId>
+            <artifactId>eventuate-account-common</artifactId>
+            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>eventuate-todo-query</artifactId>
+            <artifactId>eventuate-account-query</artifactId>
+            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>eventuate-todo-query-service</artifactId>
+            <artifactId>eventuate-account-command</artifactId>
+            <version>0.1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>eventuate-todo-command</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>eventuate-todo-command-service</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -168,20 +164,7 @@
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>eventuate-todo-query-service</artifactId>
-            <version>0.1.0</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>eventuate-todo-command-service</artifactId>
-            <version>0.1.0</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
