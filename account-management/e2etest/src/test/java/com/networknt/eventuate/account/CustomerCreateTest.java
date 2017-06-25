@@ -6,7 +6,6 @@ import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EventuateAggregateStore;
 
 
-import com.networknt.eventuate.todolist.common.model.TodoInfo;
 import com.networknt.service.SingletonServiceFactory;
 import org.h2.tools.RunScript;
 import org.junit.Test;

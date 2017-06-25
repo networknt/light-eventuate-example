@@ -114,17 +114,14 @@
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>eventuate-account-common</artifactId>
-            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>eventuate-account-query</artifactId>
-            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>eventuate-account-command</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
 
