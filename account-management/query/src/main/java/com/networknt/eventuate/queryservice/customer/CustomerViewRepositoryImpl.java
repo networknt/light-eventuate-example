@@ -3,6 +3,7 @@ package com.networknt.eventuate.queryservice.customer;
 import com.networknt.eventuate.account.common.model.customer.Address;
 import com.networknt.eventuate.account.common.model.customer.Name;
 
+import com.networknt.eventuate.account.common.model.customer.ToAccountInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -134,5 +135,68 @@ public class CustomerViewRepositoryImpl implements  CustomerViewRepository {
             logger.error("SqlException:", e);
         }
 
+    }
+
+    public int addToAccount(String id, ToAccountInfo accountInfo) {
+        Objects.requireNonNull(id);
+        Objects.requireNonNull(accountInfo);
+
+        String psInsert = "INSERT INTO account_customer (account_id, customer_Id) VALUES (?, ?)";
+        int count = 0;
+
+
+        try (final Connection connection = dataSource.getConnection()) {
+
+            PreparedStatement stmt = connection.prepareStatement(psInsert);
+            stmt.setString(1, accountInfo.getId());
+            stmt.setString(2, id);
+
+            count = stmt.executeUpdate();
+
+            if (count != 1) {
+                logger.error("Failed to insert account_customer: {}", accountInfo.getId());
+            }
+        } catch (SQLException e) {
+            logger.error("SqlException:", e);
+        }
+
+        return count;
+
+    }
+
+    public void deleteToAccount(String id, String accountId) {
+        Objects.requireNonNull(id);
+        Objects.requireNonNull(accountId);
+
+        String psInsert = "DELETE FROM account_customer WHERE account_id =  AND customer_id = ?";
+
+        try (final Connection connection = dataSource.getConnection()) {
+
+            PreparedStatement stmt = connection.prepareStatement(psInsert);
+            stmt.setString(1,accountId);
+            stmt.setString(2, id);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error("SqlException:", e);
+        }
+
+    }
+
+    public void deleteToAccountFromAllCustomers(String accountId) {
+        Objects.requireNonNull(accountId);
+        String psInsert = "DELETE FROM account_customer WHERE account_id = ?";
+
+        try (final Connection connection = dataSource.getConnection()) {
+
+            PreparedStatement stmt = connection.prepareStatement(psInsert);
+            stmt.setString(1, accountId);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error("SqlException:", e);
+        }
     }
 }

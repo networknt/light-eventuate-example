@@ -17,13 +17,13 @@ public class PathHandlerProvider implements HandlerProvider {
         return Handlers.routing()
         
             .add(Methods.GET, "/v1/accounts/{accountId}", new AccountsAccountIdGetHandler())
+
+            .add(Methods.GET, "/v1/customer/accounts/{customerId}", new CustomerAccountsGetHandler())
         
             .add(Methods.GET, "/v1/accounts/{accountId}/history", new AccountsAccountIdHistoryGetHandler())
         
             .add(Methods.GET, "/v1/health", new HealthGetHandler())
-        
-            .add(Methods.GET, "/v1/accounts", new AccountsGetHandler())
-        
+
             .add(Methods.GET, "/v1/server/info", new ServerInfoGetHandler())
         
         ;

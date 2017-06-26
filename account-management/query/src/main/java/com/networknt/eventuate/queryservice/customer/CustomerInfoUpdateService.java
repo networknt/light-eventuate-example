@@ -41,23 +41,18 @@ public class CustomerInfoUpdateService {
   }
 
   public void addToAccount(String id, ToAccountInfo accountInfo) {
-  /*  mongoTemplate.upsert(new Query(where("id").is(id)),
-            new Update().
-                    set("toAccounts." + accountInfo.getId(), accountInfo),
-            QuerySideCustomer.class);*/
+    int rec = querySideCustomerRepository.addToAccount(id,accountInfo );
+    if (rec<1) {
+      logger.error("fail to attach account the customer");
+    }
+
   }
 
   public void deleteToAccountFromAllCustomers(String accountId) {
-  /*  mongoTemplate.updateMulti(new Query(where("toAccounts." + accountId).exists(true)),
-            new Update().
-                    unset("toAccounts." + accountId),
-            QuerySideCustomer.class);*/
+    querySideCustomerRepository.deleteToAccountFromAllCustomers(accountId);
   }
 
   public void deleteToAccount(String customerId, String accountId) {
-  /*  mongoTemplate.upsert(new Query(where("id").is(customerId)),
-            new Update().
-                    unset("toAccounts." + accountId),
-            QuerySideCustomer.class);*/
+    querySideCustomerRepository.deleteToAccount(customerId, accountId);
   }
 }

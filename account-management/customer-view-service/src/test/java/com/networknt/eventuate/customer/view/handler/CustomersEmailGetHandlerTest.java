@@ -28,15 +28,15 @@ public class CustomersEmailGetHandlerTest {
     public void testCustomersEmailGetHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
         HttpGet httpGet = new HttpGet ("http://localhost:8080/v1/customers/email");
-        /*
-        Client.getInstance().addAuthorization(httpGet);
+
+     //   Client.getInstance().addAuthorization(httpGet);
         try {
             CloseableHttpResponse response = client.execute(httpGet);
             Assert.assertEquals(200, response.getStatusLine().getStatusCode());
-            Assert.assertEquals("", IOUtils.toString(response.getEntity().getContent(), "utf8"));
+        //    Assert.assertEquals("", IOUtils.toString(response.getEntity().getContent(), "utf8"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
+
     }
 }

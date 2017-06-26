@@ -15,7 +15,7 @@ public class PathHandlerProvider implements HandlerProvider {
     public HttpHandler getHandler() {
         return Handlers.routing()
         
-            .add(Methods.POST, "/v1/openaccount", new OpenaccountPostHandler())
+            .add(Methods.POST, "/v1/openaccount", new OpenAccountPostHandler())
         
             .add(Methods.DELETE, "/v1/delete/{accountId}", new DeleteAccountIdDeleteHandler())
         
