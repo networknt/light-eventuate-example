@@ -14,6 +14,9 @@ import java.util.concurrent.CompletableFuture;
 @EventSubscriber(id = "accountEventHandlers")
 public class AccountWorkflow {
 
+  public AccountWorkflow() {
+  }
+
   @EventHandlerMethod
   public CompletableFuture<?> debitAccount(EventHandlerContext<MoneyTransferCreatedEvent> ctx) {
     MoneyTransferCreatedEvent event = ctx.getEvent();

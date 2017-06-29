@@ -27,7 +27,7 @@ public class CustomersCustomerIdGetHandlerTest {
     @Test
     public void testCustomersCustomerIdGetHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpGet httpGet = new HttpGet ("http://localhost:8080/v1/customer/customerId");
+        HttpGet httpGet = new HttpGet ("http://localhost:8084/v1/customer/customerId");
 
        // Client.getInstance().addAuthorization(httpGet);
         try {

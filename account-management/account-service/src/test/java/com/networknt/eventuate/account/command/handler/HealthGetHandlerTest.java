@@ -27,7 +27,7 @@ public class HealthGetHandlerTest {
     @Test
     public void testHealthGetHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpGet httpGet = new HttpGet ("http://localhost:8080/v1/health");
+        HttpGet httpGet = new HttpGet ("http://localhost:8081/v1/health");
         /*
         Client.getInstance().addAuthorization(httpGet);
         try {

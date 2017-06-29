@@ -22,15 +22,19 @@ public class DeleteAccountIdDeleteHandler implements HttpHandler {
     private AccountService service = new AccountService(accountRepository);
     @Override
     public void handleRequest(HttpServerExchange exchange) throws Exception {
-        String id = exchange.getQueryParameters().get("id").getFirst();
+        String id = exchange.getQueryParameters().get("accountId").getFirst();
 
         CompletableFuture<DeleteAccountResponse> result = service.deleteAccount(id).thenApply((e) -> {
             DeleteAccountResponse m =  new DeleteAccountResponse(id);
             return m;
         });
+        DeleteAccountResponse response = null;
+        if (!result.isCompletedExceptionally()) {
+            response = result.get();
+        }
 
         exchange.getResponseHeaders().add(new HttpString("Content-Type"), "application/json");
-        exchange.getResponseSender().send(Config.getInstance().getMapper().writeValueAsString(result));
+        exchange.getResponseSender().send(Config.getInstance().getMapper().writeValueAsString(response));
 
         
     }

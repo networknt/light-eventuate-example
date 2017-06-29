@@ -1,14 +1,15 @@
 ---
-description: singleton service factory configuration
 singletons:
 - javax.sql.DataSource:
   - com.zaxxer.hikari.HikariDataSource:
       DriverClassName: com.mysql.jdbc.Driver
-      jdbcUrl: jdbc:mysql:/localhost/test
-      username: sa
-      password: sa
-- com.networknt.eventuate.common.impl.sync.AggregateCrud,com.networknt.eventuate.common.impl.sync.AggregateEvents:
-  - com.networknt.eventuate.test.jdbc.EventuateEmbeddedTestAggregateStore
+      jdbcUrl: jdbc:mysql://mysql:3306/eventuate?useSSL=false
+      username: mysqluser
+      password: mysqlpw
+- com.networknt.eventuate.common.impl.sync.AggregateCrud:
+  - com.networknt.eventuate.client.EventuateLocalDBAggregateCrud
+- com.networknt.eventuate.common.impl.sync.AggregateEvents:
+  - com.networknt.eventuate.client.EventuateLocalAggregatesEvents
 - com.networknt.eventuate.common.impl.AggregateCrud:
   - com.networknt.eventuate.common.impl.adapters.SyncToAsyncAggregateCrudAdapter
 - com.networknt.eventuate.common.impl.AggregateEvents:
@@ -19,3 +20,5 @@ singletons:
   - com.networknt.eventuate.common.impl.EventuateAggregateStoreImpl
 - com.networknt.eventuate.common.sync.EventuateAggregateStore:
   - com.networknt.eventuate.common.impl.sync.EventuateAggregateStoreImpl
+- com.networknt.eventuate.account.command.customer.Customer:
+  - com.networknt.eventuate.account.command.customer.Customer

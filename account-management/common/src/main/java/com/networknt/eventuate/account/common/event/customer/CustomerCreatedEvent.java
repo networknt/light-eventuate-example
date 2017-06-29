@@ -3,7 +3,7 @@ package com.networknt.eventuate.account.common.event.customer;
 
 import com.networknt.eventuate.account.common.model.customer.CustomerInfo;
 
-public class CustomerCreatedEvent extends CustomerEvent {
+public class CustomerCreatedEvent implements CustomerEvent {
 
   private CustomerInfo customerInfo;
 

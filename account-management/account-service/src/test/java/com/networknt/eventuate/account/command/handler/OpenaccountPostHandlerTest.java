@@ -6,6 +6,7 @@ import com.networknt.eventuate.account.common.model.account.CreateAccountRequest
 import com.networknt.eventuate.common.impl.JSonMapper;
 import com.networknt.exception.ClientException;
 import com.networknt.exception.ApiException;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -25,7 +26,7 @@ public class OpenAccountPostHandlerTest {
     @Test
     public void testOpenaccountPostHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpPost httpPost = new HttpPost ("http://localhost:8080/v1/openaccount");
+        HttpPost httpPost = new HttpPost ("http://localhost:8081/v1/openaccount");
         CreateAccountRequest accountReq = new CreateAccountRequest();
         accountReq.setCustomerId("1111-2222");
         accountReq.setTitle("RRSP account");
@@ -42,7 +43,7 @@ public class OpenAccountPostHandlerTest {
             httpPost.setHeader("Content-type", "application/json");
             CloseableHttpResponse response = client.execute(httpPost);
             Assert.assertEquals(200, response.getStatusLine().getStatusCode());
-            System.out.println(response.getEntity().getContent());
+            System.out.println("result:" + IOUtils.toString(response.getEntity().getContent()));
         } catch (Exception e) {
             e.printStackTrace();
         }

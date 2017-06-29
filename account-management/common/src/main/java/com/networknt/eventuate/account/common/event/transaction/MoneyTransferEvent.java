@@ -5,5 +5,5 @@ import com.networknt.eventuate.common.Event;
 import com.networknt.eventuate.common.EventEntity;
 
 @EventEntity(entity="com.networknt.eventuate.account.command.transaction.MoneyTransfer")
-public abstract class MoneyTransferEvent implements Event {
+public interface MoneyTransferEvent extends Event {
 }

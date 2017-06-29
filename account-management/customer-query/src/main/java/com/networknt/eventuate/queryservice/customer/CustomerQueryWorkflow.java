@@ -9,6 +9,7 @@ import com.networknt.eventuate.account.common.model.customer.ToAccountInfo;
 import com.networknt.eventuate.common.DispatchedEvent;
 import com.networknt.eventuate.common.EventHandlerMethod;
 import com.networknt.eventuate.common.EventSubscriber;
+import com.networknt.service.SingletonServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +19,11 @@ public class CustomerQueryWorkflow {
 
   private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private CustomerInfoUpdateService customerInfoUpdateService;
+  private CustomerInfoUpdateService customerInfoUpdateService =
+          (CustomerInfoUpdateService) SingletonServiceFactory.getBean(CustomerInfoUpdateService.class);
 
+  public CustomerQueryWorkflow() {
 
-  public CustomerQueryWorkflow(CustomerInfoUpdateService customerInfoUpdateService) {
-    this.customerInfoUpdateService = customerInfoUpdateService;
   }
 
   @EventHandlerMethod

@@ -5,5 +5,5 @@ import com.networknt.eventuate.common.Event;
 import com.networknt.eventuate.common.EventEntity;
 
 @EventEntity(entity="com.networknt.eventuate.account.command.accoun.Account")
-public abstract class AccountEvent implements Event {
+public interface AccountEvent extends Event {
 }

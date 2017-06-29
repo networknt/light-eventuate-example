@@ -26,19 +26,9 @@ public class AccountInfoUpdateService {
   public void create(String accountId, String customerId, String title, BigDecimal initialBalance, String description, Int128 version) {
     try {
       AccountChangeInfo ci = new AccountChangeInfo();
-   /*   ci.setAmount(toIntegerRepr(initialBalance));
-      WriteResult x = mongoTemplate.upsert(new Query(where("id").is(accountId).and("version").exists(false)),
-              new Update()
-                      .set("customerId", customerId)
-                      .set("title", title)
-                      .set("description", description)
-                      .set("balance", toIntegerRepr(initialBalance))
-                      .push("changes", ci)
-                      .set("creationDate", new Date(version.getHi()))
-                      .set("version", version.asString()),
-              AccountInfo.class);
-      logger.info("Saved in mongo");
-*/
+      AccountInfo accountInfo = new AccountInfo(accountId, customerId, title, description, MoneyUtil.toIntegerRepr(initialBalance), null, null, version.asString());
+      accountInfoRepository.createAccount(accountInfo);
+
     } catch (Exception t) {
       logger.warn("When saving ", t);
     } catch (Throwable t) {
@@ -53,10 +43,7 @@ public class AccountInfoUpdateService {
 
 
   public void addTransaction(String accountId, AccountTransactionInfo ti) {
- /*   mongoTemplate.upsert(new Query(where("id").is(accountId)),
-            new Update().
-                    set("transactions." + ti.getTransactionId(), ti),
-            AccountInfo.class);*/
+    accountInfoRepository.addTransaction(ti);
   }
 
 
@@ -67,6 +54,11 @@ public class AccountInfoUpdateService {
                     push("changes", ci).
                     set("version", changeId),
             AccountInfo.class);*/
+  }
+
+  public void updateTransactionStatus(String transactionId, TransferState status) {
+    accountInfoRepository.updateTransactionStatus(transactionId, status);
+
   }
 
   public void updateTransactionStatus(String accountId, String transactionId, TransferState status) {

@@ -2,8 +2,9 @@ package com.networknt.eventuate.queryservice.account;
 
 
 
+import com.networknt.eventuate.account.common.model.account.AccountHistoryEntry;
+import com.networknt.eventuate.account.common.model.account.AccountTransactionInfo;
 import com.networknt.eventuate.common.Int128;
-import com.networknt.eventuate.queryservice.customer.QuerySideCustomer;
 import com.networknt.service.SingletonServiceFactory;
 import org.h2.tools.RunScript;
 import org.junit.BeforeClass;
@@ -51,6 +52,7 @@ public class AccountInfoRepositoryImplTest {
 
 
     private static AccountInfo account;
+    private static AccountTransactionInfo ti;
     private static  String  id;
     @BeforeClass
     public static void setUp() {
@@ -61,7 +63,16 @@ public class AccountInfoRepositoryImplTest {
         account.setCustomerId("2233456");
         account.setTitle("Banking account");
         account.setDescription("test account");
+        account.setBalance(20000000L);
         account.setVersion("1");
+
+        ti = new AccountTransactionInfo();
+        ti.setTransactionId(id);
+        ti.setFromAccountId(id);
+        ti.setToAccountId(id);
+        ti.setAmount(100000L);
+        ti.setDescription("test");
+        ti.setEntryType(AccountHistoryEntry.EntryType.transaction);
     }
 
     @Test
@@ -82,5 +93,10 @@ public class AccountInfoRepositoryImplTest {
         assertTrue(result.size()>0);
      }
 
+    @Test
+    public void testAddTransaction() {
+        int result = accountRepository.addTransaction(ti);
+        assertTrue(result>0);
+    }
 
 }

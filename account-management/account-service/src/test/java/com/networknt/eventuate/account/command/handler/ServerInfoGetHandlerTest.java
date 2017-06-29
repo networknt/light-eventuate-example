@@ -27,7 +27,7 @@ public class ServerInfoGetHandlerTest {
     @Test
     public void testServerInfoGetHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpGet httpGet = new HttpGet ("http://localhost:8080/v1/server/info");
+        HttpGet httpGet = new HttpGet ("http://localhost:8081/v1/server/info");
         /*
         Client.getInstance().addAuthorization(httpGet);
         try {

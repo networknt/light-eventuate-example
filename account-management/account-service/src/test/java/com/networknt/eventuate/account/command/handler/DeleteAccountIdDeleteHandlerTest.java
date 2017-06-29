@@ -27,16 +27,16 @@ public class DeleteAccountIdDeleteHandlerTest {
     @Test
     public void testDeleteAccountIdDeleteHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpDelete httpDelete = new HttpDelete ("http://localhost:8080/v1/delete/accountId");
-        /*
-        Client.getInstance().addAuthorization(httpDelete);
+        HttpDelete httpDelete = new HttpDelete ("http://localhost:8081/v1/delete/accountId");
+
+      //  Client.getInstance().addAuthorization(httpDelete);
         try {
             CloseableHttpResponse response = client.execute(httpDelete);
             Assert.assertEquals(200, response.getStatusLine().getStatusCode());
-            Assert.assertEquals("", IOUtils.toString(response.getEntity().getContent(), "utf8"));
+        //    Assert.assertEquals("", IOUtils.toString(response.getEntity().getContent(), "utf8"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
+
     }
 }

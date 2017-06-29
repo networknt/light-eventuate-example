@@ -31,7 +31,7 @@
                 "parameters": [
                  {
                    "name": "customerId",
-                   "in": "query",
+                   "in": "path",
                    "description": "customerId",
                    "required": true,
                    "type": "string"

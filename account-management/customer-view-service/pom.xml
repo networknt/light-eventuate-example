@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>eventuate-account-query</artifactId>
+            <artifactId>eventuate-customer-query</artifactId>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
@@ -139,6 +139,10 @@
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>eventuate-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>eventuate-event</artifactId>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>

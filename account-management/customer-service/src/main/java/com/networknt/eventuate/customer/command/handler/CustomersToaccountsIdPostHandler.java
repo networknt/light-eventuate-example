@@ -30,20 +30,23 @@ public class CustomersToaccountsIdPostHandler implements HttpHandler {
 
 
         ObjectMapper mapper = new ObjectMapper();
-
+        String customerId = exchange.getQueryParameters().get("id").getFirst();
         // add a new object
         Map s = (Map)exchange.getAttachment(BodyHandler.REQUEST_BODY);
-        String id = mapper.writeValueAsString(s.get("id"));
-        String json = mapper.writeValueAsString(s.get("request"));
+        String json = mapper.writeValueAsString(s);
 
         ToAccountInfo toAccountInfo = mapper.readValue(json, ToAccountInfo.class);
 
-        CompletableFuture<String> result = service.addToAccount(id, toAccountInfo).thenApply((e) -> {
+        CompletableFuture<String> result = service.addToAccount(customerId, toAccountInfo).thenApply((e) -> {
             String m =  e.getEntityId();
             return m;
         });
 
+        String response = null;
+        if (!result.isCompletedExceptionally()) {
+            response = result.get();
+        }
         exchange.getResponseHeaders().add(new HttpString("Content-Type"), "application/json");
-        exchange.getResponseSender().send(Config.getInstance().getMapper().writeValueAsString(result));
+        exchange.getResponseSender().send(Config.getInstance().getMapper().writeValueAsString(response));
     }
 }

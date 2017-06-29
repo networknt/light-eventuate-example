@@ -3,23 +3,47 @@ version: "2"
 # Services
 #
 services:
-   command-service:
-      build: ./command-service/
+  postgresdb:
+    build: ./docker/postgres
+    environment:
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: postgres
+    ports:
+        - 5432:5432
+    networks:
+        - localnet
+
+
+  customer-service:
+      build: ./customer-service/
       volumes:
-        - ./docker/command-service/config:/config
+        - ./docker/customer-service/config:/config
       ports:
         - 8083:8083
       networks:
           - localnet
 
-   query-service:
-      build: ./query-service/
+  customer-view-service:
+      build: ./customer-view-service/
       volumes:
-        - ./docker/query-service/config:/config
+        - ./docker/customer-view-service/config:/config
       ports:
-        - 8082:8082
+        - 8084:8084
+      links:
+        - postgresdb
       networks:
           - localnet
+
+  account-service:
+      build: ./account-service/
+      volumes:
+        - ./docker/account-service/config:/config
+      ports:
+        - 8081:8081
+      networks:
+          - localnet
+
+
 # Networks
 #
 networks:

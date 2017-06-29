@@ -27,7 +27,7 @@ public class CustomersEmailGetHandlerTest {
     @Test
     public void testCustomersEmailGetHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpGet httpGet = new HttpGet ("http://localhost:8080/v1/customers/email");
+        HttpGet httpGet = new HttpGet ("http://localhost:8084/v1/customers/email");
 
      //   Client.getInstance().addAuthorization(httpGet);
         try {

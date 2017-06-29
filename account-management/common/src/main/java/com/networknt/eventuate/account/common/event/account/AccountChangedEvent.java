@@ -2,7 +2,7 @@ package com.networknt.eventuate.account.common.event.account;
 
 import java.math.BigDecimal;
 
-public class AccountChangedEvent extends AccountEvent {
+public class AccountChangedEvent implements AccountEvent {
   protected BigDecimal amount;
   protected String transactionId;
 

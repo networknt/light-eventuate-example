@@ -1,6 +1,6 @@
 package com.networknt.eventuate.account.common.event.account;
 
-public class AccountDebitFailedDueToInsufficientFundsEvent extends AccountEvent {
+public class AccountDebitFailedDueToInsufficientFundsEvent implements AccountEvent {
   private String transactionId;
 
   private AccountDebitFailedDueToInsufficientFundsEvent() {

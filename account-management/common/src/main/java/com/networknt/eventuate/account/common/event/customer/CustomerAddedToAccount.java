@@ -2,7 +2,7 @@ package com.networknt.eventuate.account.common.event.customer;
 
 import com.networknt.eventuate.account.common.model.customer.ToAccountInfo;
 
-public class CustomerAddedToAccount extends CustomerEvent {
+public class CustomerAddedToAccount implements CustomerEvent {
 
   private ToAccountInfo toAccountInfo;
 

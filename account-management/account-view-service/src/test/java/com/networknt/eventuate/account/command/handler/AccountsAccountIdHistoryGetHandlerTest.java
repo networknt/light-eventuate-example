@@ -27,7 +27,7 @@ public class AccountsAccountIdHistoryGetHandlerTest {
     @Test
     public void testAccountsAccountIdHistoryGetHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpGet httpGet = new HttpGet ("http://localhost:8080/v1/accounts/accountId/history");
+        HttpGet httpGet = new HttpGet ("http://localhost:8082/v1/accounts/accountId/history");
         /*
         Client.getInstance().addAuthorization(httpGet);
         try {

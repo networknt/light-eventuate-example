@@ -3,6 +3,9 @@ package com.networknt.eventuate.queryservice.account;
 
 
 
+import com.networknt.eventuate.account.common.model.account.AccountChangeInfo;
+import com.networknt.eventuate.account.common.model.account.AccountTransactionInfo;
+import com.networknt.eventuate.account.common.model.transaction.TransferState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,8 +112,8 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
     public int createAccount(AccountInfo accountInfo) {
         Objects.requireNonNull(accountInfo);
 
-        String psInsert = "INSERT INTO account_info (account_id, title, description, version, balance,creation_Date) VALUES (?, ? ,?,?,? , current_date);";
-        String psInsert2 = "INSERT INTO account_customer (account_id, customer_Id) VALUES (?, ?);";
+        String psInsert = "INSERT INTO account_info (account_id, title, description, version, balance,creation_Date) VALUES (?, ? ,?,?,? , current_date)";
+        String psInsert2 = "INSERT INTO account_customer (account_id, customer_Id) VALUES (?, ?)";
         int count = 0;
         try (final Connection connection = dataSource.getConnection()) {
             connection.setAutoCommit(false);
@@ -143,4 +146,83 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
         return count;
     }
 
+    public int addTransaction(AccountTransactionInfo ti){
+        Objects.requireNonNull(ti);
+        String psInsert = "INSERT INTO account_transaction (transaction_Id,from_account_id, to_account_id, amount, description, status, entry_Type,creation_Date) VALUES (?, ? ,?,?,?,?,?, current_date)";
+
+        int count = 0;
+        try (final Connection connection = dataSource.getConnection()) {
+
+            PreparedStatement stmt = connection.prepareStatement(psInsert);
+            stmt.setString(1, ti.getTransactionId());
+            stmt.setString(2, ti.getFromAccountId());
+            stmt.setString(3, ti.getToAccountId());
+            stmt.setLong(4, ti.getAmount());
+            stmt.setString(5, ti.getDescription());
+            stmt.setString(6, ti.getStatus().name());
+            stmt.setString(7, ti.getEntryType().name());
+
+            count = stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error("SqlException:", e);
+        }
+
+        return count;
+    }
+
+    public int updateTransactionStatus(String transactionId, TransferState status){
+        Objects.requireNonNull(transactionId);
+        Objects.requireNonNull(status);
+        int count = 0;
+        String psInsert = "UPDATE account_transaction SET status = ? WHERE  transaction_Id = ?";
+        try (final Connection connection = dataSource.getConnection()) {
+
+            PreparedStatement stmt = connection.prepareStatement(psInsert);
+            count = stmt.executeUpdate();
+            stmt.setString(1, status.name());
+            stmt.setString(2, transactionId);
+        } catch (SQLException e) {
+            logger.error("SqlException:", e);
+        }
+
+
+        return count;
+    }
+
+    public int updateBalance(String accountId, String changeId, long balanceDelta, AccountChangeInfo ci){
+        int count = 0;
+        String psUpdate = "UPDATE account_info SET balance = balance + ? WHERE  account_id = ?";
+        String psInsert = "INSERT INTO account_change_info (change_id,transaction_id, transaction_type, amount, balanceDelta,creation_Date) VALUES (?,?,?,?,?, current_date)";
+
+        try (final Connection connection = dataSource.getConnection()) {
+            connection.setAutoCommit(false);
+            PreparedStatement stmt = connection.prepareStatement(psUpdate);
+            stmt.setLong(1, balanceDelta);
+            stmt.setString(2, accountId);
+
+            count = stmt.executeUpdate();
+            if (count>0) {
+                try (PreparedStatement psXref = connection.prepareStatement(psInsert)) {
+
+                    psXref.setString(1,  changeId);
+                    psXref.setString(2, ci.getTransactionId());
+                    psXref.setString(3, ci.getTransactionType());
+                    psXref.setLong(4, ci.getAmount());
+                    psXref.setLong(5, ci.getAmount());
+
+                    psXref.executeUpdate();
+                }
+            }
+            connection.commit();
+
+            if (count != 1) {
+                logger.error("Failed to insert account_info: {}", accountId);
+            }
+        } catch (SQLException e) {
+            logger.error("SqlException:", e);
+        }
+
+        return count;
+    }
 }

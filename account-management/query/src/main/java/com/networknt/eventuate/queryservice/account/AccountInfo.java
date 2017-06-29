@@ -4,11 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.networknt.eventuate.account.common.model.account.AccountChangeInfo;
 import com.networknt.eventuate.account.common.model.account.AccountTransactionInfo;
 
+import java.math.BigDecimal;
 import java.util.*;
 
-/**
- * Created by cer on 11/21/14.
- */
+
 public class AccountInfo {
 
   private String id;

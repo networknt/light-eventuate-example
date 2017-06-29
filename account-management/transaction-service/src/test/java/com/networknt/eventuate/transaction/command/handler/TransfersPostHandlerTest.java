@@ -32,7 +32,7 @@ public class TransfersPostHandlerTest {
     @Test
     public void testTransfersPostHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpPost httpPost = new HttpPost ("http://localhost:8080/v1/transfers");
+        HttpPost httpPost = new HttpPost ("http://localhost:8085/v1/transfers");
         CreateMoneyTransferRequest request = new CreateMoneyTransferRequest();
         request.setFromAccountId("2222-22222");
         request.setToAccountId("2222-22223");

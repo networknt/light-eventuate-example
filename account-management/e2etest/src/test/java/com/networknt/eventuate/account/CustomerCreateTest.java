@@ -58,7 +58,7 @@ public class CustomerCreateTest {
     private CustomerService service = new CustomerService(customerRepository);
 
     @Test
-    public void testAddTodo() throws Exception {
+    public void testAddCustomer() throws Exception {
 
         Name name = new Name("Google", "Com");
         Address address = new Address("Yonge St" , "2556 unit", "toronto", "ON", "Canada", "L3R, 5F5");
@@ -77,7 +77,7 @@ public class CustomerCreateTest {
     }
 
     @Test
-    public void testUpdateTodo() throws Exception {
+    public void testToAccount() throws Exception {
 
         Name name = new Name("Google2", "Com2");
         Address address = new Address("Yonge St" , "2556 unit", "toronto", "ON", "Canada", "L3R, 5F5");

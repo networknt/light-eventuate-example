@@ -111,6 +111,7 @@
         <module>common</module>
         <module>command</module>
         <module>query</module>
+        <module>customer-query</module>
         <module>e2etest</module>
         <module>account-service</module>
         <module>account-view-service</module>
@@ -134,22 +135,12 @@
             </dependency>
             <dependency>
                 <groupId>com.networknt</groupId>
+                <artifactId>eventuate-customer-query</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.networknt</groupId>
                 <artifactId>eventuate-account-command</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.networknt</groupId>
-                <artifactId>eventuate-todo-command-service</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.networknt</groupId>
-                <artifactId>eventuate-todo-query-service</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.networknt</groupId>
-                <artifactId>eventuate-todo-e2etest</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

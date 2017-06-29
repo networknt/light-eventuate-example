@@ -13,6 +13,7 @@ import com.networknt.eventuate.common.DispatchedEvent;
 import com.networknt.eventuate.common.EventHandlerMethod;
 import com.networknt.eventuate.common.EventSubscriber;
 import com.networknt.eventuate.common.Int128;
+import com.networknt.service.SingletonServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,10 +26,12 @@ import static com.networknt.eventuate.queryservice.account.MoneyUtil.toIntegerRe
 public class AccountQueryWorkflow {
   private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private AccountInfoUpdateService accountInfoUpdateService;
 
-  public AccountQueryWorkflow(AccountInfoUpdateService accountInfoUpdateService) {
-    this.accountInfoUpdateService = accountInfoUpdateService;
+  private AccountInfoUpdateService accountInfoUpdateService =
+          (AccountInfoUpdateService) SingletonServiceFactory.getBean(AccountInfoUpdateService.class);
+
+
+  public AccountQueryWorkflow() {
   }
 
   @EventHandlerMethod
@@ -88,8 +91,9 @@ public class AccountQueryWorkflow {
     String fromAccountId = de.getEvent().getDetails().getFromAccountId();
     String toAccountId = de.getEvent().getDetails().getToAccountId();
 
-    accountInfoUpdateService.updateTransactionStatus(fromAccountId, transactionId, TransferState.DEBITED);
-    accountInfoUpdateService.updateTransactionStatus(toAccountId, transactionId, TransferState.DEBITED);
+    accountInfoUpdateService.updateTransactionStatus(transactionId, TransferState.DEBITED);
+ //   accountInfoUpdateService.updateTransactionStatus(fromAccountId, transactionId, TransferState.DEBITED);
+  //  accountInfoUpdateService.updateTransactionStatus(toAccountId, transactionId, TransferState.DEBITED);
   }
 
   @EventHandlerMethod
@@ -98,8 +102,9 @@ public class AccountQueryWorkflow {
     String fromAccountId = de.getEvent().getDetails().getFromAccountId();
     String toAccountId = de.getEvent().getDetails().getToAccountId();
 
-    accountInfoUpdateService.updateTransactionStatus(fromAccountId, transactionId, TransferState.COMPLETED);
-    accountInfoUpdateService.updateTransactionStatus(toAccountId, transactionId, TransferState.COMPLETED);
+    accountInfoUpdateService.updateTransactionStatus(transactionId, TransferState.COMPLETED);
+ //   accountInfoUpdateService.updateTransactionStatus(fromAccountId, transactionId, TransferState.COMPLETED);
+ //   accountInfoUpdateService.updateTransactionStatus(toAccountId, transactionId, TransferState.COMPLETED);
   }
 
   @EventHandlerMethod
@@ -107,9 +112,9 @@ public class AccountQueryWorkflow {
     String transactionId = de.getEntityId();
     String fromAccountId = de.getEvent().getDetails().getFromAccountId();
     String toAccountId = de.getEvent().getDetails().getToAccountId();
-
-    accountInfoUpdateService.updateTransactionStatus(fromAccountId, transactionId, TransferState.FAILED_DUE_TO_INSUFFICIENT_FUNDS);
-    accountInfoUpdateService.updateTransactionStatus(toAccountId, transactionId, TransferState.FAILED_DUE_TO_INSUFFICIENT_FUNDS);
+    accountInfoUpdateService.updateTransactionStatus(transactionId, TransferState.FAILED_DUE_TO_INSUFFICIENT_FUNDS);
+//    accountInfoUpdateService.updateTransactionStatus(fromAccountId, transactionId, TransferState.FAILED_DUE_TO_INSUFFICIENT_FUNDS);
+ //   accountInfoUpdateService.updateTransactionStatus(toAccountId, transactionId, TransferState.FAILED_DUE_TO_INSUFFICIENT_FUNDS);
   }
 
   public <T extends AccountChangedEvent> void saveChange(DispatchedEvent<T> de, int delta) {

@@ -2,7 +2,7 @@ package com.networknt.eventuate.account.common.event.account;
 
 import java.math.BigDecimal;
 
-public class AccountOpenedEvent extends AccountEvent {
+public class AccountOpenedEvent implements AccountEvent {
 
   private String customerId;
   private String title;

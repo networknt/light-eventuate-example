@@ -1,6 +1,6 @@
 package com.networknt.eventuate.account.common.event.transaction;
 
-public class DebitRecordedEvent extends MoneyTransferEvent {
+public class DebitRecordedEvent implements MoneyTransferEvent {
   private TransferDetails details;
 
   private DebitRecordedEvent() {

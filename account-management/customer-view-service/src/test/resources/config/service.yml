@@ -22,6 +22,10 @@ singletons:
   - com.networknt.eventuate.queryservice.customer.CustomerViewRepositoryImpl
 - com.networknt.eventuate.queryservice.customer.CustomerQueryService:
   - com.networknt.eventuate.queryservice.customer.CustomerQueryService
+- com.networknt.eventuate.queryservice.customer.CustomerInfoUpdateService:
+  - com.networknt.eventuate.queryservice.customer.CustomerInfoUpdateService
+- com.networknt.eventuate.queryservice.customer.CustomerQueryWorkflow:
+  - com.networknt.eventuate.queryservice.customer.CustomerQueryWorkflow
 - com.networknt.eventuate.event.EventHandlerProcessor:
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningVoid
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningCompletableFuture

@@ -1,6 +1,6 @@
 package com.networknt.eventuate.account.common.event.customer;
 
-public class CustomerToAccountDeleted extends CustomerEvent {
+public class CustomerToAccountDeleted implements CustomerEvent {
 
   private String accountId;
 

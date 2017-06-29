@@ -35,7 +35,7 @@ public class CreatecustomerPostHandlerTest {
     @Test
     public void testCreatecustomerPostHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
-        HttpPost httpPost = new HttpPost ("http://localhost:8080/v1/createcustomer");
+        HttpPost httpPost = new HttpPost ("http://localhost:8083/v1/createcustomer");
         Name name = new Name("Google", "Com");
         Address address = new Address("Yonge St" , "2556 unit", "toronto", "ON", "Canada", "L3R, 5F5");
         UserCredentials userCredentials = new UserCredentials ("aaa.bbb@google.com", "password");
@@ -50,7 +50,7 @@ public class CreatecustomerPostHandlerTest {
             httpPost.setHeader("Content-type", "application/json");
             CloseableHttpResponse response = client.execute(httpPost);
             Assert.assertEquals(200, response.getStatusLine().getStatusCode());
-            System.out.println(response.getEntity().getContent());
+            System.out.println("result:" + IOUtils.toString(response.getEntity().getContent()));
         } catch (Exception e) {
             e.printStackTrace();
         }
