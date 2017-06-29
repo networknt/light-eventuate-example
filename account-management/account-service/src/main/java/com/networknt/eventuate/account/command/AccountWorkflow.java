@@ -1,6 +1,9 @@
-package com.networknt.eventuate.account.command.account;
+package com.networknt.eventuate.account.command;
 
 
+import com.networknt.eventuate.account.command.account.Account;
+import com.networknt.eventuate.account.command.account.CreditAccountCommand;
+import com.networknt.eventuate.account.command.account.DebitAccountCommand;
 import com.networknt.eventuate.account.common.event.transaction.DebitRecordedEvent;
 import com.networknt.eventuate.account.common.event.transaction.MoneyTransferCreatedEvent;
 import com.networknt.eventuate.common.EntityWithIdAndVersion;

@@ -43,6 +43,26 @@ services:
       networks:
           - localnet
 
+  account-view-service:
+      build: ./account-view-service/
+      volumes:
+        - ./docker/account-view-service/config:/config
+      ports:
+        - 8082:8082
+      links:
+        - postgresdb
+      networks:
+          - localnet
+
+  transaction-service:
+      build: ./transaction-service/
+      volumes:
+        - ./docker/transaction-service/config:/config
+      ports:
+        - 8085:8085
+      networks:
+          - localnet
+
 
 # Networks
 #

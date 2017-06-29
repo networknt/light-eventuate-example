@@ -20,8 +20,8 @@ singletons:
   - com.networknt.eventuate.common.impl.EventuateAggregateStoreImpl
 - com.networknt.eventuate.common.sync.EventuateAggregateStore:
   - com.networknt.eventuate.common.impl.sync.EventuateAggregateStoreImpl
-- com.networknt.eventuate.account.command.account.AccountWorkflow:
-  - com.networknt.eventuate.account.command.account.AccountWorkflow
+- com.networknt.eventuate.account.command.AccountWorkflow:
+  - com.networknt.eventuate.account.command.AccountWorkflow
 - com.networknt.eventuate.event.EventHandlerProcessor:
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningVoid
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningCompletableFuture

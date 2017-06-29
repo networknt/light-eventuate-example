@@ -2,19 +2,20 @@ package com.networknt.eventuate.queryservice.customer;
 
 import com.networknt.eventuate.account.common.model.customer.Address;
 import com.networknt.eventuate.account.common.model.customer.Name;
-
 import com.networknt.eventuate.account.common.model.customer.ToAccountInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
-import java.sql.*;
-import java.time.LocalDateTime;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CustomerViewRepositoryImpl implements  CustomerViewRepository {
+public class CustomerViewRepositoryImpl implements CustomerViewRepository {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 

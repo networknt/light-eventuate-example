@@ -1,4 +1,4 @@
-package com.networknt.eventuate.queryservice.customer;
+package com.networknt.eventuate.customer.view;
 
 
 import com.networknt.eventuate.account.common.event.account.AccountDeletedEvent;
@@ -9,6 +9,7 @@ import com.networknt.eventuate.account.common.model.customer.ToAccountInfo;
 import com.networknt.eventuate.common.DispatchedEvent;
 import com.networknt.eventuate.common.EventHandlerMethod;
 import com.networknt.eventuate.common.EventSubscriber;
+import com.networknt.eventuate.queryservice.customer.CustomerInfoUpdateService;
 import com.networknt.service.SingletonServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -60,7 +60,7 @@ CREATE  TABLE customer (
 CREATE  TABLE account_customer (
   account_id varchar(255),
   customer_Id varchar(255),
-  PRIMARY KEY(account_id)
+  PRIMARY KEY(account_id,customer_Id)
 );
 
 

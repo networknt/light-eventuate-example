@@ -111,7 +111,6 @@
         <module>common</module>
         <module>command</module>
         <module>query</module>
-        <module>customer-query</module>
         <module>e2etest</module>
         <module>account-service</module>
         <module>account-view-service</module>

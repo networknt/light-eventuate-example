@@ -8,3 +8,5 @@ singletons:
       password: sa
 - com.networknt.eventuate.queryservice.account.AccountInfoRepository:
   - com.networknt.eventuate.queryservice.account.AccountInfoRepositoryImpl
+- com.networknt.eventuate.queryservice.customer.CustomerViewRepository:
+  - com.networknt.eventuate.queryservice.customer.CustomerViewRepositoryImpl

@@ -48,12 +48,7 @@ public class AccountInfoUpdateService {
 
 
   public void updateBalance(String accountId, String changeId, long balanceDelta, AccountChangeInfo ci) {
-  /*  WriteResult x = mongoTemplate.updateMulti(new Query(where("id").is(accountId).and("version").lt(changeId)),
-            new Update().
-                    inc("balance", balanceDelta).
-                    push("changes", ci).
-                    set("version", changeId),
-            AccountInfo.class);*/
+    accountInfoRepository.updateBalance(accountId, changeId,balanceDelta, ci);
   }
 
   public void updateTransactionStatus(String transactionId, TransferState status) {

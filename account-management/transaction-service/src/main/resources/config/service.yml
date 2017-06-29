@@ -12,14 +12,10 @@ singletons:
   - com.networknt.eventuate.client.KafkaAggregateSubscriptions
 - com.networknt.eventuate.common.impl.AggregateCrud:
   - com.networknt.eventuate.common.impl.adapters.SyncToAsyncAggregateCrudAdapter
-- com.networknt.eventuate.common.impl.AggregateEvents:
-  - com.networknt.eventuate.common.impl.adapters.SyncToAsyncAggregateEventsAdapter
 - com.networknt.eventuate.common.SnapshotManager:
   - com.networknt.eventuate.common.SnapshotManagerImpl
 - com.networknt.eventuate.common.EventuateAggregateStore:
   - com.networknt.eventuate.common.impl.EventuateAggregateStoreImpl
-- com.networknt.eventuate.common.sync.EventuateAggregateStore:
-  - com.networknt.eventuate.common.impl.sync.EventuateAggregateStoreImpl
 - com.networknt.eventuate.account.command.transaction.MoneyTransfer:
   - com.networknt.eventuate.account.command.transaction.MoneyTransfer
 - com.networknt.eventuate.event.EventHandlerProcessor:
@@ -27,7 +23,7 @@ singletons:
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningCompletableFuture
   - com.networknt.eventuate.event.EventHandlerProcessorEventHandlerContextReturningCompletableFuture
   - com.networknt.eventuate.event.EventHandlerProcessorEventHandlerContextReturningVoid
-- com.networknt.eventuate.account.command.transaction.MoneyTransferWorkflow:
-  - com.networknt.eventuate.account.command.transaction.MoneyTransferWorkflow
+- com.networknt.eventuate.transaction.command.MoneyTransferWorkflow:
+  - com.networknt.eventuate.transaction.command.MoneyTransferWorkflow
 - com.networknt.eventuate.client.SubscriptionsRegistry:
   - com.networknt.eventuate.client.SubscriptionsRegistryImpl

@@ -22,8 +22,8 @@ singletons:
   - com.networknt.eventuate.queryservice.account.AccountQueryService
 - com.networknt.eventuate.queryservice.account.AccountInfoUpdateService:
   - com.networknt.eventuate.queryservice.account.AccountInfoUpdateService
-- com.networknt.eventuate.queryservice.account.AccountQueryWorkflow:
-  - com.networknt.eventuate.queryservice.account.AccountQueryWorkflow
+- com.networknt.eventuate.account.command.AccountQueryWorkflow:
+  - com.networknt.eventuate.account.command.AccountQueryWorkflow
 - com.networknt.eventuate.event.EventHandlerProcessor:
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningVoid
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningCompletableFuture

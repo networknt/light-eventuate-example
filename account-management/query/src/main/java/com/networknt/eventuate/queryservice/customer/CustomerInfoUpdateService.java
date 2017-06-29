@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Collections;
 
 
-
-
 public class CustomerInfoUpdateService {
 
   private Logger logger = LoggerFactory.getLogger(getClass());

@@ -80,7 +80,7 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
                 accountInfo.setTitle(rs.getString("title"));
                 accountInfo.setDescription(rs.getString("description"));
                 accountInfo.setVersion(rs.getString("version"));
-                accountInfo.setBalance(MoneyUtil.toIntegerRepr(rs.getBigDecimal("version")));
+                accountInfo.setBalance(MoneyUtil.toIntegerRepr(rs.getBigDecimal("balance")));
                 accountInfo.setCreationDate(rs.getDate("creation_Date"));
 
 
@@ -94,13 +94,22 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
 
     public void delete(String accountId){
         Objects.requireNonNull(accountId);
+        String psDelete = "UPDATE account_info SET ACTIVE_FLG = 'N' WHERE account_id = ?";
+        String psDelete2 = "DELETE FROM account_customer WHERE account_id = ?";
         try (final Connection connection = dataSource.getConnection()){
-            String psDelete = "UPDATE account_info SET ACTIVE_FLG = 'N' WHERE account_id = ?";
+            connection.setAutoCommit(false);
             PreparedStatement psEntity = connection.prepareStatement(psDelete);
             psEntity.setString(1, accountId);
             int count = psEntity.executeUpdate();
             if (count != 1) {
-                logger.error("Failed to update account_info: {}", accountId);
+                logger.info("Failed to update account_info: {}", accountId);
+            } else {
+                try (PreparedStatement psXref = connection.prepareStatement(psDelete2)) {
+                    psXref.setString(1, accountId);
+                    psXref.executeUpdate();
+                }
+
+                connection.commit();
             }
 
         } catch (SQLException e) {
@@ -125,7 +134,7 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
             stmt.setLong(5, accountInfo.getBalance());
 
             count = stmt.executeUpdate();
-            if (count>0) {
+            if (count>0 && accountInfo.getCustomerId()!=null) {
                 try (PreparedStatement psXref = connection.prepareStatement(psInsert2)) {
 
                     psXref.setString(1,  accountInfo.getId());
@@ -179,9 +188,11 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
         try (final Connection connection = dataSource.getConnection()) {
 
             PreparedStatement stmt = connection.prepareStatement(psInsert);
-            count = stmt.executeUpdate();
+
             stmt.setString(1, status.name());
             stmt.setString(2, transactionId);
+
+            count = stmt.executeUpdate();
         } catch (SQLException e) {
             logger.error("SqlException:", e);
         }

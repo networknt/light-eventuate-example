@@ -1,4 +1,4 @@
-package com.networknt.eventuate.queryservice.account;
+package com.networknt.eventuate.account.command;
 
 
 import com.networknt.eventuate.account.common.event.account.*;
@@ -13,6 +13,7 @@ import com.networknt.eventuate.common.DispatchedEvent;
 import com.networknt.eventuate.common.EventHandlerMethod;
 import com.networknt.eventuate.common.EventSubscriber;
 import com.networknt.eventuate.common.Int128;
+import com.networknt.eventuate.queryservice.account.AccountInfoUpdateService;
 import com.networknt.service.SingletonServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +73,7 @@ public class AccountQueryWorkflow {
             de.getEvent().getDetails().getDescription());
 
     accountInfoUpdateService.addTransaction(fromAccountId, ti);
-    accountInfoUpdateService.addTransaction(toAccountId, ti);
+  //  accountInfoUpdateService.addTransaction(toAccountId, ti);
   }
 
   @EventHandlerMethod

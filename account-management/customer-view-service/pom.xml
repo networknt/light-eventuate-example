@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>eventuate-customer-query</artifactId>
+            <artifactId>eventuate-account-query</artifactId>
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
