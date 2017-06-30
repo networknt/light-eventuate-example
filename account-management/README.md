@@ -58,7 +58,7 @@ mvn clean install
 
 
 
-## steps to start event-store and microservice
+# Steps to start event-store and microservice
 
 
 1. Go to light-eventuate-4j root folder:
@@ -80,7 +80,7 @@ mvn clean install
 
 
 
-##  Test to verify result:
+# Test to verify result:
 
 Create a new customer:
 
