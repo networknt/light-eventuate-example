@@ -48,7 +48,7 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
                 accountInfo.setTitle(rs.getString("title"));
                 accountInfo.setDescription(rs.getString("description"));
                 accountInfo.setVersion(rs.getString("version"));
-                accountInfo.setBalance(MoneyUtil.toIntegerRepr(rs.getBigDecimal("version")));
+                accountInfo.setBalance(MoneyUtil.toIntegerRepr(rs.getBigDecimal("balance")));
                 accountInfo.setCreationDate(rs.getDate("creation_Date"));
 
                 accounts.add(accountInfo);
@@ -235,5 +235,39 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
         }
 
         return count;
+    }
+
+    public List<AccountTransactionInfo> getAccountTransactionHistory(String accountId) {
+        List<AccountTransactionInfo> transactions = new ArrayList<AccountTransactionInfo>();
+        String psSelect ="select transaction_Id,from_account_id, to_account_id, amount, description, status, entry_Type,creation_Date from account_transaction where from_account_id = ? or to_account_id =?";
+
+
+        try (final Connection connection = dataSource.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(psSelect);
+            stmt.setString(1, accountId);
+            stmt.setString(2, accountId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs == null ) {
+                logger.error("incorrect fetch result {}", accountId);
+            }
+
+            while (rs.next()) {
+                AccountTransactionInfo transaction = new AccountTransactionInfo();
+                transaction.setTransactionId(rs.getString("transaction_Id"));
+                transaction.setFromAccountId(rs.getString("from_account_id"));
+                transaction.setToAccountId(rs.getString("to_account_id"));
+                transaction.setDescription(rs.getString("description"));
+                transaction.setStatus(TransferState.valueOf(rs.getString("status")));
+                transaction.setAmount(MoneyUtil.toIntegerRepr(rs.getBigDecimal("amount")));
+                transaction.setDate(rs.getDate("creation_Date"));
+
+                transactions.add(transaction);
+            }
+        } catch (SQLException e) {
+            logger.error("SqlException:", e);
+        }
+
+
+        return transactions;
     }
 }

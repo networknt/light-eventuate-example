@@ -37,7 +37,7 @@ public class CustomerViewRepositoryImpl implements CustomerViewRepository {
         List<QuerySideCustomer> customers = new ArrayList<QuerySideCustomer>();
         try (final Connection connection = dataSource.getConnection()){
             PreparedStatement stmt = connection.prepareStatement(psSelect);
-            stmt.setString(1, email);
+            stmt.setString(1, "%" + email + "%");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {

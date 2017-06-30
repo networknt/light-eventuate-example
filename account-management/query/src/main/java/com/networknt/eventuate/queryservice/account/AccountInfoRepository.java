@@ -13,6 +13,9 @@ interface AccountInfoRepository {
 
     AccountInfo findOneAccount(String accountId);
 
+    List<AccountTransactionInfo> getAccountTransactionHistory(String accountId);
+
+
     void delete(String accountId);
 
     int createAccount(AccountInfo accountInfo);

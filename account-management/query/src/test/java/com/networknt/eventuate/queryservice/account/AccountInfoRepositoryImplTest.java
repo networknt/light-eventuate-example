@@ -99,4 +99,10 @@ public class AccountInfoRepositoryImplTest {
         assertTrue(result>0);
     }
 
+ /*   @Test
+    public void testGetTransactions() {
+        System.out.println(id);
+        List<AccountTransactionInfo> result = accountRepository.getAccountTransactionHistory(id);
+        assertTrue(result.size()>0);
+    }*/
 }

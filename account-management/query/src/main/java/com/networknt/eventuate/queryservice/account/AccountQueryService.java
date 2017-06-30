@@ -1,5 +1,7 @@
 package com.networknt.eventuate.queryservice.account;
 
+import com.networknt.eventuate.account.common.model.account.AccountTransactionInfo;
+
 import java.util.List;
 
 public class AccountQueryService {
@@ -20,5 +22,9 @@ public class AccountQueryService {
 
   public List<AccountInfo> findByCustomerId(String customerId) {
       return accountInfoRepository.findByCustomerId(customerId);
+  }
+
+  public List<AccountTransactionInfo> getAccountTransactionHistory(String accountId) {
+    return accountInfoRepository.getAccountTransactionHistory(accountId);
   }
 }
