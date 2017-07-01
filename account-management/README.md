@@ -35,8 +35,8 @@ Here is the list of all services:
 * Customers Service - REST API for creating customers
 * Accounts Service - REST API for creating accounts
 * Transactions Service - REST API for transferring money
-* Customers View Service - subscribes to events and updates a material view, and provides an API for retrieving customers
-* Accounts View Service - subscribes to events and updates a material view, and provides an API for retrieving accounts
+* Customers View Service - subscribes to events and updates query side material view. And it provides an API for retrieving customers
+* Accounts View Service - subscribes to events and updates query side material view, And it provides an API for retrieving accounts
 
 # Building and running the microservices
 
@@ -55,7 +55,7 @@ mvn clean install
 ```
 
 
-# Steps to start event-store and microservice
+# Steps to start event-store and microservices
 
 
 1. Go to light-eventuate-4j root folder:
