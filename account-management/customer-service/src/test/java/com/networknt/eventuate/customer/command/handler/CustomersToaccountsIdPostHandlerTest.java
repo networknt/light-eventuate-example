@@ -41,8 +41,10 @@ public class CustomersToaccountsIdPostHandlerTest {
             httpPost.setEntity(new StringEntity(json));
             httpPost.setHeader("Content-type", "application/json");
             CloseableHttpResponse response = client.execute(httpPost);
-            Assert.assertEquals(200, response.getStatusLine().getStatusCode());
-           // Assert.assertEquals("", IOUtils.toString(response.getEntity().getContent(), "utf8"));
+            int statusCode = response.getStatusLine().getStatusCode();
+            String body = IOUtils.toString(response.getEntity().getContent(), "utf8");
+            System.out.println("body = " + body);
+            Assert.assertEquals(200, statusCode);
         } catch (Exception e) {
             e.printStackTrace();
         }

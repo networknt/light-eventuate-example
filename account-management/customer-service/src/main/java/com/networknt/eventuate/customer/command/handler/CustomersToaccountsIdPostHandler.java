@@ -27,15 +27,10 @@ public class CustomersToaccountsIdPostHandler implements HttpHandler {
     private CustomerService service = new CustomerService(customertRepository);
     @Override
     public void handleRequest(HttpServerExchange exchange) throws Exception {
-
-
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = Config.getInstance().getMapper();
         String customerId = exchange.getQueryParameters().get("id").getFirst();
-        // add a new object
         Map s = (Map)exchange.getAttachment(BodyHandler.REQUEST_BODY);
-        String json = mapper.writeValueAsString(s);
-
-        ToAccountInfo toAccountInfo = mapper.readValue(json, ToAccountInfo.class);
+        ToAccountInfo toAccountInfo = mapper.convertValue(s, ToAccountInfo.class);
 
         CompletableFuture<String> result = service.addToAccount(customerId, toAccountInfo).thenApply((e) -> {
             String m =  e.getEntityId();

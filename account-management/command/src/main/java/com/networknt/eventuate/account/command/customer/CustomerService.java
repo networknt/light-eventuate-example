@@ -1,9 +1,5 @@
 package com.networknt.eventuate.account.command.customer;
 
-
-
-
-
 import com.networknt.eventuate.account.common.model.customer.CustomerInfo;
 import com.networknt.eventuate.account.common.model.customer.ToAccountInfo;
 import com.networknt.eventuate.common.AggregateRepository;

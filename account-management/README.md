@@ -1,61 +1,58 @@
 # Light-eventuate-4j example-- Account Money Transfer
 
-Account Money Transfer example is build on light-4j, light-rest-4j and light-eventuate-4j which use event sourcing as major idea to handle event process in multi microservice,
-Applications consist of loosely coupled components that communicate using events. Using an event-driven architecture to achieve data consistency - rather than using traditional distributed transaction to maintain database consistency this application uses an eventually consistent, event-driven approach
-These components can be deployed either as separate services or packaged as a monolithic application for simplified development and testing.
+Account Money Transfer example is built on light-4j, light-rest-4j and light-eventuate-4j which uses 
+event sourcing and CQRS as major patterns to handle event process between multiple microservices,
 
+The application consists of loosely coupled components that communicate using events and leverages
+eventual consistency, event-driven approach rather than using tranditional distributed transaction.
 
+These components can be deployed either as separate services or packaged as a monolithic application 
+for simplified development and testing.
 
 # Structure of the example
 
 Modules:
 
-common:  common module for the application. - the domain logic consists of Domain-Driven Design (DDD) aggregates that using event sourcing.
-command:  command side common components, include command, services
-query:   query side common components, include command, services
-e2etest: end to end test module
+* common  
+
+common module for the application, include DDD models and events for event sourcing.
+
+* command  
+
+command side common components, include command, services
+
+* query
+  
+query side common components, include command, services
+
+* e2etest
+
+end to end test module
 
 
-There are the following services:
+Here is the list of all services:
 
-Customers Service - REST API for creating customers
-Accounts Service - REST API for creating accounts
-Transactions Service - REST API for transferring money
-Customers View Service - subscribes to events and updates a MongoDB View, and provides an API for retrieving customers
-Accounts View Service - subscribes to events and updates a MongoDB View, and provides an API for retrieving accounts
+* Customers Service - REST API for creating customers
+* Accounts Service - REST API for creating accounts
+* Transactions Service - REST API for transferring money
+* Customers View Service - subscribes to events and updates a material view, and provides an API for retrieving customers
+* Accounts View Service - subscribes to events and updates a material view, and provides an API for retrieving accounts
 
 # Building and running the microservices
 
-Assume you created a directory named networknt under user directory.
+Assume you created a working directory named networknt under user directory.
 
 Checkout related projects.
 
-```
-cd ~/networknt
-git clone git@github.com:networknt/light-4j.git
-git clone git@github.com:networknt/light-rest-4j.git
-git clone git@github.com:networknt/light-codegen.git
-git clone git@github.com:networknt/light-eventuate-4j.git
-
-
-## Prepare workspace
-
-Go into the projects folder above, and build the project with maven
-
-```
-mvn clean install
-
-```
 
 Get the example project from github:
 
+```
+cd ~/networknt
 git clone git@github.com:networknt/light-eventuate-example.git
-
 cd ~/networknt/light-eventuate-example/account-management
-
 mvn clean install
-
-
+```
 
 
 # Steps to start event-store and microservice
