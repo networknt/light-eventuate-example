@@ -48,7 +48,7 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
                 accountInfo.setTitle(rs.getString("title"));
                 accountInfo.setDescription(rs.getString("description"));
                 accountInfo.setVersion(rs.getString("version"));
-                accountInfo.setBalance(MoneyUtil.toIntegerRepr(rs.getBigDecimal("balance")));
+                accountInfo.setBalance(MoneyUtil.toLongRepr(rs.getBigDecimal("balance")));
                 accountInfo.setCreationDate(rs.getDate("creation_Date"));
 
                 accounts.add(accountInfo);
@@ -80,7 +80,7 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
                 accountInfo.setTitle(rs.getString("title"));
                 accountInfo.setDescription(rs.getString("description"));
                 accountInfo.setVersion(rs.getString("version"));
-                accountInfo.setBalance(MoneyUtil.toIntegerRepr(rs.getBigDecimal("balance")));
+                accountInfo.setBalance(MoneyUtil.toLongRepr(rs.getBigDecimal("balance")));
                 accountInfo.setCreationDate(rs.getDate("creation_Date"));
 
 
@@ -258,7 +258,7 @@ public class AccountInfoRepositoryImpl implements  AccountInfoRepository{
                 transaction.setToAccountId(rs.getString("to_account_id"));
                 transaction.setDescription(rs.getString("description"));
                 transaction.setStatus(TransferState.valueOf(rs.getString("status")));
-                transaction.setAmount(MoneyUtil.toIntegerRepr(rs.getBigDecimal("amount")));
+                transaction.setAmount(MoneyUtil.toLongRepr(rs.getBigDecimal("amount")));
                 transaction.setDate(rs.getDate("creation_Date"));
 
                 transactions.add(transaction);

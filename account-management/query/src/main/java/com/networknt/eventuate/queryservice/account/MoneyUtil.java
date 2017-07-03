@@ -8,4 +8,13 @@ public class MoneyUtil {
     return d.multiply(new BigDecimal(100)).longValueExact();
   }
 
+  public static long toLongRepr(BigDecimal d) {
+    if (d!=null) {
+      return d.longValue();
+    } else {
+      return 0;
+    }
+  }
+
+
 }
