@@ -14,8 +14,11 @@ public class AccountQueryService {
 
   public AccountInfo findByAccountId(String accountId) {
     AccountInfo account = accountInfoRepository.findOneAccount(accountId);
-    if (account == null)
-      throw new AccountNotFoundException(accountId);
+    if (account == null) {
+      //TODO handle account not exception here
+      return account;
+      //throw new AccountNotFoundException(accountId);
+    }
     else
       return account;
   }
