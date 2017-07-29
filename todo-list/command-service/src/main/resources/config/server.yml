@@ -13,7 +13,7 @@ enableHttp: true
 httpsPort: 8443
 
 # Enable HTTPS should be true on official environment.
-enableHttps: true
+enableHttps: false
 
 # Keystore file name in config folder. KeystorePass is in secret.yml to access it.
 keystoreName: tls/server.keystore
@@ -25,7 +25,7 @@ enableTwoWayTls: false
 truststoreName: tls/server.truststore
 
 # Unique service identifier. Used in service registration and discovery etc.
-serviceId: io.swagger.swagger-light-java-1.0.0
+serviceId: com.networknt.eventuate-todo-command-service-1.0.0
 
 # Flag to enable service registration. Only be true if running as standalone Java jar.
 enableRegistry: false

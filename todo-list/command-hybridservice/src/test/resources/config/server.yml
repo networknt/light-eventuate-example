@@ -14,7 +14,7 @@ enableHttp: true
 httpsPort: 8443
 
 # Enable HTTPS should be true on official environment.
-enableHttps: true
+enableHttps: false
 
 # Keystore file name in config folder. KeystorePass is in secret.yml to access it.
 keystoreName: tls/server.keystore

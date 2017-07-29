@@ -189,7 +189,7 @@
         </dependency>
         <dependency>
             <groupId>com.networknt</groupId>
-            <artifactId>eventuate-testjdbc</artifactId>
+            <artifactId>test-jdbc</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
