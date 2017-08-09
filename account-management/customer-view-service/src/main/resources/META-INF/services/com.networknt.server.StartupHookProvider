@@ -2,6 +2,6 @@
 # set up db connection pools and allocate resources.
 
 # config Json Path to use Jackson Parser
-com.networknt.server.JsonPathStartupHookProvider
+# com.networknt.server.JsonPathStartupHookProvider
 # config event handle registration
 com.networknt.eventuate.client.EventuateClientStartupHookProvider
