@@ -49,8 +49,9 @@ public class CreatecustomerPostHandlerTest {
             httpPost.setEntity(new StringEntity(json));
             httpPost.setHeader("Content-type", "application/json");
             CloseableHttpResponse response = client.execute(httpPost);
+            String body = IOUtils.toString(response.getEntity().getContent());
             Assert.assertEquals(200, response.getStatusLine().getStatusCode());
-            System.out.println("result:" + IOUtils.toString(response.getEntity().getContent()));
+            System.out.println("result:" + body);
         } catch (Exception e) {
             e.printStackTrace();
         }

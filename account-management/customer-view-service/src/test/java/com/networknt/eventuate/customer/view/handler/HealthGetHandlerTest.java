@@ -28,15 +28,15 @@ public class HealthGetHandlerTest {
     public void testHealthGetHandlerTest() throws ClientException, ApiException {
         CloseableHttpClient client = Client.getInstance().getSyncClient();
         HttpGet httpGet = new HttpGet ("http://localhost:8084/v1/health");
-        /*
-        Client.getInstance().addAuthorization(httpGet);
+
+       // Client.getInstance().addAuthorization(httpGet);
         try {
             CloseableHttpResponse response = client.execute(httpGet);
             Assert.assertEquals(200, response.getStatusLine().getStatusCode());
-            Assert.assertEquals("", IOUtils.toString(response.getEntity().getContent(), "utf8"));
+            Assert.assertEquals("OK", IOUtils.toString(response.getEntity().getContent(), "utf8"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
+
     }
 }

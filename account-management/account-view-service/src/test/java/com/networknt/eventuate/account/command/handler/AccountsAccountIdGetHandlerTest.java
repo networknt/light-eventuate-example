@@ -58,7 +58,7 @@ public class AccountsAccountIdGetHandlerTest {
         //  Client.getInstance().addAuthorization(httpGet);
         try {
             CloseableHttpResponse response = client.execute(httpGet);
-          //  Assert.assertEquals(200, response.getStatusLine().getStatusCode());
+            Assert.assertEquals(200, response.getStatusLine().getStatusCode());
         //    Assert.assertEquals("", IOUtils.toString(response.getEntity().getContent(), "utf8"));
         } catch (Exception e) {
             e.printStackTrace();
