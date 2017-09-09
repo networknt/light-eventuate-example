@@ -2,15 +2,12 @@ package com.networknt.eventuate.reference;
 
 
 import com.networknt.eventuate.common.AggregateRepository;
-import com.networknt.eventuate.common.CompletableFutureUtil;
-import com.networknt.eventuate.common.DuplicateTriggeringEventException;
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 
 public class ReferenceQueryServiceImpl implements ReferenceQueryService {
@@ -36,9 +33,9 @@ public class ReferenceQueryServiceImpl implements ReferenceQueryService {
 
 
     @Override
-    public List<Map<String, ReferenceData>> getAll() {
+    public List<Map<String, ReferenceTable>> getAll() {
         List<String> ids = referenceQuerySideRepository.getAllIds();
-        List<Map<String, ReferenceData>> result = new ArrayList<Map<String, ReferenceData>>();
+        List<Map<String, ReferenceTable>> result = new ArrayList<Map<String, ReferenceTable>>();
 
         ids.stream().forEach(e-> findById(e).thenApply((ref)-> {
             result.add(ref);
@@ -49,23 +46,23 @@ public class ReferenceQueryServiceImpl implements ReferenceQueryService {
     }
 
     @Override
-    public CompletableFuture<Map<String, ReferenceData>> findByName(String refName) {
+    public CompletableFuture<Map<String, ReferenceTable>> findByName(String refName) {
         String id = referenceQuerySideRepository.getRefIdByName(refName);
         return referenceProvider.getReferenceById(id);
     }
 
     @Override
-    public CompletableFuture<Map<String, ReferenceData>> findById(String id) {
+    public CompletableFuture<Map<String, ReferenceTable>> findById(String id) {
       return referenceProvider.getReferenceById(id);
     }
 
     @Override
-    public Map<String, ReferenceData> save(String id, ReferenceData ref) {
+    public Map<String, ReferenceTable> save(String id, ReferenceTable ref) {
         return referenceQuerySideRepository.save(id, ref);
     }
 
     @Override
-    public Map<String, ReferenceData> update(String id, ReferenceData ref) {
+    public Map<String, ReferenceTable> update(String id, ReferenceTable ref) {
         return referenceQuerySideRepository.update(id, ref);
     }
 

@@ -4,7 +4,7 @@ import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EventuateAggregateStore;
 
 
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.eventuate.reference.domain.ReferenceDataAggregate;
 
 import com.networknt.service.SingletonServiceFactory;
@@ -60,10 +60,10 @@ public class ReferenceTest {
     @Test
     public void testAddRed() throws Exception {
 
-        ReferenceData ref = new ReferenceData();
+        ReferenceTable ref = new ReferenceTable();
         ref.setReferenceName("country");
-        CompletableFuture<ReferenceData> result = service.add(ref).thenApply((e) -> {
-            ReferenceData m = e.getAggregate().getReferenceData();
+        CompletableFuture<ReferenceTable> result = service.add(ref).thenApply((e) -> {
+            ReferenceTable m = e.getAggregate().getReferenceData();
             System.out.println("m = " + m);
             System.out.println("m = " + e.getEntityId());
             return m;
@@ -75,7 +75,7 @@ public class ReferenceTest {
     @Test
     public void testUpdateRef() throws Exception {
 
-        ReferenceData ref = new ReferenceData();
+        ReferenceTable ref = new ReferenceTable();
         ref.setReferenceName("country");
 
         CompletableFuture<String > id  = service.add(ref).thenApply((e) -> {
@@ -84,8 +84,8 @@ public class ReferenceTest {
         });
 
         ref.setActive(false);
-        CompletableFuture<ReferenceData> result = service.update(id.get(), ref).thenApply((e) -> {
-            ReferenceData m = e.getAggregate().getReferenceData();
+        CompletableFuture<ReferenceTable> result = service.update(id.get(), ref).thenApply((e) -> {
+            ReferenceTable m = e.getAggregate().getReferenceData();
             System.out.println("m = " + m);
             System.out.println("m = " + e.getEntityId());
             return m;

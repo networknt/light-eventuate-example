@@ -1,6 +1,6 @@
 package com.networknt.eventuate.reference;
 
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 
 import java.util.List;
 import java.util.Map;
@@ -9,9 +9,9 @@ import java.util.Map;
 public interface ReferenceQuerySideRepository {
 
 
-    Map<String, ReferenceData> save(String id, ReferenceData referenceData);
+    Map<String, ReferenceTable> save(String id, ReferenceTable referenceData);
 
-    Map<String, ReferenceData> update(String id, ReferenceData referenceData);
+    Map<String, ReferenceTable> update(String id, ReferenceTable referenceData);
 
 
     List<String> getAllIds();

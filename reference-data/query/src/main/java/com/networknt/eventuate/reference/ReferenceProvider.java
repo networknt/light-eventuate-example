@@ -1,6 +1,6 @@
 package com.networknt.eventuate.reference;
 
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -10,6 +10,6 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface ReferenceProvider {
 
-    CompletableFuture<Map<String, ReferenceData>> getReferenceById (String id);
+    CompletableFuture<Map<String, ReferenceTable>> getReferenceById (String id);
 
 }

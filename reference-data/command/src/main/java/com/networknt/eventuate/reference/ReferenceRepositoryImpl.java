@@ -1,6 +1,6 @@
 package com.networknt.eventuate.reference;
 
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,95 +27,29 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     public void setDataSource(DataSource dataSource) {this.dataSource = dataSource;}
 
     @Override
-    public List<Map<String, ReferenceData>> getAll() {
-        List<Map<String, ReferenceData>> allRefs = new ArrayList<Map<String, ReferenceData>>();
+    public List<Map<String, ReferenceTable>> getAll() {
+        List<Map<String, ReferenceTable>> allRefs = new ArrayList<Map<String, ReferenceTable>>();
 
-        try (final Connection connection = dataSource.getConnection()){
-            String psSelect = "SELECT ID, REFERENCE_NAME, DESCRIPTION FROM REFERENCE_REPOSITORY WHERE ACTIVE_FLG = 'Y' order by REFERENCE_NAME asc";
-            PreparedStatement stmt = connection.prepareStatement(psSelect);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                ReferenceData ref = new ReferenceData();
-                ref.setReferenceName(rs.getString("REFERENCE_NAME"));
-                ref.setDescription(rs.getString("DESCRIPTION"));
-                Map<String, ReferenceData> todoMap = new HashMap<String, ReferenceData>();
-                todoMap.put(rs.getString("id"), ref);
-                allRefs.add(todoMap);
-            }
-        } catch (SQLException e) {
-            logger.error("SqlException:", e);
-        }
 
         return allRefs;
     }
 
 
     @Override
-    public Map<String, ReferenceData> findById(String id) {
-        Map<String, ReferenceData> refMap = new HashMap<String, ReferenceData>();
-        try (final Connection connection = dataSource.getConnection()){
-            String psSelect = "SELECT ID, REFERENCE_NAME, DESCRIPTION FROM REFERENCE_REPOSITORY WHERE ACTIVE_FLG = 'Y' AND ID = ?";
-            PreparedStatement stmt = connection.prepareStatement(psSelect);
-            stmt.setString(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs == null || rs.getFetchSize() > 1) {
-                logger.error("incorrect fetch result {}", id);
-            }
-            while (rs.next()) {
-                ReferenceData ref = new ReferenceData();
-                ref.setReferenceName(rs.getString("REFERENCE_NAME"));
-                ref.setDescription(rs.getString("DESCRIPTION"));
-                refMap.put(rs.getString("id"), ref);
-            }
-        } catch (SQLException e) {
-            logger.error("SqlException:", e);
-        }
+    public Map<String, ReferenceTable> findById(String id) {
+        Map<String, ReferenceTable> refMap = new HashMap<String, ReferenceTable>();
+          return refMap;
+    }
+
+    @Override
+    public Map<String, ReferenceTable> findByName(String referenceName) {
+        Map<String, ReferenceTable> refMap = new HashMap<String, ReferenceTable>();
 
         return refMap;
     }
 
     @Override
-    public Map<String, ReferenceData> findByName(String referenceName) {
-        Map<String, ReferenceData> refMap = new HashMap<String, ReferenceData>();
-        try (final Connection connection = dataSource.getConnection()){
-            String psSelect = "SELECT ID, REFERENCE_NAME, DESCRIPTION FROM REFERENCE_REPOSITORY WHERE ACTIVE_FLG = 'Y' AND REFERENCE_NAME = ?";
-            PreparedStatement stmt = connection.prepareStatement(psSelect);
-            stmt.setString(1, referenceName);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                ReferenceData ref = new ReferenceData();
-                ref.setReferenceName(rs.getString("REFERENCE_NAME"));
-                ref.setDescription(rs.getString("DESCRIPTION"));
-                refMap.put(rs.getString("id"), ref);
-            }
-        } catch (SQLException e) {
-            logger.error("SqlException:", e);
-        }
-
-        return refMap;
-    }
-
-    @Override
-    public Map<String, ReferenceData> save(String id, ReferenceData ref) {
-        try (final Connection connection = dataSource.getConnection()){
-            String psInsert = "INSERT INTO REFERENCE_REPOSITORY (ID, REFERENCE_NAME, DESCRIPTION) VALUES (?, ?, ?)";
-            PreparedStatement stmt = connection.prepareStatement(psInsert);
-            stmt.setString(1, id);
-            stmt.setString(2, ref.getReferenceName());
-            stmt.setString(3, ref.getDescription());
-
-            int count = stmt.executeUpdate();
-            if (count != 1) {
-                logger.error("Failed to insert REFERENCE_REPOSITORY: {}", id);
-            } else {
-                Map<String, ReferenceData> refMap = new HashMap<String, ReferenceData>();
-                refMap.put(id, ref);
-                return refMap;
-            }
-        } catch (SQLException e) {
-            logger.error("SqlException:", e);
-        }
+    public Map<String, ReferenceTable> save(String id, ReferenceTable ref) {
 
         return null;
     }

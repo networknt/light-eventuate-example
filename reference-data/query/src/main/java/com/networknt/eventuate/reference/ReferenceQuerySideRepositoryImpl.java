@@ -1,6 +1,6 @@
 package com.networknt.eventuate.reference;
 
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +30,7 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
 
 
     @Override
-    public Map<String, ReferenceData> save(String id, ReferenceData ref) {
+    public Map<String, ReferenceTable> save(String id, ReferenceTable ref) {
         try (final Connection connection = dataSource.getConnection()){
             String psInsert = "INSERT INTO REFERENCE_QUERY_LIST (ID, REFERENCE_NAME, DESCRIPTION, STATUS) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(psInsert);
@@ -43,7 +43,7 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
             if (count != 1) {
                 logger.error("Failed to insert REFERENCE_QUERY_LIST: {}", id);
             } else {
-                Map<String, ReferenceData> refMap = new HashMap<String, ReferenceData>();
+                Map<String, ReferenceTable> refMap = new HashMap<String, ReferenceTable>();
                 refMap.put(id, ref);
                 return refMap;
             }
@@ -55,7 +55,7 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
     }
 
     @Override
-    public Map<String, ReferenceData> update(String id, ReferenceData ref) {
+    public Map<String, ReferenceTable> update(String id, ReferenceTable ref) {
         try (final Connection connection = dataSource.getConnection()){
             String psInsert = "UPDATE REFERENCE_QUERY_LIST SET STATUS = ? WHERE ID = ?";
             PreparedStatement stmt = connection.prepareStatement(psInsert);
@@ -67,7 +67,7 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
             if (count != 1) {
                 logger.error("Failed to UPDATE REFERENCE_QUERY_LIST: {}", id);
             } else {
-                Map<String, ReferenceData> refMap = new HashMap<String, ReferenceData>();
+                Map<String, ReferenceTable> refMap = new HashMap<String, ReferenceTable>();
                 refMap.put(id, ref);
                 return refMap;
             }

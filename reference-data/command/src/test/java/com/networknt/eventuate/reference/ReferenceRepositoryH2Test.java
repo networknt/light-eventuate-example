@@ -1,7 +1,7 @@
 package com.networknt.eventuate.reference;
 
 import com.networknt.eventuate.common.Int128;
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.service.SingletonServiceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -45,11 +45,11 @@ public class ReferenceRepositoryH2Test {
     }
     }
     private ReferenceRepository refRepository = (ReferenceRepository)SingletonServiceFactory.getBean(ReferenceRepository.class);
-    private static ReferenceData ref;
+    private static ReferenceTable ref;
     private static  String  id;
     @BeforeClass
     public static void setUp() {
-        ref = new ReferenceData();
+        ref = new ReferenceTable();
 
         ref.setReferenceName("COUNTRY");
         ref.setDescription("Country Code reference data");
@@ -60,33 +60,33 @@ public class ReferenceRepositoryH2Test {
 
     @Test
     public void testSave() {
-        Map<String, ReferenceData>  result = refRepository.save(id, ref);
+        Map<String, ReferenceTable>  result = refRepository.save(id, ref);
         assertNotNull(result);
     }
 
     @Test
     public void testGetAll() {
-        List<Map<String, ReferenceData>> result= refRepository.getAll();
+        List<Map<String, ReferenceTable>> result= refRepository.getAll();
         assertTrue(result.size()>0);
     }
 
     @Test
     public void testFindById() {
-        Map<String, ReferenceData> result = refRepository.findById(id);
+        Map<String, ReferenceTable> result = refRepository.findById(id);
         assertTrue(result.size()>0);
 
     }
 
     @Test
     public void testFindByName() {
-        Map<String, ReferenceData> result = refRepository.findByName("COUNTRY");
+        Map<String, ReferenceTable> result = refRepository.findByName("COUNTRY");
         assertTrue(result.size()>0);
 
     }
     @Test
     public void testRemove() {
         refRepository.inActive(id);
-        Map<String, ReferenceData> result = refRepository.findById(id);
+        Map<String, ReferenceTable> result = refRepository.findById(id);
         assertTrue(result.size() ==0);
     }
 }

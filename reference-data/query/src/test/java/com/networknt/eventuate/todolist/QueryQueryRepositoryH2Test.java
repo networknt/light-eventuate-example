@@ -2,7 +2,7 @@ package com.networknt.eventuate.todolist;
 
 import com.networknt.eventuate.common.Int128;
 import com.networknt.eventuate.reference.ReferenceQuerySideRepository;
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.service.SingletonServiceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertNotNull;
@@ -46,11 +45,11 @@ public class QueryQueryRepositoryH2Test {
     }
     }
     private ReferenceQuerySideRepository refQueryRepository = (ReferenceQuerySideRepository)SingletonServiceFactory.getBean(ReferenceQuerySideRepository.class);
-    private static ReferenceData ref;
+    private static ReferenceTable ref;
     private static  String  id;
     @BeforeClass
     public static void setUp() {
-        ref = new ReferenceData();
+        ref = new ReferenceTable();
         ref.setReferenceName("Country");
         ref.setDescription("complete the test first");
 
@@ -61,7 +60,7 @@ public class QueryQueryRepositoryH2Test {
 
     @Test
     public void testSave() {
-        Map<String, ReferenceData>  result = refQueryRepository.save(id, ref);
+        Map<String, ReferenceTable>  result = refQueryRepository.save(id, ref);
         assertNotNull(result);
     }
 

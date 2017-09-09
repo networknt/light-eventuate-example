@@ -1,7 +1,7 @@
 package com.networknt.eventuate.reference;
 
 
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -11,15 +11,15 @@ public interface ReferenceQueryService {
 
     boolean required(String refName);
 
-    List<Map<String, ReferenceData>> getAll();
+    List<Map<String, ReferenceTable>> getAll();
 
-    CompletableFuture<Map<String, ReferenceData>> findById(String id);
+    CompletableFuture<Map<String, ReferenceTable>> findById(String id);
 
-    CompletableFuture<Map<String, ReferenceData>> findByName(String refName);
+    CompletableFuture<Map<String, ReferenceTable>> findByName(String refName);
 
-    Map<String, ReferenceData> save(String id, ReferenceData ref);
+    Map<String, ReferenceTable> save(String id, ReferenceTable ref);
 
-    Map<String, ReferenceData> update(String id, ReferenceData ref);
+    Map<String, ReferenceTable> update(String id, ReferenceTable ref);
 
     void remove(String id);
 }

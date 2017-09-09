@@ -2,11 +2,11 @@ package com.networknt.eventuate.reference;
 
 import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EntityWithIdAndVersion;
-import com.networknt.eventuate.reference.command.CreateReferenceCommand;
-import com.networknt.eventuate.reference.command.DeleteReferenceCommand;
+import com.networknt.eventuate.reference.command.CreateReferenceTableCommand;
+import com.networknt.eventuate.reference.command.DeleteReferenceTableCommand;
 import com.networknt.eventuate.reference.command.ReferenceCommand;
-import com.networknt.eventuate.reference.command.UpdateReferenceCommand;
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.command.UpdateReferenceTableCommand;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.eventuate.reference.domain.ReferenceDataAggregate;
 
 
@@ -23,18 +23,18 @@ public class ReferenceCommandServiceImpl implements ReferenceCommandService {
 
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceDataAggregate>> add(ReferenceData referenceData) {
-        return aggregateRepository.save(new CreateReferenceCommand(referenceData));
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceDataAggregate>> add(ReferenceTable referenceData) {
+        return aggregateRepository.save(new CreateReferenceTableCommand(referenceData));
     }
 
     @Override
     public CompletableFuture<EntityWithIdAndVersion<ReferenceDataAggregate>> remove(String id) {
-        return aggregateRepository.update(id, new DeleteReferenceCommand());
+        return aggregateRepository.update(id, new DeleteReferenceTableCommand());
     }
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceDataAggregate>> update(String id, ReferenceData newReferenceData) {
-        return aggregateRepository.update(id, new UpdateReferenceCommand(id, newReferenceData));
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceDataAggregate>> update(String id, ReferenceTable newReferenceData) {
+        return aggregateRepository.update(id, new UpdateReferenceTableCommand(id, newReferenceData));
     }
 
 

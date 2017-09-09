@@ -1,6 +1,6 @@
 package com.networknt.eventuate.reference.load;
 
-import com.networknt.eventuate.reference.common.model.ReferenceData;
+import com.networknt.eventuate.reference.common.model.ReferenceTable;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface DataLoad {
 
-    ReferenceData loadByReferenceName(String refName);
+    ReferenceTable loadByReferenceName(String refName);
 
-    List<ReferenceData> loadReferenceList(List<String> refNameList);
+    List<ReferenceTable> loadReferenceList(List<String> refNameList);
 
-    List<ReferenceData> loadFromDestination(String destination);
+    List<ReferenceTable> loadFromDestination(String destination);
 
 }
