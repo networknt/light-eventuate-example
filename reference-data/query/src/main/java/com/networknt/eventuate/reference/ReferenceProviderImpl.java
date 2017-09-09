@@ -3,7 +3,7 @@ package com.networknt.eventuate.reference;
 import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EntityWithMetadata;
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
-import com.networknt.eventuate.reference.domain.ReferenceDataAggregate;
+import com.networknt.eventuate.reference.domain.ReferenceTableAggregate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class ReferenceProviderImpl implements ReferenceProvider {
 
 
     public CompletableFuture<Map<String, ReferenceTable>> getReferenceById(String id) {
-        CompletableFuture<EntityWithMetadata<ReferenceDataAggregate>> result = aggregateRepository.find(id);
+        CompletableFuture<EntityWithMetadata<ReferenceTableAggregate>> result = aggregateRepository.find(id);
 
         return result.thenApply(e -> {
             ReferenceTable ref = e.getEntity().getReferenceData();

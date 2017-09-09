@@ -5,7 +5,7 @@ import com.networknt.eventuate.common.EventuateAggregateStore;
 
 
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
-import com.networknt.eventuate.reference.domain.ReferenceDataAggregate;
+import com.networknt.eventuate.reference.domain.ReferenceTableAggregate;
 
 import com.networknt.service.SingletonServiceFactory;
 
@@ -53,8 +53,8 @@ public class ReferenceTest {
 
     private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);
 
-    private AggregateRepository refRepository = new AggregateRepository(ReferenceDataAggregate.class, eventStore);
-
+    private AggregateRepository refRepository = new AggregateRepository(ReferenceTableAggregate.class, eventStore);
+/*
     private ReferenceCommandServiceImpl  service = new ReferenceCommandServiceImpl(refRepository);
 
     @Test
@@ -93,4 +93,6 @@ public class ReferenceTest {
 
         System.out.println("result = " + result.get());
     }
+
+    */
 }

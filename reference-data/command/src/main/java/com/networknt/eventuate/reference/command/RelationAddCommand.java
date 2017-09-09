@@ -1,7 +1,6 @@
 package com.networknt.eventuate.reference.command;
 
 
-import com.networknt.eventuate.reference.common.model.ReferenceValue;
 
 public class RelationAddCommand implements ReferenceCommand {
 

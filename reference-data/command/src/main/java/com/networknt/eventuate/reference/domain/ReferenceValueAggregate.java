@@ -11,6 +11,7 @@ import com.networknt.eventuate.reference.common.event.refValue.ReferenceValueCre
 import com.networknt.eventuate.reference.common.event.refValue.ReferenceValueDeletedEvent;
 import com.networknt.eventuate.reference.common.event.refValue.ReferenceValueUpdatedEvent;
 
+import com.networknt.eventuate.reference.common.event.refValue.RelationAddedEvent;
 import com.networknt.eventuate.reference.common.model.ReferenceValue;
 
 import java.util.Collections;
@@ -37,6 +38,13 @@ public class ReferenceValueAggregate extends ReflectiveMutableCommandProcessingA
         return EventUtil.events(new ReferenceValueUpdatedEvent(cmd.getTableId(), cmd.getReferenceValue()));
     }
 
+    public List<Event> process(RelationAddCommand cmd) {
+        if (this.deleted) {
+            return Collections.emptyList();
+        }
+        return EventUtil.events(new RelationAddedEvent(cmd.getToValueId(), cmd.getType()));
+    }
+
     public List<Event> process(DeleteReferenceValueCommand cmd) {
         if (this.deleted) {
             return Collections.emptyList();
@@ -57,6 +65,9 @@ public class ReferenceValueAggregate extends ReflectiveMutableCommandProcessingA
 
     public void apply(ReferenceValueDeletedEvent event) {
         this.deleted = true;
+    }
+
+    public void apply(RelationAddedEvent event) {
     }
 
     public ReferenceValue getReferenceValue() {
