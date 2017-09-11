@@ -6,8 +6,8 @@ package com.networknt.eventuate.reference.common.model;
 
 public enum RelationType {
 
-  Link("Link with other"),
-  SubValue("Sub-value of the parent value");
+  A101("Link"),
+  A102("Sub-value");
 
   private String type;
 

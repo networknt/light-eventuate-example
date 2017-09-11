@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertNotNull;
@@ -66,8 +67,43 @@ public class ReferenceQueryServiceH2Test {
         assertNotNull(result);
     }
 
+    @Test
+    public void testGetReferenceById() {
+        ReferenceTable  result = refQueryRepository.saveRefTable("223355-6666", ref);
+        assertNotNull(result);
+
+        ReferenceTable refResult = refQueryRepository.getReferenceById("223355-6666");
+
+        assertNotNull(refResult);
+    }
 
 
+    @Test
+    public void testUpdateRefTable() {
+        ReferenceTable  result = refQueryRepository.saveRefTable("223355-6666", ref);
+        assertNotNull(result);
+
+        ReferenceTable ref2 = new ReferenceTable();
+        ref2.setTableName("Country");
+        ref2.setTableDesc("complete the test first");
+        ref2.setHost("CIBC");
+        ref2.setEditable(false);
+        ReferenceTable refResult = refQueryRepository.updateRefTable("223355-6666", ref2);
+
+        assertNotNull(refResult);
+
+    }
+
+    @Test
+    public void testGetAllReferences() {
+        ReferenceTable  result = refQueryRepository.saveRefTable("223355-6666", ref);
+        assertNotNull(result);
+
+        List<ReferenceTable> refResult = refQueryRepository.getAllReferences("CIBC GOW");
+
+        assertNotNull(refResult);
+        assertTrue(refResult.size()>0);
+    }
     @Test
     public void testRemove() {
  //       refQueryRepository.inActive(id);

@@ -2,12 +2,9 @@ package com.networknt.eventuate.reference.common.model;
 
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class ReferenceValue implements ValueObject<ReferenceValue>{
+public class ReferenceValue implements Comparator, ValueObject<ReferenceValue>{
     private String tableId;
     private String valueId;
     private String valueCode;
@@ -105,4 +102,17 @@ public class ReferenceValue implements ValueObject<ReferenceValue>{
         return equals(other);
     }
 
+    @Override
+    public int compare(Object value1, Object value2) {
+        int order1 = ((ReferenceValue) value1).getDisplayOrder();
+        int order2 = ((ReferenceValue) value1).getDisplayOrder();
+        if (order1<order2) {
+            return -1;
+        } else if (order1==order2) {
+            return 0;
+        } else {
+            return 1;
+        }
+
+    }
 }
