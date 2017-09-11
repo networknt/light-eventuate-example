@@ -1,5 +1,4 @@
 ---
-description: singleton service factory configuration
 singletons:
 - javax.sql.DataSource:
   - com.zaxxer.hikari.HikariDataSource:
@@ -7,5 +6,5 @@ singletons:
       jdbcUrl: jdbc:h2:~/test
       username: sa
       password: sa
-- com.networknt.eventuate.reference.ReferenceQuerySideRepository:
-  - com.networknt.eventuate.reference.ReferenceQuerySideRepositoryImpl
+- com.networknt.eventuate.reference.ReferenceQueryService:
+  - com.networknt.eventuate.reference.ReferenceQueryServiceImpl

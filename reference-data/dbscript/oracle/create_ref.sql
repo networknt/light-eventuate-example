@@ -1,11 +1,18 @@
+DROP table IF EXISTS ref_table;
+DROP table IF EXISTS ref_value;
+DROP table IF EXISTS value_locale;
+DROP table IF EXISTS relation_type;
+DROP table IF EXISTS relation;
+
+
 CREATE TABLE ref_table (
   table_id             VARCHAR2(160) NOT NULL,
   table_name           VARCHAR2(80) NOT NULL,
   table_desc           VARCHAR2(1024) NULL,
   host                 VARCHAR2(32) NULL,
-  active               CHAR(1) NOT NULL DEFAULT 'Y',
-  editable             CHAR(1) NOT NULL DEFAULT 'Y',
-  common               CHAR(1) NOT NULL DEFAULT 'Y'
+  active               VARCHAR2(1) NOT NULL DEFAULT 'Y',
+  editable             VARCHAR2(1) NOT NULL DEFAULT 'Y',
+  common               VARCHAR2(1) NOT NULL DEFAULT 'Y'
 );
 
 ALTER TABLE ref_table ADD ( CONSTRAINT PK_REF_TABLE  PRIMARY KEY (table_id) ) ;
@@ -17,7 +24,7 @@ CREATE TABLE ref_value (
   start_time            TIMESTAMP NULL,
   end_time              TIMESTAMP NULL,
   display_order         INT,
-  active                CHAR(1) NOT NULL
+  active                VARCHAR2(1) NOT NULL
 );
 
 ALTER TABLE ref_value ADD ( CONSTRAINT pk_refvalue  PRIMARY KEY (value_id)) ;
@@ -33,7 +40,7 @@ ALTER TABLE value_locale ADD (CONSTRAINT PK_VALUE_LOCALE PRIMARY KEY (value_id, 
 
 
 CREATE TABLE relation_type (
-  relation_id           VARCHAR2(100) NOT NULL,
+  relation_id           VARCHAR2(10) NOT NULL,
   relation_name         VARCHAR2(32) NOT NULL,
   relation_desc         VARCHAR2(256) NOT NULL
 );
@@ -42,7 +49,7 @@ ALTER TABLE RELATION_TYPE ADD (CONSTRAINT PK_RELATION_TYPE PRIMARY KEY (relation
 
 
 CREATE TABLE relation (
-  relation_id           VARCHAR2(100) NOT NULL,
+  relation_id           VARCHAR2(10) NOT NULL,
   value_id_from         VARCHAR2(160) NOT NULL,
   value_id_to           VARCHAR2(160) NOT NULL
 );

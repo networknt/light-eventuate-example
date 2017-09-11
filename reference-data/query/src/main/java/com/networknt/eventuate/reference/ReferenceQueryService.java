@@ -2,6 +2,8 @@ package com.networknt.eventuate.reference;
 
 
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
+import com.networknt.eventuate.reference.common.model.ReferenceValue;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -9,17 +11,33 @@ import java.util.concurrent.CompletableFuture;
 
 public interface ReferenceQueryService {
 
-    boolean required(String refName);
+    ReferenceTable saveRefTable(String id, ReferenceTable referenceTable);
 
-    List<Map<String, ReferenceTable>> getAll();
+    ReferenceValue saveRefValue(String id, ReferenceValue referenceValue);
 
-    CompletableFuture<Map<String, ReferenceTable>> findById(String id);
+    int saveRefRelation(String type, String fromValueId, String toValueId);
 
-    CompletableFuture<Map<String, ReferenceTable>> findByName(String refName);
 
-    Map<String, ReferenceTable> save(String id, ReferenceTable ref);
+    List< ReferenceTable> getAllReferences(String host);
 
-    Map<String, ReferenceTable> update(String id, ReferenceTable ref);
+    List<String> getAllRefTableNames(String host);
 
-    void remove(String id);
+    ReferenceTable getReferenceByName(String host, String name);
+
+    ReferenceTable getReferenceById( String id);
+
+    List<ReferenceValue> getReferenceValuesById( String id);
+
+    List<String> getAllHosts();
+
+    int deleteRefTable(String id);
+
+    int deleteRefValue(String id);
+
+
+    ReferenceTable updateRefTable(String id, ReferenceTable referenceTable);
+
+    ReferenceValue updateRefValue(String id, ReferenceValue referenceValue);
+
+    void referenceActive(String id, boolean active);
 }

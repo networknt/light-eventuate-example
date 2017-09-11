@@ -1,6 +1,7 @@
 package com.networknt.eventuate.todolist;
 
 import com.networknt.eventuate.common.Int128;
+import com.networknt.eventuate.reference.ReferenceQueryService;
 import com.networknt.eventuate.reference.ReferenceQuerySideRepository;
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.service.SingletonServiceFactory;
@@ -23,7 +24,7 @@ import static org.junit.Assert.assertTrue;
  * This is a sample test for H2 test DB.
  * refer the
  */
-public class QueryQueryRepositoryH2Test {
+public class ReferenceQueryServiceH2Test {
 
     public static DataSource ds;
 
@@ -32,7 +33,7 @@ public class QueryQueryRepositoryH2Test {
         try (Connection connection = ds.getConnection()) {
             // Runscript doesn't work need to execute batch here.
         String schemaResourceName = "/query-side-h2-ddl.sql";
-        InputStream in = QueryQueryRepositoryH2Test.class.getResourceAsStream(schemaResourceName);
+        InputStream in = ReferenceQueryServiceH2Test.class.getResourceAsStream(schemaResourceName);
 
         if (in == null) {
             throw new RuntimeException("Failed to load resource: " + schemaResourceName);
@@ -44,15 +45,16 @@ public class QueryQueryRepositoryH2Test {
         e.printStackTrace();
     }
     }
-    private ReferenceQuerySideRepository refQueryRepository = (ReferenceQuerySideRepository)SingletonServiceFactory.getBean(ReferenceQuerySideRepository.class);
+    private ReferenceQueryService refQueryRepository = (ReferenceQueryService)SingletonServiceFactory.getBean(ReferenceQueryService.class);
     private static ReferenceTable ref;
     private static  String  id;
     @BeforeClass
     public static void setUp() {
         ref = new ReferenceTable();
-        ref.setReferenceName("Country");
-        ref.setDescription("complete the test first");
-
+        ref.setTableName("Country");
+        ref.setTableDesc("complete the test first");
+        ref.setHost("CIBC GOW");
+        ref.setEditable(false);
 
         Int128 idGen = new Int128(1222L, 1011L);
         id = idGen.asString();
@@ -60,7 +62,7 @@ public class QueryQueryRepositoryH2Test {
 
     @Test
     public void testSave() {
-        Map<String, ReferenceTable>  result = refQueryRepository.save(id, ref);
+        ReferenceTable  result = refQueryRepository.saveRefTable(id, ref);
         assertNotNull(result);
     }
 
@@ -68,7 +70,7 @@ public class QueryQueryRepositoryH2Test {
 
     @Test
     public void testRemove() {
-        refQueryRepository.inActive(id);
+ //       refQueryRepository.inActive(id);
 
     }
 }

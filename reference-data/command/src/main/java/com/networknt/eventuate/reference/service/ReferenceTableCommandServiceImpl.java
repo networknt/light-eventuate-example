@@ -2,13 +2,12 @@ package com.networknt.eventuate.reference.service;
 
 import com.networknt.eventuate.common.AggregateRepository;
 import com.networknt.eventuate.common.EntityWithIdAndVersion;
-import com.networknt.eventuate.reference.command.CreateReferenceTableCommand;
-import com.networknt.eventuate.reference.command.DeleteReferenceTableCommand;
-import com.networknt.eventuate.reference.command.ReferenceCommand;
-import com.networknt.eventuate.reference.command.UpdateReferenceTableCommand;
+import com.networknt.eventuate.reference.command.*;
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
+import com.networknt.eventuate.reference.common.model.ReferenceValue;
 import com.networknt.eventuate.reference.domain.ReferenceTableAggregate;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -23,6 +22,7 @@ public class ReferenceTableCommandServiceImpl implements ReferenceTableCommandSe
 
     @Override
     public CompletableFuture<EntityWithIdAndVersion<ReferenceTableAggregate>> add(ReferenceTable referenceData) {
+
         return aggregateRepository.save(new CreateReferenceTableCommand(referenceData));
     }
 

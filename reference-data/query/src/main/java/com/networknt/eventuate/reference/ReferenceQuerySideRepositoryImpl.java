@@ -1,6 +1,7 @@
 package com.networknt.eventuate.reference;
 
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
+import com.networknt.eventuate.reference.common.model.ReferenceValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,72 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
     public void setDataSource(DataSource dataSource) {this.dataSource = dataSource;}
 
 
+    @Override
+    public ReferenceTable saveRefTable(String id, ReferenceTable referenceTable){
+        return null;
+    }
 
+    @Override
+    public ReferenceValue saveRefValue(String id, ReferenceValue referenceValue){
+        return null;
+    }
+
+    @Override
+    public ReferenceValue saveRefRelation(String id, String toValueId, String type){
+        return null;
+    }
+
+    @Override
+    public List< ReferenceTable> getAllReferences(String host){
+        return null;
+    }
+
+    @Override
+    public List<String> getAllRefTableNames(String host){
+        return null;
+    }
+
+    @Override
+    public ReferenceTable getReferenceByName(String host, String name){
+        return null;
+    }
+
+    @Override
+    public ReferenceTable getReferenceById( String id){
+        return null;
+    }
+
+    @Override
+    public List<String> getAllHosts(){
+        return null;
+    }
+
+    @Override
+    public int deleteRefTable(String id){
+        return 0;
+    }
+
+    @Override
+    public int deleteRefValue(String id){
+        return 0;
+    }
+
+    @Override
+    public ReferenceTable updateRefTable(String id, ReferenceTable referenceTable){
+        return null;
+    }
+
+    @Override
+    public ReferenceValue updateRefValue(String id, ReferenceValue referenceValue){
+        return null;
+    }
+
+    @Override
+    public void referenceActive(String id, boolean active){
+
+    }
+
+/*
     @Override
     public Map<String, ReferenceTable> save(String id, ReferenceTable ref) {
         try (final Connection connection = dataSource.getConnection()){
@@ -129,4 +195,6 @@ public class ReferenceQuerySideRepositoryImpl implements ReferenceQuerySideRepos
 
         return id;
     }
+
+    */
 }

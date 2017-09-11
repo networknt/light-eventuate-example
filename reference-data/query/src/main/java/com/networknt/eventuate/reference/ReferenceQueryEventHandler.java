@@ -5,15 +5,16 @@ import com.networknt.eventuate.common.DispatchedEvent;
 import com.networknt.eventuate.common.EventHandlerMethod;
 import com.networknt.eventuate.common.EventSubscriber;
 
-import com.networknt.eventuate.reference.common.event.ReferenceTableCreatedEvent;
-import com.networknt.eventuate.reference.common.event.ReferenceTableDeletedEvent;
-import com.networknt.eventuate.reference.common.event.ReferenceTableUpdatedEvent;
+
+import com.networknt.eventuate.reference.common.event.refTable.ReferenceTableCreatedEvent;
+import com.networknt.eventuate.reference.common.event.refTable.ReferenceTableDeletedEvent;
+import com.networknt.eventuate.reference.common.event.refTable.ReferenceTableUpdatedEvent;
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.service.SingletonServiceFactory;
 
 
 
-@EventSubscriber(id = "todoQuerySideEventHandlers")
+@EventSubscriber(id = "referenceQuerySideEventHandlers")
 public class ReferenceQueryEventHandler {
 
     private ReferenceQueryService service =
@@ -24,22 +25,18 @@ public class ReferenceQueryEventHandler {
 
     @EventHandlerMethod
     public void create(DispatchedEvent<ReferenceTableCreatedEvent> de) {
-        ReferenceTable ref = de.getEvent().getReferenceData();
-        if (service.required(ref.getReferenceName()))  {
-            service.save(de.getEntityId(), ref);
-        }
+        ReferenceTable ref = de.getEvent().getReferenceTable();
+
     }
 
     @EventHandlerMethod
     public void delete(DispatchedEvent<ReferenceTableDeletedEvent> de) {
-        service.remove(de.getEntityId());
+       // service.remove(de.getEntityId());
     }
 
     @EventHandlerMethod
     public void update(DispatchedEvent<ReferenceTableUpdatedEvent> de) {
-        ReferenceTable ref = de.getEvent().getReferenceData();
-        if (service.required(ref.getReferenceName()))  {
-            service.update(de.getEntityId(), ref);
-        }
+        ReferenceTable ref = de.getEvent().getReferenceTable();
+
      }
 }
