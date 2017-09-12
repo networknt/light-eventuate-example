@@ -5,6 +5,7 @@ import com.networknt.eventuate.common.EntityWithIdAndVersion;
 import com.networknt.eventuate.reference.command.*;
 import com.networknt.eventuate.reference.common.model.ReferenceValue;
 import com.networknt.eventuate.reference.domain.ReferenceTableAggregate;
+import com.networknt.eventuate.reference.domain.ReferenceValueAggregate;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -13,32 +14,32 @@ import java.util.concurrent.CompletableFuture;
  */
 public class ReferenceValueCommandServiceImpl implements ReferenceValueCommandService {
 
-    private AggregateRepository<ReferenceTableAggregate, ReferenceCommand> aggregateRepository;
+    private AggregateRepository<ReferenceValueAggregate, ReferenceCommand> aggregateRepository;
 
-    public ReferenceValueCommandServiceImpl(AggregateRepository<ReferenceTableAggregate, ReferenceCommand> refRepository) {
+    public ReferenceValueCommandServiceImpl(AggregateRepository<ReferenceValueAggregate, ReferenceCommand> refRepository) {
         this.aggregateRepository = refRepository;
     }
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceTableAggregate>> add(String tableId, ReferenceValue referenceValue) {
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceValueAggregate>> add(String tableId, ReferenceValue referenceValue) {
         return aggregateRepository.save(new CreateReferenceValueCommand(tableId, referenceValue));
 
     }
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceTableAggregate>> remove(String id){
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceValueAggregate>> remove(String id){
         return aggregateRepository.update(id, new DeleteReferenceValueCommand());
 
     }
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceTableAggregate>> update(String id, String tableId, ReferenceValue referenceValue){
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceValueAggregate>> update(String id, String tableId, ReferenceValue referenceValue){
         return aggregateRepository.update(id, new UpdateReferenceValueCommand(tableId, referenceValue));
 
     }
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceTableAggregate>> relation(String id, String toValueId, String type){
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceValueAggregate>> relation(String id, String toValueId, String type){
         return aggregateRepository.update(id, new RelationAddCommand(toValueId, type));
 
     }

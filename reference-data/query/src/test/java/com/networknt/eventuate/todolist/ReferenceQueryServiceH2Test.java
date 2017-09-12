@@ -2,7 +2,7 @@ package com.networknt.eventuate.todolist;
 
 import com.networknt.eventuate.common.Int128;
 import com.networknt.eventuate.reference.ReferenceQueryService;
-import com.networknt.eventuate.reference.ReferenceQuerySideRepository;
+
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.service.SingletonServiceFactory;
 import org.junit.BeforeClass;
@@ -80,7 +80,7 @@ public class ReferenceQueryServiceH2Test {
 
     @Test
     public void testUpdateRefTable() {
-        ReferenceTable  result = refQueryRepository.saveRefTable("223355-6666", ref);
+        ReferenceTable  result = refQueryRepository.saveRefTable("223355-6669", ref);
         assertNotNull(result);
 
         ReferenceTable ref2 = new ReferenceTable();
@@ -88,7 +88,7 @@ public class ReferenceQueryServiceH2Test {
         ref2.setTableDesc("complete the test first");
         ref2.setHost("CIBC");
         ref2.setEditable(false);
-        ReferenceTable refResult = refQueryRepository.updateRefTable("223355-6666", ref2);
+        ReferenceTable refResult = refQueryRepository.updateRefTable("223355-6669", ref2);
 
         assertNotNull(refResult);
 
@@ -96,7 +96,7 @@ public class ReferenceQueryServiceH2Test {
 
     @Test
     public void testGetAllReferences() {
-        ReferenceTable  result = refQueryRepository.saveRefTable("223355-6666", ref);
+        ReferenceTable  result = refQueryRepository.saveRefTable("223355-6660", ref);
         assertNotNull(result);
 
         List<ReferenceTable> refResult = refQueryRepository.getAllReferences("CIBC GOW");

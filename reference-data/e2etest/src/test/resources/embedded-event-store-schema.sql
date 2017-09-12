@@ -1,39 +1,32 @@
 DROP table IF EXISTS events;
 DROP table IF EXISTS  entities;
 DROP table IF EXISTS  snapshots;
-DROP table IF EXISTS REFERENCE_REPOSITORY;
+
 
 create table events (
-  event_id VARCHAR(256),
-  event_type VARCHAR(256),
-  event_data VARCHAR(20000),
-  entity_type VARCHAR(256),
-  entity_id VARCHAR(256),
-  triggering_event VARCHAR(256),
-   PRIMARY KEY(event_id)
+  event_id varchar PRIMARY KEY,
+  event_type varchar,
+  event_data varchar,
+  entity_type VARCHAR,
+  entity_id VARCHAR,
+  triggering_event VARCHAR,
+   metadata VARCHAR
 );
 
 create table entities (
-  entity_type VARCHAR(256),
-  entity_id VARCHAR(256),
-  entity_version VARCHAR(256),
+  entity_type VARCHAR,
+  entity_id VARCHAR,
+  entity_version VARCHAR,
   PRIMARY KEY(entity_type, entity_id)
 );
 
 create table snapshots (
-  entity_type VARCHAR(256),
-  entity_id VARCHAR(256),
-  entity_version VARCHAR(256),
-  snapshot_type VARCHAR(256),
-  snapshot_json VARCHAR(20000),
-  triggering_events VARCHAR(256),
+  entity_type VARCHAR,
+  entity_id VARCHAR,
+  entity_version VARCHAR,
+  snapshot_type VARCHAR,
+  snapshot_json VARCHAR,
+  triggering_events VARCHAR,
   PRIMARY KEY(entity_type, entity_id,entity_version)
 );
 
-
-CREATE  TABLE REFERENCE_REPOSITORY (
-  ID varchar(255) PRIMARY KEY,
-  REFERENCE_NAME varchar(255),
-  DESCRIPTION varchar(255),
-  ACTIVE_FLG varchar(1) DEFAULT 'Y'
-);

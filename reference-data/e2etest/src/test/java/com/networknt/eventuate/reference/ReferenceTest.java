@@ -7,6 +7,8 @@ import com.networknt.eventuate.common.EventuateAggregateStore;
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.eventuate.reference.domain.ReferenceTableAggregate;
 
+import com.networknt.eventuate.reference.domain.ReferenceValueAggregate;
+import com.networknt.eventuate.reference.service.*;
 import com.networknt.service.SingletonServiceFactory;
 
 import org.h2.tools.RunScript;
@@ -53,25 +55,23 @@ public class ReferenceTest {
 
     private EventuateAggregateStore eventStore  = (EventuateAggregateStore)SingletonServiceFactory.getBean(EventuateAggregateStore.class);
 
-    private AggregateRepository refRepository = new AggregateRepository(ReferenceTableAggregate.class, eventStore);
-/*
-    private ReferenceCommandServiceImpl  service = new ReferenceCommandServiceImpl(refRepository);
+    private AggregateRepository refTableRepository = new AggregateRepository(ReferenceTableAggregate.class, eventStore);
+    private AggregateRepository refValueRepository = new AggregateRepository(ReferenceValueAggregate.class, eventStore);
+
+    private ReferenceTableCommandService tableService = new ReferenceTableCommandServiceImpl(refTableRepository);
+    private ReferenceValueCommandService valueService = new ReferenceValueCommandServiceImpl(refValueRepository);
+    private ReferenceCommandService service = new ReferenceCommandServiceImpl(tableService, valueService);
 
     @Test
     public void testAddRed() throws Exception {
 
         ReferenceTable ref = new ReferenceTable();
-        ref.setReferenceName("country");
-        CompletableFuture<ReferenceTable> result = service.add(ref).thenApply((e) -> {
-            ReferenceTable m = e.getAggregate().getReferenceData();
-            System.out.println("m = " + m);
-            System.out.println("m = " + e.getEntityId());
-            return m;
-        });
+        ref.setTableName("country");
+        String tableId = service.addRefTable(ref);
 
-        System.out.println("result = " + result.get());
+        System.out.println("result = " + tableId);
     }
-
+/*
     @Test
     public void testUpdateRef() throws Exception {
 

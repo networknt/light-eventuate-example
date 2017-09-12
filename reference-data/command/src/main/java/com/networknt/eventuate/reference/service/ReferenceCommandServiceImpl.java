@@ -6,6 +6,7 @@ import com.networknt.eventuate.reference.command.*;
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.eventuate.reference.common.model.ReferenceValue;
 import com.networknt.eventuate.reference.domain.ReferenceTableAggregate;
+import com.networknt.eventuate.reference.domain.ReferenceValueAggregate;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -49,22 +50,22 @@ public class ReferenceCommandServiceImpl implements ReferenceCommandService {
     }
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceTableAggregate>> addRefValue(String tableId, ReferenceValue referenceValue) {
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceValueAggregate>> addRefValue(String tableId, ReferenceValue referenceValue) {
         return referenceValueCommandService.add(tableId, referenceValue);
     }
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceTableAggregate>> removeRefValue(String id){
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceValueAggregate>> removeRefValue(String id){
         return referenceValueCommandService.remove(id);
     }
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceTableAggregate>> updateRefValue(String id, String tableId, ReferenceValue referenceValue){
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceValueAggregate>> updateRefValue(String id, String tableId, ReferenceValue referenceValue){
         return referenceValueCommandService.update(id, tableId, referenceValue);
     }
 
     @Override
-    public CompletableFuture<EntityWithIdAndVersion<ReferenceTableAggregate>> relation(String id, String toValueId, String type){
+    public CompletableFuture<EntityWithIdAndVersion<ReferenceValueAggregate>> relation(String id, String toValueId, String type){
         return referenceValueCommandService.relation(id, toValueId, type);
     }
 }
