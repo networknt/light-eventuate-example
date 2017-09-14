@@ -6,6 +6,7 @@ import com.networknt.eventuate.reference.common.model.ReferenceValue;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 public interface ReferenceRepository {
@@ -21,9 +22,9 @@ public interface ReferenceRepository {
 
     List<String> getAllRefTableNames(String host);
 
-    ReferenceTable getReferenceByName(String host, String name);
+    Optional<ReferenceTable> getReferenceByName(String host, String name);
 
-    ReferenceTable getReferenceById( String id);
+    Optional<ReferenceTable> getReferenceById( String id);
 
     List<ReferenceValue> getReferenceValuesById( String id);
 

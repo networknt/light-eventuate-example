@@ -79,7 +79,7 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     }
 
     @Override
-    public ReferenceTable getReferenceByName(String host, String name) {
+    public Optional<ReferenceTable> getReferenceByName(String host, String name) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(host);
         if (!dataCache.hasRefTablesForHost(host)) {
@@ -91,24 +91,36 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
             ReferenceTable ref1 = referenceQueryService.getReferenceByName(host, name);
             if (ref1!=null) {
                 dataCache.addHostRefTable(host, ref1);
-                return ref1;
+                if (ref1 == null) {
+                    return Optional.empty();
+                }
+                return Optional.of(ref1);
             }
         }
-        return ref;
+        if (ref == null) {
+            return Optional.empty();
+        }
+        return Optional.of(ref);
     }
 
     @Override
-    public ReferenceTable getReferenceById( String id){
+    public Optional<ReferenceTable> getReferenceById( String id){
         Objects.requireNonNull(id);
         ReferenceTable ref = dataCache.getRefTableById(id);
         if (ref== null) {
             ReferenceTable ref1 = referenceQueryService.getReferenceById(id);
             if (ref1!=null) {
                 dataCache.addHostRefTable(ref1.getHost(), ref1);
-                return ref1;
+                if (ref1 == null) {
+                    return Optional.empty();
+                }
+                return Optional.of(ref1);
             }
         }
-        return ref;
+        if (ref == null) {
+            return Optional.empty();
+        }
+        return Optional.of(ref);
     }
 
     @Override

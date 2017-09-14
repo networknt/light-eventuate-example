@@ -27,8 +27,8 @@ singletons:
   - com.networknt.eventuate.common.DefaultMissingApplyEventMethodStrategy
 - com.networknt.eventuate.common.EventuateAggregateStore:
   - com.networknt.eventuate.common.impl.EventuateAggregateStoreImpl
-- com.networknt.portal.usermanagement.restquery.UserQueryWorkflow:
-  - com.networknt.portal.usermanagement.restquery.UserQueryWorkflow
+- com.networknt.eventuate.reference.ReferenceQueryEventHandler:
+  - com.networknt.eventuate.reference.ReferenceQueryEventHandler
 - com.networknt.eventuate.event.EventHandlerProcessor:
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningVoid
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningCompletableFuture
@@ -36,3 +36,7 @@ singletons:
   - com.networknt.eventuate.event.EventHandlerProcessorEventHandlerContextReturningVoid
 - com.networknt.eventuate.client.SubscriptionsRegistry:
   - com.networknt.eventuate.client.SubscriptionsRegistryImpl
+- com.networknt.eventuate.reference.ReferenceQueryService:
+  - com.networknt.eventuate.reference.ReferenceQueryServiceImpl
+- com.networknt.eventuate.reference.ReferenceRepository:
+  - com.networknt.eventuate.reference.ReferenceRepositoryImpl
