@@ -28,7 +28,7 @@ public class PathHandlerProvider implements HandlerProvider {
         
             .add(Methods.GET, "/v1/refValue/{id}", new RefValueIdGetHandler())
         
-            .add(Methods.GET, "/v1/refTable/host", new RefTableHostGetHandler())
+            .add(Methods.GET, "/v1/refTable/host", new RefTableHostListGetHandler())
         
         ;
     }
