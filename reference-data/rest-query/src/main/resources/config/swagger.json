@@ -1,0 +1,120 @@
+{"basePath": "/v1","paths":{"/refTable/name/{host}":{"get":{"x-accepts": "application/json","security": [
+                    {
+                        "ref_auth": [
+                            "ref.r",
+                            "ref.w"
+                        ]
+                    }
+                ],"description": "Return the list of reference table name for the host","operationId": "getRefTableNames","responses":{"200":{"schema": {
+                            "type": "array",
+                            "items": {
+                               "type": "string"
+                            }
+                        },"description": "Successful response"}},"parameters": [
+                    {
+                        "name": "host",
+                        "in": "path",
+                        "description": "The host which use the reference",
+                        "required": true,
+                        "type": "string"
+                    }           
+               ],"x-contentType": "application/json"}},"/refTable/{host}":{"get":{"x-accepts": "application/json","security": [
+                    {
+                        "ref_auth": [
+                            "ref.r",
+                            "ref.w"
+                        ]
+                    }
+                ],"description": "Return the reference data for the host","operationId": "getRefTableByNameOrId","responses":{"200":{"schema": {
+                            "$ref": "#/definitions/ReferenceTable"
+                        },"description": "Successful response"}},"parameters": [
+                   {
+                        "name": "host",
+                        "in": "path",
+                        "description": "The host which use the reference",
+                        "required": true,
+                        "type": "string"
+                    } ,
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "refernece table name",
+                        "required": false,
+                        "type": "string"
+                    },       
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "confirm refernece table id",
+                        "required": false,
+                        "type": "string"
+                    }              
+                ],"x-contentType": "application/json"}},"/health":{"get":{"responses":{"200":{"description":"successful operation"}},"parameters":[]}},"/refTables/{host}":{"get":{"x-accepts": "application/json","security": [
+                    {
+                        "ref_auth": [
+                            "ref.r",
+                            "ref.w"
+                        ]
+                    }
+                ],"description": "Return the reference data list for the host","operationId": "getRefTables","responses":{"200":{"schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ReferenceTable"
+                            }
+                        },"description": "Successful response"}},"parameters": [
+                    {
+                        "name": "host",
+                        "in": "path",
+                        "description": "The host which use the reference",
+                        "required": true,
+                        "type": "string"
+                    }           
+               ],"x-contentType": "application/json"}},"/server/info":{"get":{"security":[{"ref_auth":["server.info.r"]}],"responses":{"200":{"description":"successful operation"}},"parameters":[]}},"/refValue/{id}":{"get":{"x-accepts": "application/json","security": [
+                    {
+                        "ref_auth": [
+                            "ref.r"
+                       ]
+                    }
+                ],"description": "get reference value","operationId": "getRefValue","responses":{"200":{"schema": {
+                            "$ref": "#/definitions/ReferenceValue"
+                        },"description": "Successful response"}},"parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The reference value Id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],"x-contentType": "application/json"}},"/refTable/host":{"get":{"x-accepts": "application/json","security": [
+                    {
+                        "ref_auth": [
+                            "ref.r",
+                            "ref.w"
+                        ]
+                    }
+                ],"description": "Return the ALL registed host","operationId": "getHosts","responses":{"200":{"schema": {
+                            "type": "array",
+                            "items": {
+                             "type": "string"
+                        }
+                       },"description": "Successful response"}},"parameters": [],"x-contentType": "application/json"}}},"host": "reference.networknt.com","produces": [
+        "application/json"
+    ],"schemes": [
+        "http"
+    ],"securityDefinitions":{"ref_auth":{"scopes":{"ref.w": "write reference","ref.r": "read reference","server.info.r":"read server info"},"type": "oauth2","authorizationUrl": "http://localhost:8080/oauth2/code","flow": "implicit"}},"definitions":{"ReferenceTable":{"type": "object","properties":{"common":{"type": "boolean","description": "commmon indicator"},"editable":{"type": "boolean","description": "editable indicator"},"values":{"$ref": "#/definitions/ReferenceValue"},"host":{"type": "string","description": "host indicator the organization for the reference"},"tableId":{"type": "string","description": "a UUID generated"},"active":{"type": "boolean","description": "reference active indicator"},"tableDesc":{"type": "string","description": "reference table description"},"tableName":{"type": "string","description": "reference table name"}}},"Relation":{"type": "object","properties":{"type":{"type": "string","description": "reference value relation type"},"relations":{"$ref": "#/definitions/Relation"},"toValueId":{"type": "string","description": "to reference value Id"}}},"ValueLocale":{"type": "object","properties":{"valueId":{"type": "string","description": "reference value unique id"},"valueDesc":{"type": "string","description": "reference value"},"language":{"type": "string","description": "language for the value entry","enum":["En",
+                        "Fr",
+                        "Cn",
+                        "Sp"]}}},"RelationForm":{"type": "object","properties":{"fromValueId":{"type": "string","description": "relation from ref value Id"},"type":{"type": "string","description": "relation type"},"toValueId":{"type": "string","description": "relation to ref value Id"}}},"ReferenceValue":{"type": "object","properties":{"valueId":{"type": "string","description": "reference value Id"},"locales":{"$ref": "#/definitions/ValueLocale"},"displayOrder":{"type": "number","format": "integer","description": "reference value display order"},"tableId":{"type": "string","description": "reference table Id"},"valueCode":{"type": "string","description": "reference value code"},"startTime":{"type": "string","format": "date-time","description": "effective start Time"},"endTime":{"type": "string","format": "date-time","description": "effective end Time"},"relations":{"$ref": "#/definitions/Relation"}}}},"swagger": "2.0","info": {
+        "description": "Rerference Data service query side API is a microserice that used for reference data project  built on top of light-4j framework.",
+        "version": "1.0.0",
+        "title": "Reference query service API",
+        "contact": {
+            "email": "stevehu@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },"consumes": [
+        "application/json"
+    ]}

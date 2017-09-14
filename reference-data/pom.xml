@@ -107,6 +107,8 @@
         <module>command</module>
         <module>query</module>
         <module>e2etest</module>
+        <module>rest-command</module>
+        <module>rest-query</module>
     </modules>
 
     <dependencyManagement>
@@ -129,12 +131,12 @@
             </dependency>
             <dependency>
                 <groupId>com.networknt</groupId>
-                <artifactId>eventuate-reference-command-service</artifactId>
+                <artifactId>reference-restcommand</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.networknt</groupId>
-                <artifactId>eventuate-reference-query-service</artifactId>
+                <artifactId>reference-restquery</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

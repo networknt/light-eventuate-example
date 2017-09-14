@@ -9,7 +9,7 @@ public enum Language {
   En("English"),
   Fr("French"),
   Cn("Chinese"),
-  Sb("Spain");
+  Sp("Spain");
 
   private String language;
 

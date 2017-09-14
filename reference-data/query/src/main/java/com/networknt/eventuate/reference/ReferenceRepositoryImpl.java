@@ -2,20 +2,28 @@ package com.networknt.eventuate.reference;
 
 import com.networknt.eventuate.reference.common.exception.ReferenceDuplicatedException;
 import com.networknt.eventuate.reference.common.model.*;
+import com.networknt.eventuate.reference.domain.ReferenceDataCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sql.DataSource;
-import java.sql.*;
+
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class ReferenceRepositoryImpl implements ReferenceRepository {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
     ReferenceQueryService referenceQueryService;
 
+    //Local cache for reference data, structure: host->Map(refTableName->ReferenceTable)
+    private Map<String, List<ReferenceTable>> referenceDataMap = new ConcurrentHashMap<String, List<ReferenceTable>>();
+
+    private ReferenceDataCache dataCache;
+
     public ReferenceRepositoryImpl(ReferenceQueryService referenceQueryService) {
         this.referenceQueryService = referenceQueryService;
+        this.dataCache =  ReferenceDataCache.getInstance();
     }
 
     @Override
@@ -27,10 +35,7 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
             throw new ReferenceDuplicatedException("Reference table Name has already been taken");
         }
         return referenceQueryService.saveRefTable(id, referenceTable);
-
     }
-
-
 
     @Override
     public ReferenceValue saveRefValue(String id, ReferenceValue referenceValue){
@@ -51,27 +56,59 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     @Override
     public List< ReferenceTable> getAllReferences(String host){
         Objects.requireNonNull(host);
-        return referenceQueryService.getAllReferences(host);
+        List< ReferenceTable> refTables ;
+        if (dataCache.hasRefTablesForHost(host)) {
+            refTables = dataCache.getAllRefByHost(host);
+        } else {
+            refTables = referenceQueryService.getAllReferences(host);
+            dataCache.putHostRefTables(host, refTables);
+        }
+
+        return refTables;
     }
 
     @Override
     public List<String> getAllRefTableNames(String host){
         Objects.requireNonNull(host);
-        return referenceQueryService.getAllRefTableNames(host);
+
+        if (!dataCache.hasRefTablesForHost(host)) {
+            dataCache.putHostRefTables(host, referenceQueryService.getAllReferences(host));
+        }
+        return dataCache.getAllRefByHost(host).stream().map(e->e.getTableName()).collect(Collectors.toList());
+        //return referenceQueryService.getAllRefTableNames(host);
     }
 
     @Override
     public ReferenceTable getReferenceByName(String host, String name) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(host);
-        return referenceQueryService.getReferenceByName(host, name);
+        if (!dataCache.hasRefTablesForHost(host)) {
+            dataCache.putHostRefTables(host, referenceQueryService.getAllReferences(host));
+        }
 
+        ReferenceTable ref = dataCache.getRefTableByName(host, name);
+        if (ref== null) {
+            ReferenceTable ref1 = referenceQueryService.getReferenceByName(host, name);
+            if (ref1!=null) {
+                dataCache.addHostRefTable(host, ref1);
+                return ref1;
+            }
+        }
+        return ref;
     }
 
     @Override
     public ReferenceTable getReferenceById( String id){
         Objects.requireNonNull(id);
-        return referenceQueryService.getReferenceById(id);
+        ReferenceTable ref = dataCache.getRefTableById(id);
+        if (ref== null) {
+            ReferenceTable ref1 = referenceQueryService.getReferenceById(id);
+            if (ref1!=null) {
+                dataCache.addHostRefTable(ref1.getHost(), ref1);
+                return ref1;
+            }
+        }
+        return ref;
     }
 
     @Override
@@ -89,8 +126,18 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
 
     @Override
     public int deleteRefTable(String id){
-
         Objects.requireNonNull(id);
+        boolean found;
+        for (Map.Entry<String, List<ReferenceTable>> entry : referenceDataMap.entrySet()) {
+            List<ReferenceTable> refList = entry.getValue();
+            for (ReferenceTable reference:refList) {
+                if (id.equals(reference.getTableId()))  {
+                    break;
+                }
+            }
+          //  refList.remove();
+        }
+
         return referenceQueryService.deleteRefTable(id);
      }
 
