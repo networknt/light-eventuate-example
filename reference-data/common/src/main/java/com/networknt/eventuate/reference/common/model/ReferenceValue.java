@@ -1,6 +1,9 @@
 package com.networknt.eventuate.reference.common.model;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -8,8 +11,10 @@ public class ReferenceValue implements Comparator, ValueObject<ReferenceValue>{
     private String tableId;
     private String valueId;
     private String valueCode;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    @JsonSerialize(using = JsonDateSerializer.class)
+    private Timestamp startTime;
+    @JsonSerialize(using = JsonDateSerializer.class)
+    private Timestamp endTime;
     private int displayOrder;
     private boolean active = true;
 
@@ -48,19 +53,19 @@ public class ReferenceValue implements Comparator, ValueObject<ReferenceValue>{
         this.valueCode = valueCode;
     }
 
-    public LocalDateTime getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
 
@@ -114,5 +119,13 @@ public class ReferenceValue implements Comparator, ValueObject<ReferenceValue>{
             return 1;
         }
 
+    }
+
+    public void updateObject(ReferenceValue newValue) {
+        setValueCode(newValue.getValueCode());
+        setDisplayOrder(newValue.getDisplayOrder());
+        setStartTime(newValue.getStartTime());
+        setEndTime(newValue.getEndTime());
+        setActive(newValue.isActive());
     }
 }

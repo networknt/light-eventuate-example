@@ -37,7 +37,7 @@ public class RefTableHostGetHandlerTest {
 
     @Test
     public void testRefTableHostGetHandlerTest() throws ClientException, ApiException {
-        /*
+
         final Http2Client client = Http2Client.getInstance();
         final CountDownLatch latch = new CountDownLatch(1);
         final ClientConnection connection;
@@ -48,7 +48,7 @@ public class RefTableHostGetHandlerTest {
         }
         final AtomicReference<ClientResponse> reference = new AtomicReference<>();
         try {
-            ClientRequest request = new ClientRequest().setPath("/v1/refTable/host").setMethod(Methods.GET);
+            ClientRequest request = new ClientRequest().setPath("/v1/refTable/host?name=country").setMethod(Methods.GET);
             
             connection.sendRequest(request, client.createClientCallback(reference, latch));
             
@@ -63,6 +63,6 @@ public class RefTableHostGetHandlerTest {
         String body = reference.get().getAttachment(Http2Client.RESPONSE_BODY);
         Assert.assertEquals(200, statusCode);
         Assert.assertNotNull(body);
-        */
+
     }
 }

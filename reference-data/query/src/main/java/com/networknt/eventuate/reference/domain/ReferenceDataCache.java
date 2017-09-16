@@ -1,10 +1,12 @@
 package com.networknt.eventuate.reference.domain;
 
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
+import com.networknt.eventuate.reference.common.model.ReferenceValue;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -75,4 +77,52 @@ public class ReferenceDataCache {
         return null;
     }
 
+    public  List<ReferenceValue> getReferenceValuesById(String id) {
+        ReferenceTable ref = getRefTableById(id);
+
+        if (ref!=null) {
+            return  ref.getValues();
+        }
+
+        return null;
+    }
+
+    public ReferenceValue getReferenceValueByValueId (String id) {
+        for (Map.Entry<String, List<ReferenceTable>> entry : referenceDataMap.entrySet()) {
+            List<ReferenceTable> refList = entry.getValue();
+            for (ReferenceTable reference : refList) {
+                for (ReferenceValue value:reference.getValues()) {
+                    if (id.equals(value.getValueId())) {
+                        return value;
+                    }
+                }
+
+            }
+        }
+
+        return null;
+    }
+
+
+    public  void deleteRefTableById(String id) {
+
+        ReferenceTable ref = null;
+        for (Map.Entry<String, List<ReferenceTable>> entry : referenceDataMap.entrySet()) {
+            List<ReferenceTable> refList = entry.getValue();
+            for (ReferenceTable reference:refList) {
+                if (id.equals(reference.getTableId()))  {
+                    ref = reference;
+                    break;
+                }
+            }
+            if (ref!=null) {
+                refList.remove(ref);
+                break;
+            }
+        }
+    }
+
+    public  void  addRefTable(String host) {
+        Objects.requireNonNull(host);
+    }
 }

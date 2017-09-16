@@ -1,0 +1,5 @@
+---
+smtpHost: all
+fromEmail: light.portal@light4j.com
+subject: New User Initial confirmation email
+emitEvent: false

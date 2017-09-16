@@ -79,8 +79,8 @@ public class ReferenceQueryServiceImpl implements ReferenceQueryService {
             stmt.setString(1, id);
             stmt.setString(2, referenceValue.getTableId());
             stmt.setString(3, referenceValue.getValueCode());
-            stmt.setTimestamp(4, referenceValue.getStartTime()== null?null: Timestamp.valueOf(referenceValue.getStartTime()));
-            stmt.setTimestamp(5, referenceValue.getEndTime()== null?null: Timestamp.valueOf(referenceValue.getEndTime()));
+            stmt.setTimestamp(4, referenceValue.getStartTime());
+            stmt.setTimestamp(5, referenceValue.getStartTime());
             stmt.setInt(6, referenceValue.getDisplayOrder());
             stmt.setString(7, referenceValue.isActive()?"Y":"N");
 
@@ -271,8 +271,8 @@ public class ReferenceQueryServiceImpl implements ReferenceQueryService {
                 value.setValueId(rs.getString("value_id"));
                 value.setTableId(id);
                 value.setValueCode(rs.getString("value_code"));
-                value.setStartTime(rs.getTimestamp("start_time")==null?null:rs.getTimestamp("start_time").toLocalDateTime());
-                value.setEndTime(rs.getTimestamp("end_time")==null?null:rs.getTimestamp("end_time").toLocalDateTime());
+                value.setStartTime(rs.getTimestamp("start_time"));
+                value.setEndTime(rs.getTimestamp("end_time"));
                 value.setDisplayOrder(rs.getInt("display_order"));
 
                 value.setLocales(getValueLocaleById(rs.getString("value_id")));
@@ -435,8 +435,8 @@ public class ReferenceQueryServiceImpl implements ReferenceQueryService {
 
             PreparedStatement stmt = connection.prepareStatement(psUpdate);
             stmt.setString(1, referenceValue.getValueCode());
-            stmt.setTimestamp(2, referenceValue.getStartTime()== null?null: Timestamp.valueOf(referenceValue.getStartTime()));
-            stmt.setTimestamp(3, referenceValue.getEndTime()== null?null: Timestamp.valueOf(referenceValue.getEndTime()));
+            stmt.setTimestamp(2, referenceValue.getStartTime());
+            stmt.setTimestamp(3, referenceValue.getStartTime());
             stmt.setString(4, referenceValue.isActive()?"Y":"N");
             stmt.setInt(5, referenceValue.getDisplayOrder());
             stmt.setString(6, id);

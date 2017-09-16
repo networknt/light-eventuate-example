@@ -1,0 +1,43 @@
+version: "2"
+#
+# Services
+#
+services:
+  postgresdb:
+    build: ./docker/postgres
+    environment:
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: postgres
+    ports:
+        - 5432:5432
+    networks:
+        - localnet
+
+
+  rest-command:
+    build: ./rest-command/
+    volumes:
+      - ./docker/rest-command/config:/config
+    ports:
+      - 8081:8081
+    links:
+        - postgresdb
+    networks:
+      - localnet
+
+  rest-query:
+    build: ./rest-query/
+    volumes:
+      - ./docker/rest-query/config:/config
+    ports:
+      - 8082:8082
+    links:
+        - postgresdb
+    networks:
+      - localnet
+# Networks
+#
+networks:
+  localnet:
+    # driver: bridge
+    external: true

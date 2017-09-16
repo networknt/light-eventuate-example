@@ -11,7 +11,7 @@ import io.undertow.util.HttpString;
 import java.util.List;
 import java.util.Optional;
 
-public class RefTableHostListGetHandler implements HttpHandler {
+public class RefTableHostsGetHandler implements HttpHandler {
     private ReferenceRepository referenceRepository = (ReferenceRepository) SingletonServiceFactory.getBean(ReferenceRepository.class);
 
     @Override

@@ -1,5 +1,6 @@
 package com.networknt.eventuate.reference;
 
+import com.networknt.config.Config;
 import com.networknt.eventuate.reference.common.exception.ReferenceDuplicatedException;
 import com.networknt.eventuate.reference.common.model.*;
 import com.networknt.eventuate.reference.domain.ReferenceDataCache;
@@ -16,14 +17,17 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     protected Logger logger = LoggerFactory.getLogger(getClass());
     ReferenceQueryService referenceQueryService;
 
-    //Local cache for reference data, structure: host->Map(refTableName->ReferenceTable)
-    private Map<String, List<ReferenceTable>> referenceDataMap = new ConcurrentHashMap<String, List<ReferenceTable>>();
+    static String REFERENCE_CONFIG_NAME = "reference";
+    static ReferenceConfig referenceConfig = (ReferenceConfig) Config.getInstance().getJsonObjectConfig(REFERENCE_CONFIG_NAME, ReferenceConfig.class);
+
+    private boolean useCache = false;
 
     private ReferenceDataCache dataCache;
 
     public ReferenceRepositoryImpl(ReferenceQueryService referenceQueryService) {
         this.referenceQueryService = referenceQueryService;
         this.dataCache =  ReferenceDataCache.getInstance();
+        useCache = referenceConfig.isUseCache();
     }
 
     @Override
@@ -34,6 +38,10 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
         if (getReferenceByName(referenceTable.getHost(), referenceTable.getTableName()) !=null ) {
             throw new ReferenceDuplicatedException("Reference table Name has already been taken");
         }
+        if (useCache) {
+            referenceTable.setTableId(id);
+            dataCache.addHostRefTable(referenceTable.getHost(), referenceTable);
+        }
         return referenceQueryService.saveRefTable(id, referenceTable);
     }
 
@@ -41,6 +49,13 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     public ReferenceValue saveRefValue(String id, ReferenceValue referenceValue){
         Objects.requireNonNull(id);
         Objects.requireNonNull(referenceValue);
+        referenceValue.setValueId(id);
+        if (useCache) {
+            ReferenceTable referenceTable =  dataCache.getRefTableById(referenceValue.getTableId());
+            if (referenceTable!=null) {
+                referenceTable.getValues().add(referenceValue);
+            }
+        }
         return referenceQueryService.saveRefValue (id, referenceValue);
     }
 
@@ -50,12 +65,21 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
         Objects.requireNonNull(type);
         Objects.requireNonNull(fromValueId);
         Objects.requireNonNull(toValueId);
+        if (useCache) {
+            ReferenceValue value = dataCache.getReferenceValueByValueId(fromValueId);
+            if (value!=null) {
+                value.addRelation(new Relation(toValueId, type));
+            }
+        }
         return referenceQueryService.saveRefRelation(type, fromValueId, toValueId);
     }
 
     @Override
     public List< ReferenceTable> getAllReferences(String host){
         Objects.requireNonNull(host);
+        if (!useCache) {
+            return referenceQueryService.getAllReferences(host);
+        }
         List< ReferenceTable> refTables ;
         if (dataCache.hasRefTablesForHost(host)) {
             refTables = dataCache.getAllRefByHost(host);
@@ -70,6 +94,9 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     @Override
     public List<String> getAllRefTableNames(String host){
         Objects.requireNonNull(host);
+        if (!useCache) {
+            referenceQueryService.getAllRefTableNames(host);
+        }
 
         if (!dataCache.hasRefTablesForHost(host)) {
             dataCache.putHostRefTables(host, referenceQueryService.getAllReferences(host));
@@ -82,21 +109,23 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     public Optional<ReferenceTable> getReferenceByName(String host, String name) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(host);
-        if (!dataCache.hasRefTablesForHost(host)) {
-            dataCache.putHostRefTables(host, referenceQueryService.getAllReferences(host));
-        }
+        ReferenceTable ref;
+        if (!useCache) {
+            ref = referenceQueryService.getReferenceByName(host, name);
+        } else {
+            if (!dataCache.hasRefTablesForHost(host)) {
+                dataCache.putHostRefTables(host, referenceQueryService.getAllReferences(host));
+            }
 
-        ReferenceTable ref = dataCache.getRefTableByName(host, name);
-        if (ref== null) {
-            ReferenceTable ref1 = referenceQueryService.getReferenceByName(host, name);
-            if (ref1!=null) {
-                dataCache.addHostRefTable(host, ref1);
-                if (ref1 == null) {
-                    return Optional.empty();
+            ref = dataCache.getRefTableByName(host, name);
+            if (ref== null) {
+                ref = referenceQueryService.getReferenceByName(host, name);
+                if (ref!=null) {
+                    dataCache.addHostRefTable(host, ref);
                 }
-                return Optional.of(ref1);
             }
         }
+
         if (ref == null) {
             return Optional.empty();
         }
@@ -106,17 +135,19 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     @Override
     public Optional<ReferenceTable> getReferenceById( String id){
         Objects.requireNonNull(id);
-        ReferenceTable ref = dataCache.getRefTableById(id);
-        if (ref== null) {
-            ReferenceTable ref1 = referenceQueryService.getReferenceById(id);
-            if (ref1!=null) {
-                dataCache.addHostRefTable(ref1.getHost(), ref1);
-                if (ref1 == null) {
-                    return Optional.empty();
+        ReferenceTable ref;
+        if (!useCache) {
+            ref = referenceQueryService.getReferenceById(id);
+        } else {
+            ref = dataCache.getRefTableById(id);
+            if (ref== null) {
+                ref = referenceQueryService.getReferenceById(id);
+                if (ref!=null) {
+                    dataCache.addHostRefTable(ref.getHost(), ref);
                 }
-                return Optional.of(ref1);
             }
         }
+
         if (ref == null) {
             return Optional.empty();
         }
@@ -126,6 +157,9 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     @Override
     public List<ReferenceValue> getReferenceValuesById( String id) {
         Objects.requireNonNull(id);
+        if (useCache) {
+            dataCache.getReferenceValuesById(id);
+        }
         return referenceQueryService.getReferenceValuesById(id);
     }
 
@@ -139,17 +173,9 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     @Override
     public int deleteRefTable(String id){
         Objects.requireNonNull(id);
-        boolean found;
-        for (Map.Entry<String, List<ReferenceTable>> entry : referenceDataMap.entrySet()) {
-            List<ReferenceTable> refList = entry.getValue();
-            for (ReferenceTable reference:refList) {
-                if (id.equals(reference.getTableId()))  {
-                    break;
-                }
-            }
-          //  refList.remove();
+        if (useCache) {
+            dataCache.deleteRefTableById(id);
         }
-
         return referenceQueryService.deleteRefTable(id);
      }
 
@@ -163,6 +189,12 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     public ReferenceTable updateRefTable(String id, ReferenceTable referenceTable){
         Objects.requireNonNull(id);
         Objects.requireNonNull(referenceTable);
+        if (useCache) {
+            ReferenceTable oldReferenceTable =  dataCache.getRefTableById(id);
+            if (oldReferenceTable!=null) {
+                oldReferenceTable.updateObject(referenceTable);
+            }
+        }
         return referenceQueryService.updateRefTable(id, referenceTable);
 
     }
@@ -171,6 +203,12 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
     public ReferenceValue updateRefValue(String id, ReferenceValue referenceValue){
         Objects.requireNonNull(id);
         Objects.requireNonNull(referenceValue);
+        if (useCache) {
+            ReferenceValue value = dataCache.getReferenceValueByValueId(id);
+            if (value!=null) {
+                value.updateObject(referenceValue);
+            }
+        }
         return referenceQueryService.updateRefValue(id, referenceValue);
     }
 

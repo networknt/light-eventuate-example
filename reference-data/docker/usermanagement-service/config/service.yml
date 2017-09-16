@@ -1,0 +1,12 @@
+---
+singletons:
+- javax.sql.DataSource:
+  - com.zaxxer.hikari.HikariDataSource:
+      DriverClassName: org.postgresql.Driver
+      jdbcUrl: jdbc:postgresql://postgresdb:5432/postgres
+      username: postgres
+      password: postgres
+- com.networknt.portal.usermanagement.model.common.model.user.UserRepository:
+  - com.networknt.portal.usermanagement.model.jdbc.user.UserRepositoryImpl
+- com.networknt.portal.usermanagement.model.common.crypto.PasswordSecurity:
+  - com.networknt.portal.usermanagement.model.common.crypto.Pbkdf2PasswordSecurityImpl

@@ -10,6 +10,12 @@ public class Relation implements ValueObject<Relation>{
     private RelationType type;
     private List<Relation> relations = new ArrayList<Relation>();
 
+    public Relation(){}
+
+    public Relation(String toValueId, String type) {
+        this.toValueId = toValueId;
+        this.type = RelationType.valueOf(type);
+    }
     public String getToValueId() {
         return toValueId;
     }

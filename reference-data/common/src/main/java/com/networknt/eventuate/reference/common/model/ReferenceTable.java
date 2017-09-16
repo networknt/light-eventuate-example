@@ -98,4 +98,14 @@ public class ReferenceTable {
         this.values.add(value);
     }
 
+    public void updateObject(ReferenceTable newRef) {
+        setTableName(newRef.getTableName());
+        setTableDesc(newRef.getTableDesc());
+        setHost(newRef.getHost());
+        setActive(newRef.isActive());
+        setEditable(newRef.isEditable());
+        setCommon(newRef.isCommon());
+    }
+
+
 }
