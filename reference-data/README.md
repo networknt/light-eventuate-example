@@ -48,6 +48,19 @@ ValueLocale;
 Relation;
 
 
+## Use cache
+
+Reference Data Service implement local cache service based on ConcurrentHashMap (com.networknt.eventuate.reference.domain.ReferenceDataCache):
+
+System can alternatively to use cache or not based on the config file:
+
+
+./docker/rest-query/config/reference.yml:
+
+---
+useCache: false
+
+
 
 
 ## Build project and run verification.
