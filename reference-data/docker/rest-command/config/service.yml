@@ -22,5 +22,7 @@ singletons:
   - com.networknt.eventuate.common.impl.EventuateAggregateStoreImpl
 - com.networknt.eventuate.common.sync.EventuateAggregateStore:
   - com.networknt.eventuate.common.impl.sync.EventuateAggregateStoreImpl
-- com.networknt.portal.usermanagement.model.auth.command.user.UserAggregate:
-  - com.networknt.portal.usermanagement.model.auth.command.user.UserAggregate
+- com.networknt.eventuate.reference.domain.ReferenceTableAggregate:
+  - com.networknt.eventuate.reference.domain.ReferenceTableAggregate
+- com.networknt.eventuate.reference.domain.ReferenceValueAggregate:
+  - com.networknt.eventuate.reference.domain.ReferenceValueAggregate

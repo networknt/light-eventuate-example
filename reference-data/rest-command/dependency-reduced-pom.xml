@@ -167,7 +167,6 @@
     <version.commons.io>2.5</version.commons.io>
     <version.logback>1.2.3</version.logback>
     <version.junit>4.12</version.junit>
-    <version.postgres>42.1.1</version.postgres>
     <version.antlr4>4.7</version.antlr4>
   </properties>
 </project>

@@ -1,4 +1,6 @@
----
+
+# Singleton service factory configuration
+
 singletons:
 - javax.sql.DataSource:
   - com.zaxxer.hikari.HikariDataSource:
@@ -6,10 +8,13 @@ singletons:
       jdbcUrl: jdbc:postgresql://postgresdb:5432/postgres
       username: postgres
       password: postgres
-- com.networknt.portal.usermanagement.model.common.model.user.UserRepository:
-  - com.networknt.portal.usermanagement.model.jdbc.user.UserRepositoryImpl
-- com.networknt.portal.usermanagement.model.common.crypto.PasswordSecurity:
-  - com.networknt.portal.usermanagement.model.common.crypto.Pbkdf2PasswordSecurityImpl
+      maximumPoolSize: 10
+      useServerPrepStmts: true,
+      cachePrepStmts: true,
+      cacheCallableStmts: true,
+      prepStmtCacheSize: 10,
+      prepStmtCacheSqlLimit: 2048,
+      connectionTimeout: 2000
 - com.networknt.eventuate.common.impl.sync.AggregateCrud:
   - com.networknt.eventuate.client.EventuateLocalDBAggregateCrud
 - com.networknt.eventuate.common.impl.AggregateEvents:
@@ -22,8 +27,8 @@ singletons:
   - com.networknt.eventuate.common.DefaultMissingApplyEventMethodStrategy
 - com.networknt.eventuate.common.EventuateAggregateStore:
   - com.networknt.eventuate.common.impl.EventuateAggregateStoreImpl
-- com.networknt.portal.usermanagement.restquery.UserQueryWorkflow:
-  - com.networknt.portal.usermanagement.restquery.UserQueryWorkflow
+- com.networknt.eventuate.reference.ReferenceQueryEventHandler:
+  - com.networknt.eventuate.reference.ReferenceQueryEventHandler
 - com.networknt.eventuate.event.EventHandlerProcessor:
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningVoid
   - com.networknt.eventuate.event.EventHandlerProcessorDispatchedEventReturningCompletableFuture
@@ -31,5 +36,7 @@ singletons:
   - com.networknt.eventuate.event.EventHandlerProcessorEventHandlerContextReturningVoid
 - com.networknt.eventuate.client.SubscriptionsRegistry:
   - com.networknt.eventuate.client.SubscriptionsRegistryImpl
-- com.networknt.portal.usermanagement.model.auth.command.user.UserAggregate:
-  - com.networknt.portal.usermanagement.model.auth.command.user.UserAggregate
+- com.networknt.eventuate.reference.ReferenceQueryService:
+  - com.networknt.eventuate.reference.ReferenceQueryServiceImpl
+- com.networknt.eventuate.reference.ReferenceRepository:
+  - com.networknt.eventuate.reference.ReferenceRepositoryImpl

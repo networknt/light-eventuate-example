@@ -35,7 +35,7 @@ public class ReferenceRepositoryImpl implements ReferenceRepository {
         Objects.requireNonNull(id);
         Objects.requireNonNull(referenceTable);
 
-        if (getReferenceByName(referenceTable.getHost(), referenceTable.getTableName()) !=null ) {
+        if (getReferenceByName(referenceTable.getHost(), referenceTable.getTableName()).isPresent() ) {
             throw new ReferenceDuplicatedException("Reference table Name has already been taken");
         }
         if (useCache) {

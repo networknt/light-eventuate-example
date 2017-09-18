@@ -3,8 +3,10 @@ package com.networknt.eventuate.reference.restcommand.handler;
 
 import com.networknt.client.Http2Client;
 import com.networknt.eventuate.common.impl.JSonMapper;
+import com.networknt.eventuate.reference.common.model.Language;
 import com.networknt.eventuate.reference.common.model.ReferenceTable;
 import com.networknt.eventuate.reference.common.model.ReferenceValue;
+import com.networknt.eventuate.reference.common.model.ValueLocale;
 import com.networknt.exception.ApiException;
 import com.networknt.exception.ClientException;
 import com.networknt.service.SingletonServiceFactory;
@@ -30,6 +32,7 @@ import java.net.URI;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
@@ -87,7 +90,11 @@ public class RefValuePostHandlerTest {
         ref.setStartTime(Timestamp.valueOf(LocalDateTime.now()));
         ref.setActive(true);
 
+        ValueLocale localeValue = new ValueLocale();
+        localeValue.setLanguage(Language.En);
+        localeValue.setValueDesc("test value");
 
+        ref.addLocale(localeValue);
 
         String json = JSonMapper.toJson(ref);
 
