@@ -93,7 +93,9 @@ curl -X POST \
 
 
 
-— -- create reference value for specified reference table:
+
+
+—-- create reference value for specified reference table:
 
 ```
 curl -X POST \
@@ -105,8 +107,14 @@ curl -X POST \
 ```
 
 
+
+
 --- get all reference data for specified host name
+
+```
 curl -X GET \
   http://localhost:8082/v1/refTables/CIBC \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json'
+
+```
