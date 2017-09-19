@@ -291,7 +291,7 @@ public class ReferenceQueryServiceImpl implements ReferenceQueryService {
         Objects.requireNonNull(valueId);
         Set<ValueLocale> values = new HashSet<ValueLocale>();
 
-        String psSelect = "SELECT language, value_desc  FROM value_locale WHERE   value_id = ?";
+        String psSelect = "SELECT value_id,language, value_desc  FROM value_locale WHERE   value_id = ?";
         try (final Connection connection = dataSource.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement(psSelect);
             stmt.setString(1, valueId);
