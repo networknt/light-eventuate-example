@@ -54,7 +54,7 @@ public class ReferenceQueryServiceH2Test {
         ref = new ReferenceTable();
         ref.setTableName("Country");
         ref.setTableDesc("complete the test first");
-        ref.setHost("CIBC GOW");
+        ref.setHost("HOST1");
         ref.setEditable(false);
 
         Int128 idGen = new Int128(1222L, 1011L);
@@ -86,7 +86,7 @@ public class ReferenceQueryServiceH2Test {
         ReferenceTable ref2 = new ReferenceTable();
         ref2.setTableName("Country");
         ref2.setTableDesc("complete the test first");
-        ref2.setHost("CIBC");
+        ref2.setHost("HOST2");
         ref2.setEditable(false);
         ReferenceTable refResult = refQueryRepository.updateRefTable("223355-6669", ref2);
 
@@ -99,7 +99,7 @@ public class ReferenceQueryServiceH2Test {
         ReferenceTable  result = refQueryRepository.saveRefTable("223355-6660", ref);
         assertNotNull(result);
 
-        List<ReferenceTable> refResult = refQueryRepository.getAllReferences("CIBC GOW");
+        List<ReferenceTable> refResult = refQueryRepository.getAllReferences("HOST1");
 
         assertNotNull(refResult);
         assertTrue(refResult.size()>0);

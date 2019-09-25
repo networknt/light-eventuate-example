@@ -99,7 +99,7 @@ curl -X POST \
   http://localhost:8081/v1/refTable \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
-  -d '{"tableName":"COUNTRY","tableDesc":"country ref code","host":"CIBC","active":true,"editable":true,"common":true,"values":[]}'
+  -d '{"tableName":"COUNTRY","tableDesc":"country ref code","host":"HOST2","active":true,"editable":true,"common":true,"values":[]}'
 ```
 
 --- System will return new reference table id
@@ -126,7 +126,7 @@ curl -X POST \
 
 ```
 curl -X GET \
-  http://localhost:8082/v1/refTables/CIBC \
+  http://localhost:8082/v1/refTables/HOST2 \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json'
 

@@ -80,7 +80,7 @@ public class RefTablePostHandlerTest {
         ReferenceTable ref = new ReferenceTable();
         ref.setTableName("country");
         ref.setTableDesc("country ref code");
-        ref.setHost("CIBC GOW");
+        ref.setHost("HOST1");
         ref.setActive(true);
         ref.setEditable(true);
 
